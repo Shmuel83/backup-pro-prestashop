@@ -20,20 +20,21 @@ require_once 'BaseAdminController.php';
  */
 class AdminBackupProSettingsController extends BaseAdminController
 {
+    /**
+     * The main base template we're using
+     * @var string
+     */
     protected $bp_template = 'settings.tpl';
     
+    /**
+     * Our actual "Action" method
+     */
     public function display()
     {
-        $path = _MODULE_DIR_."backup_pro";
         $this->context->smarty->assign(array('test_var' => 'fdsafdsa'));
-        $content = $this->module->display($path, 'views/templates/admin/dashboard.tpl');
+        $content = $this->prepareContent($this->bp_template);
         $this->context->smarty->assign(array('content' => $content));
         //$this->template = 'dashboard.tpl';
         parent::display();
-    }
-    
-    public function renderList() {
-        $return = $this->context->smarty->fetch(dirname(__FILE__) . '\adminyourmodule.tpl');             
-        return $return;
     }
 }

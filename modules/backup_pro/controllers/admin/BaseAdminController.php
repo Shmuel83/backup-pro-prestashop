@@ -8,8 +8,7 @@
  * @filesource 	./modules/BackupPro/controllers/admin/BaseAdminController.php
  */
 
-$path = realpath(dirname(__FILE__).'/../../libraries/vendor/autoload.php');
-require_once $path;
+require_once realpath(dirname(__FILE__).'/../../libraries/vendor/autoload.php');
 
 use mithra62\BackupPro\Platforms\Controllers\Prestashop AS PrestashopController;
 
@@ -35,6 +34,9 @@ abstract class BaseAdminController extends PrestashopController implements \mith
      */
     protected $bp_template_path = false;
     
+    /**
+     * Set it up
+     */
     public function __construct()
     {
         $this->bootstrap = true;
@@ -49,7 +51,7 @@ abstract class BaseAdminController extends PrestashopController implements \mith
         if (!$this->loadObject(true)) {
             return;
         }
-    
+        
         $this->initToolbar();
         $this->initPageHeaderToolbar();
         $this->context->smarty->assign(array(
@@ -68,5 +70,10 @@ abstract class BaseAdminController extends PrestashopController implements \mith
   		$this->addJS($this->path."/js/mymodule.js");
   		$this->addCSS($this->path.'/css/mymodule.css', 'all');
   		parent::setMedia();
+    }
+    
+    protected function prepareContent($template)
+    {
+        return $this->module->display($this->bp_template_path, 'views/templates/admin/'.$template);
     }
 }
