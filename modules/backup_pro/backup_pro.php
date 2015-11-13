@@ -22,6 +22,26 @@ if (!defined('_PS_VERSION_'))
  */
 class Backup_pro extends Module
 {
+    /**
+     * The Admin menu details
+     * @var array
+     */
+    protected $admin_tabs = array(
+        array(
+            'class' => 'AdminBackupProDashboard',
+            'title' => 'Backup Pro',
+            'children' => array(
+                'AdminBackupProDashboard' => 'Dashboard',
+                'AdminBackupProBackupDatabase' => 'Backup Database',
+                'AdminBackupProBackupFiles' => 'Backup Files',
+                'AdminBackupProSettings' => 'Settings'
+            )
+        ),
+    );
+    
+    /**
+     * Set everything up
+     */
     public function __construct()
     {
         $this->name = 'backup_pro';
@@ -52,7 +72,7 @@ class Backup_pro extends Module
         if (Shop::isFeatureActive())
             Shop::setContext(Shop::CONTEXT_ALL);
     
-        if( !parent::install() || !$this->installSettingsTable() || !$this->installModuleTab('AdminBackupProDashboard', array(1 => 'Backup Pro'), -1) )
+        if( !parent::install() || !$this->installSettingsTable() || !$this->installModuleTabs() )
         {
             return false;
         }
@@ -62,7 +82,7 @@ class Backup_pro extends Module
     
     public function uninstall()
     {
-        if (!parent::uninstall() || !$this->uninstallModuleTab('AdminBackupProDashboard'))
+        if (!parent::uninstall() || !$this->uninstallModuleTabs())
         {
             return false;
         }
@@ -75,38 +95,64 @@ class Backup_pro extends Module
     }
     
 
-    private function installModuleTab($tabClass, $tabName, $idTabParent) {
-        @copy(_PS_MODULE_DIR_ . $this->name . '/logo.png',
-            _PS_IMG_DIR_ . 't/' . $tabClass . '.png');
-
-        // Install Tabs
-        $parent_tab = new Tab();
-        // Need a foreach for the language
-        $parent_tab->name[$this->context->language->id] = $this->l('Backup Pro');
-        $parent_tab->class_name = 'AdminBackupProDashboard';
-        $parent_tab->id_parent = 0; // Home tab
-        $parent_tab->module = $this->name;
-        $parent_tab->add();
-        $tab = new Tab();
-        // Need a foreach for the language
-        $tab->name[$this->context->language->id] = $this->l('Dashboard');
-        $tab->class_name = 'AdminBackupProDashboard';
-        $tab->id_parent = $parent_tab->id;
-        $tab->module = $this->name;
-        $tab->add();
+    private function installModuleTabs() 
+    {
+        foreach($this->admin_tabs As $key => $value)
+        {
+            @copy(_PS_MODULE_DIR_ . $this->name . '/logo.png', _PS_IMG_DIR_ . 't/' . $value['class'] . '.png');
+            $parent_tab = new Tab();
+            $parent_tab->name[$this->context->language->id] = $this->l($value['title']);
+            $parent_tab->class_name = $value['class'];
+            $parent_tab->id_parent = 0; // Home tab
+            $parent_tab->module = $this->name;
+            $parent_tab->add();
+            
+            if( isset($value['children']) )
+            {
+                foreach($value['children'] AS $k => $v)
+                {
+                    $tab = new Tab();
+                    // Need a foreach for the language
+                    $tab->name[$this->context->language->id] = $this->l($v);
+                    $tab->class_name = $k;
+                    $tab->id_parent = $parent_tab->id;
+                    $tab->module = $this->name;
+                    $tab->add();
+                }
+            }
+        }
         
         return true;
     }
     
-    private function uninstallModuleTab($tabClass) {
-        $idTab = Tab::getIdFromClassName($tabClass);
-        if ($idTab != 0) {
-            $tab = new Tab($idTab);
-            $tab->delete();
-            @unlink(_PS_IMG_DIR . "t/" . $tabClass . ".png");
-            return true;
+    private function uninstallModuleTabs() 
+    {
+        foreach($this->admin_tabs As $key => $value)
+        {
+            $idTab = Tab::getIdFromClassName($value['class']);
+            if ($idTab != 0) 
+            {
+                $tab = new Tab($idTab);
+                $tab->delete();
+                @unlink(_PS_IMG_DIR . "t/" . $value['class'] . ".png");
+            } 
+            
+            if( isset($value['children']) )
+            {
+                foreach($value['children'] AS $k => $v)
+                {
+                    $idTab = Tab::getIdFromClassName($k);
+                    if ($idTab != 0)
+                    {
+                        $tab = new Tab($idTab);
+                        $tab->delete();
+                    }
+                }
+            }
+            
         }
-        return false;
+
+        return true;
     }
     
     private function installSettingsTable()
