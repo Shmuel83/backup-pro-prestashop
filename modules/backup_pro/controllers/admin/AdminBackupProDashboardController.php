@@ -1,5 +1,11 @@
 <?php
-class AdminBackupProDashboardController extends ModuleAdminController
+
+error_reporting(E_ALL);
+
+$path = realpath(dirname(__FILE__).'/../../libraries/vendor/autoload.php');
+require_once $path;
+
+class AdminBackupProDashboardController extends ModuleAdminController implements \mithra62\BackupPro\BackupPro
 {
 
     public function __construct()
@@ -7,9 +13,34 @@ class AdminBackupProDashboardController extends ModuleAdminController
         parent::__construct();
     }
 
+    public function initContent()
+    {
+        $this->initTabModuleList();
+        if (!$this->loadObject(true)) {
+            return;
+        }
+
+        $this->initToolbar();
+        $this->initPageHeaderToolbar();
+        $this->context->smarty->assign(array(
+            'localization_form' => $this->renderForm(),
+            'localization_options' => $this->renderOptions(),
+            'url_post' => self::$currentIndex.'&token='.$this->token,
+            'show_page_header_toolbar' => $this->show_page_header_toolbar,
+            'page_header_toolbar_title' => $this->page_header_toolbar_title,
+            'page_header_toolbar_btn' => $this->page_header_toolbar_btn
+        ));
+    }
+
     public function display()
     {
-        return $this->l('This is admin my module tab !');
+        $this->initContent();
+        parent::display();
+    }
+    
+    public function test()
+    {
+        
     }
     
     public function setMedia(){
