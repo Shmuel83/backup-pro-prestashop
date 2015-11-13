@@ -8,6 +8,7 @@ class AdminBackupProDashboardController extends ModuleAdminController implements
 
     public function __construct()
     {
+        $this->bootstrap = true;
         parent::__construct();
     }
 
@@ -32,23 +33,27 @@ class AdminBackupProDashboardController extends ModuleAdminController implements
 
     public function display()
     {
-        $this->initContent();
+        $path = _MODULE_DIR_."backup_pro";
+        $this->context->smarty->assign(array('test_var' => 'test'));
+        $content = $this->module->display($path, 'views/templates/admin/dashboard.tpl');
+        $this->context->smarty->assign(array('content' => $content));
+        //$this->template = 'dashboard.tpl';
         parent::display();
     }
     
-    public function test()
-    {
-        
+    public function renderList() {
+        $return = $this->context->smarty->fetch(dirname(__FILE__) . '\adminyourmodule.tpl');             
+        return $return;
     }
     
     public function setMedia(){
     
-      		$this->addJquery();
-    
-      		$this->addJS($this->path."/js/mymodule.js");
-      		$this->addCSS($this->path.'/css/mymodule.css', 'all');
-    
-      		parent::setMedia();
+  		$this->addJquery();
+
+  		$this->addJS($this->path."/js/mymodule.js");
+  		$this->addCSS($this->path.'/css/mymodule.css', 'all');
+
+  		parent::setMedia();
     
     }
 }

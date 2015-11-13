@@ -65,8 +65,10 @@ class Backup_pro extends Module
             $this->warning = $this->l('No name provided');
     }
     
-    
-    
+    /**
+     * Installs Backup Pro
+     * @return boolean
+     */
     public function install()
     {
         if (Shop::isFeatureActive())
@@ -80,6 +82,10 @@ class Backup_pro extends Module
         return true;
     }
     
+    /**
+     * Uninstalls Backup Pro
+     * @return boolean
+     */
     public function uninstall()
     {
         if (!parent::uninstall() || !$this->uninstallModuleTabs())
@@ -89,12 +95,21 @@ class Backup_pro extends Module
         return true;
     }
     
+    /**
+     * Prestashop Settings view 
+     * 
+     * We redirect to our own internal settings mechanism
+     * @return string
+     */
     public function getContent()
     {
         return 'ff';
+        //Tools::redirectAdmin($this->context->link->getAdminLink('AdminHome'));
     }
     
-
+    /**
+     * Installs the tabs for the admin interface
+     */
     private function installModuleTabs() 
     {
         foreach($this->admin_tabs As $key => $value)
@@ -125,6 +140,10 @@ class Backup_pro extends Module
         return true;
     }
     
+    /**
+     * Uninstalls the tags for the admin interface
+     * @return boolean
+     */
     private function uninstallModuleTabs() 
     {
         foreach($this->admin_tabs As $key => $value)
@@ -155,6 +174,10 @@ class Backup_pro extends Module
         return true;
     }
     
+    /**
+     * Sets the settings database table up
+     * @return bool
+     */
     private function installSettingsTable()
     {
         return (
