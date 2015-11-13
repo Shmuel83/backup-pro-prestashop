@@ -103,8 +103,7 @@ class Backup_pro extends Module
      */
     public function getContent()
     {
-        return 'ff';
-        //Tools::redirectAdmin($this->context->link->getAdminLink('AdminHome'));
+        Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProSettings'));
     }
     
     /**
