@@ -1,9 +1,8 @@
 <?php
 
-$path = realpath(dirname(__FILE__).'/../../libraries/vendor/autoload.php');
-require_once $path;
+require_once 'BaseAdminController.php';
 
-class AdminBackupProDashboardController extends ModuleAdminController implements \mithra62\BackupPro\BackupPro
+class AdminBackupProDashboardController extends BaseAdminController
 {
 
     public function __construct()
