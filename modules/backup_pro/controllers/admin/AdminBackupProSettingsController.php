@@ -34,7 +34,6 @@ class AdminBackupProSettingsController extends BaseAdminController
         $this->context->smarty->assign(array('test_var' => 'fdsafdsa'));
         $content = $this->prepareContent($this->bp_template);
         $this->context->smarty->assign(array('content' => $content));
-        //$this->template = 'dashboard.tpl';
         parent::display();
     }
 }

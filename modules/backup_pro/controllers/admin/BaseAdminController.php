@@ -41,7 +41,16 @@ abstract class BaseAdminController extends PrestashopController implements \mith
     {
         $this->bootstrap = true;
         parent::__construct();
-        $this->context->smarty->assign(array('settings' => $this->settings, 'bp_errors' => $this->bp_errors));
+        $this->context->smarty->assign(array(
+            'settings' => $this->settings, 
+            'bp_errors' => $this->bp_errors
+        ));
+        
+        $this->context->smarty->registerPlugin('modifier', 'm62Lang', array($this->view_helper, 'm62Lang'));
+        $this->context->smarty->registerPlugin('modifier', 'm62FileSize', array($this->view_helper, 'm62FileSize'));
+        $this->context->smarty->registerPlugin('modifier', 'm62DateTime', array($this->view_helper, 'm62DateTime'));
+        $this->context->smarty->registerPlugin('modifier', 'm62Encode', array($this->view_helper, 'm62Encode'));
+        $this->context->smarty->registerPlugin('modifier', 'm62Decode', array($this->view_helper, 'm62Decode'));
         $this->bp_template_path = _MODULE_DIR_."backup_pro";
     }
     
