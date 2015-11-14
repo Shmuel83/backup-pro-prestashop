@@ -1,14 +1,14 @@
 <div id="container" class="row">
+{include file="./includes/_errors.tpl"}
 <ul class="nav nav-tabs">
-    <li role="presentation" class="active"><a href="#">Dashboard</a></li>
-    <li role="presentation"><a href="#">Database Backups</a></li>
-    <li role="presentation"><a href="#">File Backups</a></li>
+    <li role="presentation" class="active"><a href="#">{'home_bp_dashboard_menu'|m62Lang}</a></li>
+    <li role="presentation"><a href="#">{'files_bp_dashboard_menu'|m62Lang}</a></li>
+    <li role="presentation"><a href="#">{'db_bp_dashboard_menu'|m62Lang}</a></li>
 </ul>
-        
 		<div class="panel">
 												<div>
 			<div class="panel-heading"><i class="icon-dashboard"></i> Stats Dashboard</div>
-			<div class="alert alert-info">The listed amounts do not include tax.</div>
+			
 			<form id="granularity" action="index.php?controller=AdminStats&amp;module=statsforecast&amp;token=fa9a569a26404a309e6617d8a37f38df#granularity" method="post" class="form-horizontal">
 				<div class="row row-margin-bottom">
 					<label class="control-label col-lg-3">
