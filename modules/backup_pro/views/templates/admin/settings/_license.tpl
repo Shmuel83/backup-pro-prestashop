@@ -1,7 +1,7 @@
 <div class="panel">
 												
 	<div class="panel-heading">
-		<i class="icon-group"></i>{'license_details'|m62Lang}
+		<i class="icon-heart-empty"></i> {'license_details'|m62Lang}
 	</div>
 	
 	<div class="form-wrapper">
@@ -10,7 +10,7 @@
 			<label class="control-label col-lg-3 required">
 				<span title="" data-toggle="tooltip" class="label-tooltip" data-original-title="{'license_number_instructions'|m62Lang}" data-html="true">{'license_number'|m62Lang}</span>
 			</label>
-			<div class="col-lg-9"><input type="text" id="name_1" name="name_1" class="" value="" required="required" /></div>
+			<div class="col-lg-9"><input type="text" id="license_number" name="license_number" class="{$form_data['license_number']}" value="" required="required" /></div>
 		</div>
 	</div><!-- /.form-wrapper -->
 	
