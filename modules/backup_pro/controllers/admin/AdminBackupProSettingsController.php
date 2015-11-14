@@ -31,7 +31,7 @@ class AdminBackupProSettingsController extends BaseAdminController
      */
     public function display()
     {
-        $this->context->smarty->assign(array('test_var' => 'fdsafdsa'));
+        $this->context->smarty->assign(array('active_tab' => 'settings'));
         $content = $this->prepareContent($this->bp_template);
         $this->context->smarty->assign(array('content' => $content));
         parent::display();

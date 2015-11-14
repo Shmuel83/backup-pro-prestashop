@@ -31,6 +31,29 @@ class AdminBackupProDashboardController extends BaseAdminController
      */
     public function display()
     {
+        switch( $this->getPost('section') )
+        {
+            case 'db_backups':
+                $this->dbBackupView();
+            break;
+            
+            case 'file_backups':
+                $this->fileBackupView();
+            break;
+            
+            default:
+                $this->dashboardView();
+            break;
+        }
+
+        parent::display();
+    }
+    
+    /**
+     * The Backup Pro Dashboard Action
+     */
+    protected function dashboardView()
+    {
         $backup = $this->services['backups'];
         $backups = $backup->setBackupPath($this->settings['working_directory'])->getAllBackups($this->settings['storage_details']);
         
@@ -67,10 +90,61 @@ class AdminBackupProDashboardController extends BaseAdminController
             //'method' => ee()->input->get_post('method')
         );
         
-        $this->context->smarty->assign( $variables ); 
+        $this->context->smarty->assign( $variables );
         $content = $this->prepareContent($this->bp_template);
         $this->context->smarty->assign(array('content' => $content));
-        parent::display();
     }
 
+    /**
+     * The Backup Pro Database Backup View Action
+     */
+    protected function dbBackupView()
+    {
+        $backup = $this->services['backups'];
+        $backups = $backup->setBackupPath($this->settings['working_directory'])->getAllBackups($this->settings['storage_details']);
+        $backup_meta = $backup->getBackupMeta($backups);
+        
+        $variables = array(
+            'settings' => $this->settings,
+            'backup_meta' => $backup_meta,
+            'backups' => $backups,
+            'errors' => $this->errors,
+            //'view_helper' => $this->view_helper,
+            //'url_base' => $this->url_base,
+            //'menu_data' => $this->backup_lib->getDashboardViewMenu(),
+            'section' => 'db_backups',
+            //'theme_folder_url' => plugin_dir_url(self::name),
+            'active_tab' => 'db_backups'
+        );
+        
+        $this->bp_template = 'database_backups.tpl';
+        $this->context->smarty->assign( $variables );
+        $content = $this->prepareContent($this->bp_template);
+        $this->context->smarty->assign(array('content' => $content));
+    }
+    
+    protected function fileBackupView()
+    {
+        $backup = $this->services['backups'];
+        $backups = $backup->setBackupPath($this->settings['working_directory'])->getAllBackups($this->settings['storage_details']);
+        $backup_meta = $backup->getBackupMeta($backups);
+        
+        $variables = array(
+            'settings' => $this->settings,
+            'backup_meta' => $backup_meta,
+            'backups' => $backups,
+            'errors' => $this->errors,
+            //'view_helper' => $this->view_helper,
+            //'url_base' => $this->url_base,
+            //'menu_data' => $this->backup_lib->getDashboardViewMenu(),
+            'section' => 'file_backups',
+            //'theme_folder_url' => plugin_dir_url(self::name)
+            'active_tab' => 'file_backups'
+        );
+        
+        $this->bp_template = 'file_backups.tpl';
+        $this->context->smarty->assign( $variables );
+        $content = $this->prepareContent($this->bp_template);
+        $this->context->smarty->assign(array('content' => $content));
+    }
 }

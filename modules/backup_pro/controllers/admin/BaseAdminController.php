@@ -43,7 +43,8 @@ abstract class BaseAdminController extends PrestashopController implements \mith
         parent::__construct();
         $this->context->smarty->assign(array(
             'settings' => $this->settings, 
-            'bp_errors' => $this->bp_errors
+            'bp_errors' => $this->bp_errors,
+            'active_tab' => 'dashboard'
         ));
         
         $this->context->smarty->registerPlugin('modifier', 'm62Lang', array($this->view_helper, 'm62Lang'));
@@ -85,5 +86,27 @@ abstract class BaseAdminController extends PrestashopController implements \mith
     protected function prepareContent($template)
     {
         return $this->module->display($this->bp_template_path, 'views/templates/admin/'.$template);
+    }
+    
+    /**
+     * Handy little helper method to figure out the passed variables 
+     * 
+     * We check the _POST then _GET in that order. 
+     * @param string $index The GET or POST variable we want
+     * @param string $default The value to use if the expected isn't set
+     * @return unknown|string
+     */
+    public function getPost($index, $default = false)
+    {
+        if ( isset($_POST[$index]) )
+        {
+            return $_POST[$index];
+        }
+        elseif( isset( $_GET[$index]) )
+        {
+            return $_GET[$index];
+        }
+        
+        return $default;
     }
 }

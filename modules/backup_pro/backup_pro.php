@@ -35,6 +35,8 @@ class Backup_pro extends Module
                 'AdminBackupProBackupDatabase' => 'Backup Database',
                 'AdminBackupProBackupFiles' => 'Backup Files',
                 'AdminBackupProSettings' => 'Settings'
+            ),
+            'hidden' => array(
             )
         ),
     );
@@ -130,6 +132,17 @@ class Backup_pro extends Module
                     $tab->name[$this->context->language->id] = $this->l($v);
                     $tab->class_name = $k;
                     $tab->id_parent = $parent_tab->id;
+                    $tab->module = $this->name;
+                    $tab->add();
+                }
+                
+                foreach($value['hidden'] AS $k => $v)
+                {
+                    $tab = new Tab();
+                    // Need a foreach for the language
+                    $tab->name[$this->context->language->id] = $this->l($v);
+                    $tab->class_name = $k;
+                    $tab->id_parent = -1;
                     $tab->module = $this->name;
                     $tab->add();
                 }
