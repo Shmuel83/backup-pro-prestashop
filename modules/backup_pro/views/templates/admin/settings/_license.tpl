@@ -15,7 +15,7 @@
 	</div><!-- /.form-wrapper -->
 	
 	<div class="panel-footer">
-		<button type="submit" value="1"	id="profile_form_submit_btn" name="submitAddprofile" class="btn btn-default pull-right">
+		<button type="submit" value="1"	id="m62_settings_submit" name="submitAddprofile" class="btn btn-default pull-right">
 		<i class="process-icon-save"></i> Save
 		</button>
 	</div>
