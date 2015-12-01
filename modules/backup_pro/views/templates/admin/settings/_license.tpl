@@ -7,10 +7,9 @@
 	<div class="form-wrapper">
 		<p>{'license_details_instructions'|m62Lang}</p>
 		<div class="form-group">
-			<label class="control-label col-lg-3 required">
-				<span title="" data-toggle="tooltip" class="label-tooltip" data-original-title="{'license_number_instructions'|m62Lang}" data-html="true">{'license_number'|m62Lang}</span>
-			</label>
-			<div class="col-lg-9"><input type="text" id="license_number" name="license_number" class="{$form_data['license_number']}" value="" required="required" /></div>
+			<label class="control-label col-lg-3 required">{'license_number'|m62Lang}</label>
+			<div class="col-lg-9"><input type="text" id="license_number" name="license_number" value="{$form_data['license_number']}" class="" required="required" /></div>
+			<div class="col-lg-9 col-lg-offset-3"><div class="help-block">{'license_number_instructions'|m62Lang}</div></div>
 		</div>
 	</div><!-- /.form-wrapper -->
 	

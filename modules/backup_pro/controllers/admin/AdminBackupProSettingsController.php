@@ -58,11 +58,10 @@ class AdminBackupProSettingsController extends BaseAdminController
         $variables['form_data']['db_backup_execute_pre_sql'] = implode("\n", $this->settings['db_backup_execute_pre_sql']);
         $variables['form_data']['db_backup_execute_post_sql'] = implode("\n", $this->settings['db_backup_execute_post_sql']);
         $variables['form_data']['backup_missed_schedule_notify_emails'] = implode("\n", $this->settings['backup_missed_schedule_notify_emails']);
-        
+        $variables['form_has_errors'] = false;
         if( $_SERVER['REQUEST_METHOD'] == 'POST' )
         {
-            $data = array();
-            $data = array_map( 'stripslashes_deep', $_POST );
+            $data = $_POST;
         
             $variables['form_data'] = array_merge(array('db_backup_ignore_tables' => '', 'db_backup_ignore_table_data' => ''), $data);
             $backup = $this->services['backups'];
@@ -70,8 +69,14 @@ class AdminBackupProSettingsController extends BaseAdminController
             $data['meta'] = $backup->getBackupMeta($backups);
             $extra = array('db_creds' => $this->platform->getDbCredentials());
             $settings_errors = $this->services['settings']->validate($data, $extra);
-            if( $settings_errors )
+            if( !$settings_errors )
             {
+                echo 'f';
+                exit;
+            }
+            else
+            {
+                $variables['form_has_errors'] = true;
                 $variables['form_errors'] = array_merge($variables['form_errors'], $settings_errors);
             }
         }

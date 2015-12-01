@@ -1,8 +1,18 @@
 <div id="container" class="row">
     {include file="./includes/_errors.tpl"}
+    
+    
+    
+    {if $form_has_errors}
+    	
+    	<div class="alert alert-danger">Woops! Looks like we have an issue...
+
+    	</div>
+    {/if}    
+    
     {include file="./settings/_settings_nav.tpl"}
     
-    <form name="" method="POST" action="" class="defaultForm form-horizontal AdminProfiles" >
+    <form name="fdsafdsafdsa" method="POST" action="" class="defaultForm form-horizontal " >
 	{if $section == 'general'}
 		{include file="./settings/_general.tpl"}
 	{/if}
