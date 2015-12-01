@@ -79,10 +79,12 @@ abstract class BaseAdminController extends PrestashopController implements \mith
     public function setMedia()
     {
   		$this->addJquery();
+  		
+  		$this->addJS('modules/backup_pro/views/js/chosen.jquery.js', true);
   		$this->addJS('modules/backup_pro/views/js/global.js', true);
   		$this->addJS('modules/backup_pro/views/js/dashboard.js', true);
-  		$this->addJS('modules/backup_pro/views/js/settings.js', true);
   		$this->addJS('modules/backup_pro/views/js/backup.js', true);
+  		$this->addJS('modules/backup_pro/views/js/settings.js', true);
   		parent::setMedia();
     }
     

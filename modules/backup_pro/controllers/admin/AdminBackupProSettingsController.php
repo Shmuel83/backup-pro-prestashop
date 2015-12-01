@@ -59,6 +59,7 @@ class AdminBackupProSettingsController extends BaseAdminController
         $variables['form_data']['db_backup_execute_post_sql'] = implode("\n", $this->settings['db_backup_execute_post_sql']);
         $variables['form_data']['backup_missed_schedule_notify_emails'] = implode("\n", $this->settings['backup_missed_schedule_notify_emails']);
         $variables['form_has_errors'] = false;
+        
         if( $_SERVER['REQUEST_METHOD'] == 'POST' )
         {
             $data = $_POST;
@@ -71,8 +72,12 @@ class AdminBackupProSettingsController extends BaseAdminController
             $settings_errors = $this->services['settings']->validate($data, $extra);
             if( !$settings_errors )
             {
-                echo 'f';
-                exit;
+                if( $this->services['settings']->update($data) )
+                {
+                    $this->redirect_after = self::$currentIndex.'&section='.$section.'&update=yes&token='.$this->token;;
+                    $this->redirect();
+                    //ee()->functions->redirect(ee('CP/URL', 'addons/settings/backup_pro/settings/'.$section));
+                }
             }
             else
             {
