@@ -46,8 +46,8 @@
 		</div>
 	</div><!-- /.form-wrapper -->
 	
-	<div class="form-wrapper" >
-		<div class="form-group" id="auto_threshold_custom_wrap" style="display:none;">
+	<div class="form-wrapper" id="auto_threshold_custom_wrap" style="display:none;">
+		<div class="form-group">
 			<label class="control-label col-lg-3 " for="auto_threshold_custom">{'auto_threshold_custom'|m62Lang}</label>
 			<div class="col-lg-6"><input type="text" id="auto_threshold_custom" name="auto_threshold_custom" value="{$form_data['auto_threshold_custom']}" class="" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'auto_threshold_custom_instructions'|m62Lang}</div></div>

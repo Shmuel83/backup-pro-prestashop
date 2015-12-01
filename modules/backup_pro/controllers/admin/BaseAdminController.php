@@ -85,6 +85,9 @@ abstract class BaseAdminController extends PrestashopController implements \mith
   		$this->addJS('modules/backup_pro/views/js/dashboard.js', true);
   		$this->addJS('modules/backup_pro/views/js/backup.js', true);
   		$this->addJS('modules/backup_pro/views/js/settings.js', true);
+  		
+  		$this->addCss('modules/backup_pro/views/css/backup_pro.css', true);
+  		$this->addCss('modules/backup_pro/views/css/chosen.css', true);
   		parent::setMedia();
     }
     
