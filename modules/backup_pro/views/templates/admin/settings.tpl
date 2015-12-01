@@ -17,6 +17,10 @@
 		{include file="./settings/_general.tpl"}
 	{/if}
 	
+	{if $section == 'db_backups'}
+		{include file="./settings/_db.tpl"}
+	{/if}	
+	
 	{if $section == 'license'}
 		{include file="./settings/_license.tpl"}
 	{/if}	

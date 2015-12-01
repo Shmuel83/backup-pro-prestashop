@@ -3,3 +3,5 @@
 /.project
 /modules/backup_pro/libraries/vendor
 /modules/backup_pro/libraries/mithra62
+/modules/backup_pro/views/css
+/modules/backup_pro/views/js

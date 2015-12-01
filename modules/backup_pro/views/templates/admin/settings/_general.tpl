@@ -1,5 +1,6 @@
 <div class="panel">
-												
+	<input type="hidden" value="0" name="relative_time" />
+	<input type="hidden" value="0" name="allow_duplicates" />
 	<div class="panel-heading">
 		<i class="icon-cogs"></i> {'configure_backups'|m62Lang}
 	</div>
@@ -37,7 +38,7 @@
 			<div class="col-lg-9">
 			<select name="auto_threshold" id="auto_threshold" class="form-control fixed-width-xxl">
 			{foreach from=$threshold_options key=k item=v}
-			<option value="{$k}" >{$v}</option>
+			<option value="{$k}" {if $form_data['auto_threshold'] == $k}selected="selected"{/if}>{$v}</option>
 			{/foreach}
 			</select>
 			</div>
@@ -50,6 +51,7 @@
 			<label class="control-label col-lg-3 " for="auto_threshold_custom">{'auto_threshold_custom'|m62Lang}</label>
 			<div class="col-lg-9"><input type="text" id="auto_threshold_custom" name="auto_threshold_custom" value="{$form_data['auto_threshold_custom']}" class="" /></div>
 			<div class="col-lg-9 col-lg-offset-3"><div class="help-block">{'auto_threshold_custom_instructions'|m62Lang}</div></div>
+			<div class="col-lg-9 col-lg-offset-3">{$form_errors['auto_threshold_custom']|m62FormErrors}</div>
 		</div>
 	</div><!-- /.form-wrapper -->	
 	
