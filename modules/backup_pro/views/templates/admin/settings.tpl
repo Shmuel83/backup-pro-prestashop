@@ -15,14 +15,16 @@
     <form name="fdsafdsafdsa" method="POST" action="" class="defaultForm form-horizontal " >
 	{if $section == 'general'}
 		{include file="./settings/_general.tpl"}
-	{/if}
-	
-	{if $section == 'db_backups'}
+	{elseif $section == 'file_backups'}
+		{include file="./settings/_files.tpl"}
+	{elseif $section == 'db_backups'}
 		{include file="./settings/_db.tpl"}
-	{/if}	
-	
-	{if $section == 'license'}
+	{elseif $section == 'cron'}
+		{include file="./settings/_cron.tpl"}
+	{elseif $section == 'license'}
 		{include file="./settings/_license.tpl"}
+	{else}
+		{include file="./settings/_integrtiy_agent.tpl"}
 	{/if}	
 	</form>
 </div>	
