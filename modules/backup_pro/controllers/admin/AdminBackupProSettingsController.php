@@ -21,6 +21,18 @@ require_once 'BaseAdminController.php';
 class AdminBackupProSettingsController extends BaseAdminController
 {
     /**
+     * The default Storage form field values
+     * @var unknown
+     */
+    public $storage_form_data_defaults = array(
+        'storage_location_name' => '',
+        'storage_location_file_use' => '1',
+        'storage_location_status' => '1',
+        'storage_location_db_use' => '1',
+        'storage_location_include_prune' => '1',
+    );
+    
+    /**
      * The main base template we're using
      * @var string
      */
@@ -50,11 +62,71 @@ class AdminBackupProSettingsController extends BaseAdminController
     {
         switch( $this->getPost('sub') )
         {
+            
+            case 'new_storage':
+                $this->newStorageView();
+            break; 
             case 'view_storage':
             default:
                 $this->viewStorageView();
             break;                
         }
+    }
+    
+    protected function newStorageView()
+    {
+        $sub = $this->getPost('sub', 'view_storage');
+        $engine = $this->getPost('engine', 'local');
+        $section = $this->getPost('section', 'storage');
+        $variables = array();
+        $variables['available_storage_engines'] = $this->services['backup']->getStorage()->getAvailableStorageDrivers();
+        
+        if( !isset($variables['available_storage_engines'][$engine]) )
+        {
+            $engine = 'local';
+        }
+        
+        $variables['storage_details'] = $this->settings['storage_details'];
+        $variables['storage_engine'] = $variables['available_storage_engines'][$engine];
+        $variables['form_data'] = array_merge($this->settings, $variables['storage_engine']['settings'], $this->storage_form_data_defaults);
+        $variables['form_errors'] = array_merge($this->returnEmpty($this->settings), $this->returnEmpty($variables['storage_engine']['settings']), $this->storage_form_data_defaults);
+        $variables['form_has_errors'] = false;
+        if(  $_SERVER['REQUEST_METHOD'] == 'POST' )
+        {
+            $data = $_POST;
+            $variables['form_data'] = $data;
+            $settings_errors = $this->services['backup']->getStorage()->validateDriver($this->services['validate'], $engine, $data, $this->settings['storage_details']);
+            if( !$settings_errors )
+            {
+                if( $this->services['backup']->getStorage()->getLocations()->setSetting($this->services['settings'])->create($engine, $variables['form_data']) )
+                {
+                    $this->redirect_after = self::$currentIndex.'&section=storage&added=yes&token='.$this->token;;
+                    $this->redirect();
+                }
+            }
+            else
+            {
+                $variables['form_has_errors'] = true;
+                $variables['form_errors'] = array_merge($variables['form_errors'], $settings_errors);
+            }
+        }
+        
+        $variables['errors'] = $this->errors;
+        $variables['_form_template'] = false;
+        if( $variables['storage_engine']['obj']->hasSettingsView() )
+        {
+            $variables['_form_template'] = './drivers/_'.$engine;
+        }
+        
+        //$variables['menu_data'] = ee()->backup_pro->get_settings_view_menu();
+        $variables['section'] = 'storage';
+        $variables['engine'] = $engine;
+        $variables['section'] = 'storage';
+        $variables['active_tab'] = $section;
+        
+        $this->context->smarty->assign( $variables );
+        $content = $this->prepareContent('storage/new.tpl');
+        $this->context->smarty->assign(array('content' => $content));    
     }
     
     protected function viewStorageView()
