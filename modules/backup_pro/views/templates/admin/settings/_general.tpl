@@ -2,7 +2,7 @@
 	<input type="hidden" value="0" name="relative_time" />
 	<input type="hidden" value="0" name="allow_duplicates" />
 	<div class="panel-heading">
-		<i class="icon-cogs"></i> {'configure_backups'|m62Lang}
+		<i class="icon-puzzle-piece"></i> {'configure_backups'|m62Lang}
 	</div>
 	
 	<div class="form-wrapper">

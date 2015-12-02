@@ -1,7 +1,7 @@
 <div class="panel">
 	<input type="hidden" value="0" name="regex_file_exclude" />
 	<div class="panel-heading">
-		<i class="icon-cogs"></i> {'config_files'|m62Lang}
+		<i class="icon-folder-close"></i> {'config_files'|m62Lang}
 	</div>
 	
 	<div class="form-wrapper">

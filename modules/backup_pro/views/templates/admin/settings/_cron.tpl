@@ -1,14 +1,9 @@
 <div class="panel">
 
 	<div class="panel-heading">
-		<i class="icon-cogs"></i> {'configure_cron'|m62Lang}
+		<i class="icon-bug"></i> {'configure_cron'|m62Lang}
 	</div>
-		
-	<div class="panel-footer">
-		<button type="submit" value="1"	id="m62_settings_submit" name="submitAddprofile" class="btn btn-default pull-right">
-		<i class="process-icon-save"></i> Save
-		</button>
-	</div>
+
 			
 </div>
 
@@ -16,7 +11,7 @@
 <div class="panel">
 
 	<div class="panel-heading">
-		<i class="icon-cogs"></i> {'configure_cron_notification'|m62Lang}
+		<i class="icon-envelope"></i> {'configure_cron_notification'|m62Lang}
 	</div>	
 	
 	<div class="form-wrapper">

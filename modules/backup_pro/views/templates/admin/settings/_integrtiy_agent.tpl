@@ -1,14 +1,9 @@
 <div class="panel">
 
 	<div class="panel-heading">
-		<i class="icon-cogs"></i> {'integrity_agent_cron'|m62Lang}
+		<i class="icon-bug"></i> {'integrity_agent_cron'|m62Lang}
 	</div>
-		
-	<div class="panel-footer">
-		<button type="submit" value="1"	id="m62_settings_submit" name="submitAddprofile" class="btn btn-default pull-right">
-		<i class="process-icon-save"></i> Save
-		</button>
-	</div>
+
 			
 </div>
 
@@ -60,7 +55,7 @@
 <div class="panel">
 
 	<div class="panel-heading">
-		<i class="icon-cogs"></i> {'configure_integrity_agent_backup_missed_schedule'|m62Lang}
+		<i class="icon-envelope"></i> {'configure_integrity_agent_backup_missed_schedule'|m62Lang}
 	</div>	
 	
 	<div class="form-wrapper">

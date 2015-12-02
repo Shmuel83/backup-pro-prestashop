@@ -34,19 +34,52 @@ class AdminBackupProSettingsController extends BaseAdminController
         switch( $this->getPost('section') )
         {
             case 'storage':
-                $this->fileBackupView();
+                $this->storage();
             break;
             
             case 'settings':
             default:
-                $this->settings();
+                $this->settingsView();
             break;
         }
     
         parent::display();
     }
     
-    protected function settings()
+    protected function storage()
+    {
+        switch( $this->getPost('sub') )
+        {
+            case 'view_storage':
+            default:
+                $this->viewStorageView();
+            break;                
+        }
+    }
+    
+    protected function viewStorageView()
+    {
+        $sub = $this->getPost('sub', 'view_storage');
+        $section = $this->getPost('section', 'storage');
+        $variables = array();
+        $variables['can_remove'] = true;
+        if( count($this->settings['storage_details']) <= 1 )
+        {
+            $variables['can_remove'] = false;
+        }
+        
+        $variables['errors'] = $this->errors;
+        $variables['available_storage_engines'] = $this->services['backup']->getStorage()->getAvailableStorageDrivers();
+        $variables['storage_details'] = $this->settings['storage_details'];
+        $variables['section'] = 'storage';
+        $variables['active_tab'] = $section;
+        
+        $this->context->smarty->assign( $variables );
+        $content = $this->prepareContent('storage.tpl');
+        $this->context->smarty->assign(array('content' => $content));
+    }
+    
+    protected function settingsView()
     {
         $section = $this->getPost('section', 'general');
         $variables = array('form_data' => $this->settings, 'form_errors' => $this->returnEmpty($this->settings));
@@ -76,7 +109,6 @@ class AdminBackupProSettingsController extends BaseAdminController
                 {
                     $this->redirect_after = self::$currentIndex.'&section='.$section.'&update=yes&token='.$this->token;;
                     $this->redirect();
-                    //ee()->functions->redirect(ee('CP/URL', 'addons/settings/backup_pro/settings/'.$section));
                 }
             }
             else
@@ -93,12 +125,9 @@ class AdminBackupProSettingsController extends BaseAdminController
         $variables['errors'] = $this->errors;
         $variables['threshold_options'] = $this->services['settings']->getAutoPruneThresholdOptions();
         $variables['available_db_backup_engines'] = $this->services['backup']->getDataBase()->getAvailableEnginesOptions();
-        //$variables['menu_data'] = $this->backup_lib->getSettingsViewMenu();
         
         $variables['view_helper'] = $this->view_helper;
         $variables['active_tab'] = $section;
-        //$variables['url_base'] = $this->url_base;
-        //$variables['theme_folder_url'] = plugin_dir_url(self::name);
         $this->context->smarty->assign( $variables );
         $content = $this->prepareContent($this->bp_template);
         $this->context->smarty->assign(array('content' => $content));

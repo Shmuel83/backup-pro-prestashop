@@ -2,7 +2,7 @@
     {include file="./includes/_errors.tpl"}
     {include file="./includes/_dashboard_nav.tpl"}
     <div class="panel">
-		<table border="0" cellspacing="0" cellpadding="0" class="widefat"  width="100%" >
+		<table border="0" cellspacing="0" cellpadding="0" class="table"  width="100%" >
 		<thead>
 		<tr>
 			<th width="120">{'total_backups'|m62Lang}</th>
@@ -27,7 +27,7 @@
 	<div class="row panel">
 	
 		<div class="col-md-6 ">
-				<table class="widefat"  width="100%" border="0" cellpadding="0" cellspacing="0">
+				<table class="table"  width="100%" border="0" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr class="odd">
 							<th width="50%">{'database_backups'|m62Lang}</th>
@@ -52,7 +52,7 @@
 		</div>
 		<div class="col-md-6 ">
 		
-				<table class="widefat"  width="100%" border="0" cellpadding="0" cellspacing="0">
+				<table class="table"  width="100%" border="0" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr class="odd">
 							<th width="50%">{'file_backups'|m62Lang}</th>
