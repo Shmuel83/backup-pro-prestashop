@@ -1,8 +1,13 @@
-<div style="float: right;">
-<select name="NewStorageDropdown" id="NewStorageDropdown" >
-     <option value="0">New Storage Location</option>
-			{foreach from=$available_storage_engines key=k item=section}
-			<option value="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=storage&amp;sub=new_storage&engine={$k}" >{$section['name']|m62Lang}</option>
-			{/foreach}  
-</select>
+<div class="row" style="float: right;">
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    New Storage Location
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+    {foreach from=$available_storage_engines key=k item=section}
+    <li><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=storage&amp;sub=new_storage&engine={$k}">{$section['name']|m62Lang}</a></li>
+    {/foreach} 
+  </ul>
+</div>
 </div>

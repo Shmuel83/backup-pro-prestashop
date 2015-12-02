@@ -77,4 +77,8 @@
 		</div>
 	
 	</div>
+	
+	<div class="row panel">
+	
+	</div>
 </div>	

@@ -1,7 +1,7 @@
 <div class="panel">
 
 	<div class="panel-heading">
-		<i class="icon-bug"></i> {'integrity_agent_cron'|m62Lang}
+		<i class="icon-time"></i> {'integrity_agent_cron'|m62Lang}
 	</div>
 
 			
@@ -10,7 +10,7 @@
 <div class="panel">
 
 	<div class="panel-heading">
-		<i class="icon-cogs"></i> {'configure_integrity_agent_verification'|m62Lang}
+		<i class="icon-eye-open"></i> {'configure_integrity_agent_verification'|m62Lang}
 	</div>
 	
 	<div class="form-wrapper">

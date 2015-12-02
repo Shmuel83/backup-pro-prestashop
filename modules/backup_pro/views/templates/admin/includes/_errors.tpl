@@ -1,5 +1,5 @@
 {foreach $bp_errors as $error_type=>$error}
-<div class="alert alert-danger">{$error|m62Lang}
+<div class="alert alert-warning">{$error|m62Lang}
 {if $error_type eq 'no_storage_locations_setup'}
     <a href="{$link->getAdminLink('AdminBackupProStorage')|escape:'html':'UTF-8'}&amp;section=general">Setup Storage Location</a>
 {elseif $error_type eq 'license_number'}

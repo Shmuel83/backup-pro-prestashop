@@ -4,7 +4,7 @@
     
     <div class="panel">
 		<div class="panel-heading">
-			<i class="icon-cogs"></i> {'storage_bp_settings_menu'|m62Lang}
+			<i class="icon-folder-open"></i> {'storage_bp_settings_menu'|m62Lang}
 		</div>
 	
 		{include file="./storage/_submenu.tpl"}

@@ -1,7 +1,7 @@
 <div class="panel">
 
 	<div class="panel-heading">
-		<i class="icon-bug"></i> {'configure_cron'|m62Lang}
+		<i class="icon-time"></i> {'configure_cron'|m62Lang}
 	</div>
 
 			
