@@ -66,11 +66,126 @@ class AdminBackupProSettingsController extends BaseAdminController
             case 'new_storage':
                 $this->newStorageView();
             break; 
+            
+            case 'edit_storage':
+                $this->editStorageView();
+            break;
+            
+            case 'remove_storage':
+                $this->removeStorageView();
+            break;
+            
             case 'view_storage':
             default:
                 $this->viewStorageView();
             break;                
         }
+    }
+    
+    protected function removeStorageView()
+    {
+        $storage_id = $this->getPost('id');
+        $sub = $this->getPost('sub', 'view_storage');
+        $section = $this->getPost('section', 'storage');
+        if( count($this->settings['storage_details']) <= 1 )
+        {
+            ee()->session->set_flashdata('message_error', $this->services['lang']->__('min_storage_location_needs'));
+            ee()->functions->redirect(ee('CP/URL', 'addons/settings/backup_pro/view_storage'));
+        }
+        
+        if( empty($this->settings['storage_details'][$storage_id]) )
+        {
+            ee()->session->set_flashdata('message_error', $this->services['lang']->__('invalid_storage_id'));
+            ee()->functions->redirect(ee('CP/URL', 'addons/settings/backup_pro/view_storage'));
+        }
+        
+        $storage_details = $this->settings['storage_details'][$storage_id];
+        
+        $variables = array();
+        $variables['form_data'] = array('remove_remote_files' => '0');
+        $variables['form_errors'] = array('remove_remote_files' => false);
+        $variables['errors'] = $this->errors;
+        $variables['available_storage_engines'] = $this->services['backup']->getStorage()->getAvailableStorageDrivers();
+        $variables['storage_engine'] = $variables['available_storage_engines'][$storage_details['storage_location_driver']];
+        $variables['storage_details'] = $storage_details;
+        
+        if( $_SERVER['REQUEST_METHOD'] == 'POST' )
+        {
+            $data = $_POST;
+            $backups = $this->services['backups']->setBackupPath($this->settings['working_directory'])
+                                                 ->getAllBackups($this->settings['storage_details'], $this->services['backup']->getStorage()->getAvailableStorageDrivers());
+        
+            if( $this->services['backup']->getStorage()->getLocations()->setSetting($this->services['settings'])->remove($storage_id, $data, $backups) )
+            {
+                ee()->session->set_flashdata('message_success', $this->services['lang']->__('storage_location_removed'));
+                ee()->functions->redirect(ee('CP/URL', 'addons/settings/backup_pro/view_storage'));
+            }
+            else
+            {
+                $variables['form_errors'] = array_merge($variables['form_errors'], $settings_errors);
+            }
+        }
+        
+        //$variables['menu_data'] = ee()->backup_pro->get_settings_view_menu();
+        $variables['section'] = 'storage';
+        $variables['storage_id'] = $storage_id;
+        
+        $this->context->smarty->assign( $variables );
+        $content = $this->prepareContent('storage/remove.tpl');
+        $this->context->smarty->assign(array('content' => $content));
+    }
+    
+    protected function editStorageView()
+    {
+        $storage_id = $this->getPost('id');
+        $sub = $this->getPost('sub', 'view_storage');
+        $section = $this->getPost('section', 'storage');
+        if( empty($this->settings['storage_details'][$storage_id]) )
+        {
+            $this->redirect_after = self::$currentIndex.'&section=storage&invalid_storage_id=yes&token='.$this->token;;
+            $this->redirect();
+        }
+        
+        $storage_details = $this->settings['storage_details'][$storage_id];
+        
+        $variables = array();
+        $variables['storage_details'] = $storage_details;
+        $variables['form_data'] = array_merge($this->storage_form_data_defaults, $storage_details);
+        $variables['form_errors'] = $this->returnEmpty($storage_details); //array_merge($storage_details, $this->form_data_defaults);
+        $variables['errors'] = $this->errors;
+        $variables['available_storage_engines'] = $this->services['backup']->getStorage()->getAvailableStorageOptions();
+        $variables['storage_engine'] = $variables['available_storage_engines'][$storage_details['storage_location_driver']];
+        $variables['_form_template'] = './drivers/_'.$storage_details['storage_location_driver'];
+        
+        if(  $_SERVER['REQUEST_METHOD'] == 'POST' )
+        {
+            $data = $_POST;
+            $variables['form_data'] = $data;
+            $data['location_id'] = $storage_id;
+            $settings_errors = $this->services['backup']->getStorage()->validateDriver($this->services['validate'], $storage_details['storage_location_driver'], $data, $this->settings['storage_details']);
+            if( !$settings_errors )
+            {
+                if( $this->services['backup']->getStorage()->getLocations()->setSetting($this->services['settings'])->update($storage_id, $variables['form_data']) )
+                {
+                    $this->redirect_after = self::$currentIndex.'&section=storage&updated=yes&token='.$this->token;;
+                    $this->redirect();
+                }
+            }
+            else
+            {
+                $variables['form_errors'] = array_merge($variables['form_errors'], $settings_errors);
+            }
+        }
+        
+        //$variables['menu_data'] = ee()->backup_pro->get_settings_view_menu();
+        $variables['section'] = 'storage';
+        $variables['storage_id'] = $storage_id;
+        $variables['active_tab'] = $section;
+        //ee()->view->cp_page_title = $this->services['lang']->__('storage_bp_settings_menu');     
+        
+        $this->context->smarty->assign( $variables );
+        $content = $this->prepareContent('storage/edit.tpl');
+        $this->context->smarty->assign(array('content' => $content));       
     }
     
     protected function newStorageView()
@@ -129,10 +244,14 @@ class AdminBackupProSettingsController extends BaseAdminController
         $this->context->smarty->assign(array('content' => $content));    
     }
     
+    /**
+     * The default Storage Locations view
+     */
     protected function viewStorageView()
     {
         $sub = $this->getPost('sub', 'view_storage');
         $section = $this->getPost('section', 'storage');
+        $invalid_storage_id = $this->getPost('invalid_storage_id', 'no');
         $variables = array();
         $variables['can_remove'] = true;
         if( count($this->settings['storage_details']) <= 1 )
@@ -145,12 +264,18 @@ class AdminBackupProSettingsController extends BaseAdminController
         $variables['storage_details'] = $this->settings['storage_details'];
         $variables['section'] = 'storage';
         $variables['active_tab'] = $section;
+        $variables['invalid_storage_id'] = $invalid_storage_id;
         
         $this->context->smarty->assign( $variables );
         $content = $this->prepareContent('storage.tpl');
         $this->context->smarty->assign(array('content' => $content));
     }
     
+    /**
+     * The Backup Pro Settings view
+     * 
+     * Handles displaying and processing settings 
+     */
     protected function settingsView()
     {
         $section = $this->getPost('section', 'general');
