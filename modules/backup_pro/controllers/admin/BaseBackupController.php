@@ -20,7 +20,7 @@ require_once 'BaseAdminController.php';
  */
 abstract class BaseBackupController extends BaseAdminController
 {
-    public function backupView()
+    public function backupView($type)
     {
         
     }
