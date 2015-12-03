@@ -5,6 +5,10 @@
     <div class="alert alert-danger">Invalid Storage ID</div>
     {/if}
     
+    {if $fail_min_storage_location_needs == 'yes'}
+    <div class="alert alert-warning">{'min_storage_location_needs'|m62Lang}</div>
+    {/if}    
+    
     {include file="./settings/_settings_nav.tpl"}
     
     <div class="panel">

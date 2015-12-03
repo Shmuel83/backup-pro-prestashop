@@ -89,14 +89,14 @@ class AdminBackupProSettingsController extends BaseAdminController
         $section = $this->getPost('section', 'storage');
         if( count($this->settings['storage_details']) <= 1 )
         {
-            ee()->session->set_flashdata('message_error', $this->services['lang']->__('min_storage_location_needs'));
-            ee()->functions->redirect(ee('CP/URL', 'addons/settings/backup_pro/view_storage'));
+            $this->redirect_after = self::$currentIndex.'&section=storage&fail_min_storage_location_needs=yes&token='.$this->token;;
+            $this->redirect();            
         }
         
         if( empty($this->settings['storage_details'][$storage_id]) )
         {
-            ee()->session->set_flashdata('message_error', $this->services['lang']->__('invalid_storage_id'));
-            ee()->functions->redirect(ee('CP/URL', 'addons/settings/backup_pro/view_storage'));
+            $this->redirect_after = self::$currentIndex.'&section=storage&invalid_storage_id=yes&token='.$this->token;;
+            $this->redirect();            
         }
         
         $storage_details = $this->settings['storage_details'][$storage_id];
@@ -129,6 +129,7 @@ class AdminBackupProSettingsController extends BaseAdminController
         //$variables['menu_data'] = ee()->backup_pro->get_settings_view_menu();
         $variables['section'] = 'storage';
         $variables['storage_id'] = $storage_id;
+        $variables['active_tab'] = $section;
         
         $this->context->smarty->assign( $variables );
         $content = $this->prepareContent('storage/remove.tpl');
@@ -252,6 +253,7 @@ class AdminBackupProSettingsController extends BaseAdminController
         $sub = $this->getPost('sub', 'view_storage');
         $section = $this->getPost('section', 'storage');
         $invalid_storage_id = $this->getPost('invalid_storage_id', 'no');
+        $fail_min_storage_location_needs = $this->getPost('fail_min_storage_location_needs', 'no');
         $variables = array();
         $variables['can_remove'] = true;
         if( count($this->settings['storage_details']) <= 1 )
@@ -265,6 +267,7 @@ class AdminBackupProSettingsController extends BaseAdminController
         $variables['section'] = 'storage';
         $variables['active_tab'] = $section;
         $variables['invalid_storage_id'] = $invalid_storage_id;
+        $variables['fail_min_storage_location_needs'] = $fail_min_storage_location_needs;
         
         $this->context->smarty->assign( $variables );
         $content = $this->prepareContent('storage.tpl');
