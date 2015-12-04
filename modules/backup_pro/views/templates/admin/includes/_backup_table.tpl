@@ -1,10 +1,12 @@
 {if $enable_delete != 'yes'}
-
+{foreach from=$backups key=k item=backup}
+	<input type="hidden" name="backups[]" value="{$backup['file_name']|m62Encode}" />
+{/foreach}
 {/if}
 
 <input type="hidden" value="<?php echo $note_url; ?>" name="__note_url" id="__note_url" />
-<div class="tbl-wrap">
-<table width="100%" class="data existing_backups " id="existing_backup_table" border="0" cellpadding="0" cellspacing="0">
+<div class="table-responsive-row clearfix">
+<table width="100%" class="data existing_backups table tableDnD " id="existing_backup_table" border="0" cellpadding="0" cellspacing="0">
 <thead>
 	<tr class="odd">
 		<th></th>
@@ -29,16 +31,16 @@
 <tbody>
 {foreach from=$backups key=k item=backup}
 <tr class="odd">
-	<td class="  "><span class="<?php echo $status_class; ?>"><?php echo $status_string; ?></span></td>
+	<td class=" backup_pro_backup_status {if $backup['verified'] == '0'}backup_pro_backup_warn{elseif $backup['verified'] == 'success'}backup_pro_backup_success{elseif $backup['verified'] == 'fail'}backup_pro_backup_fail{/if}"></td>
 	{if $enable_delete == 'yes'}
 	<td><?php echo form_checkbox('backups[]', urlencode($view_helper->m62Encode($backup['file_name'])), false, 'id="'.$backup['hash'].'"'); ?></td>
 	{/if}
 	<td style="white-space: nowrap">
-    	<?php if(isset($backup['storage_locations']) && is_array($backup['storage_locations']) ): ?>
-    		<?php foreach($backup['storage_locations'] AS $location_id => $storage): ?>
-    			<img src="{$module_dir|escape}/images/storage/<?php echo $storage['icon']; ?>.png" class="" title="<?php echo $storage['storage_location_name']; ?>">
-    		<?php endforeach; ?>
-    	<?php endif; ?>
+    	{if isset($backup['storage_locations']) && is_array($backup['storage_locations']) }
+    		{foreach from=$backup['storage_locations'] key=location_id item=storage}
+    			<img src="{$module_dir|escape}views/images/storage/{$storage['icon']}.png" class="" title="{$storage['storage_location_name']}">
+    		{/foreach}
+    	{/if}
 	</td>
 	<td style="width:55%">
 		{if $enable_editable_note == 'yes'}
@@ -58,34 +60,33 @@
 	<td style="white-space: nowrap"><!-- {$backup['compressed_size']} -->{$backup['compressed_size']|m62FileSize}</td>
 	<td style="white-space: nowrap"><!-- {$backup['time_taken']} -->{$backup['time_taken']|m62TimeFormat}</td>
 	<td style="white-space: nowrap"><!-- {$backup['max_memory']} -->{$backup['max_memory']|m62FileSize}</td>
-		<?php if(isset($enable_actions) && $enable_actions == 'yes' ): ?>
+		{if isset($enable_actions) && $enable_actions == 'yes'}
 	<td align="right" style="width:40px; white-space: nowrap">
 		<div style="float:right">
-		<ul class="toolbar">
-            <?php if( $backup['backup_type'] == 'database'): ?> 
+            {if $backup['backup_type'] == 'database'} 
             
-            <?php if( $backup['can_restore'] ): ?>
-    			<li class="sync"><a href="<?php echo ee('CP/URL', 'addons/settings/backup_pro/restore_confirm'.AMP.'id='.urlencode($view_helper->m62Encode($backup['details_file_name'])).AMP.'type='.$backup['backup_type']);?>" title="<?php echo $view_helper->m62Lang('restore'); ?>">
-    				
-    			</a><?php ?>
-            <?php else: ?>
-                <img src="<?php echo $theme_folder_url; ?>backup_pro/images/restore.png" alt="<?php echo $view_helper->m62Lang('restore'); ?>" class="desaturate">
-            <?php endif; ?>
+            {if $backup['can_restore']}
+    			<a href="<?php echo $url_base;?>restore_confirm&id=<?php echo urlencode($view_helper->m62Encode($backup['details_file_name'])); ?>&type=<?php echo $backup['backup_type']; ?>" title="<?php echo $view_helper->m62Lang('restore'); ?>">
+    				<img src="{$module_dir|escape}views/images/restore.png" alt="<?php echo $view_helper->m62Lang('restore'); ?>" class="">
+    			</a> 
+            {else}
+                <img src="{$module_dir|escape}views/images/restore.png" alt="<?php echo $view_helper->m62Lang('restore'); ?>" class="desaturate">
+            {/if}
 			
-		<?php endif; ?>
-        <?php if( $backup['can_download'] ): ?>
-    		<li class="download"><a href="<?php echo ee('CP/URL', 'addons/settings/backup_pro/download'.AMP.'id='.urlencode($view_helper->m62Encode($backup['details_file_name'])).AMP.'type='.$backup['backup_type']);?>" title="<?php echo $view_helper->m62Lang('download'); ?>">
-    			
-    		</a></li>
-		<?php else: ?>
-		
-		<?php endif; ?>
-		</ul>
+		{/if}
+        {if $backup['can_download']}
+    		<a href="<?php echo $url_base;?>download&id=<?php echo urlencode($view_helper->m62Encode($backup['details_file_name'])); ?>&type=<?php echo $backup['backup_type']; ?>" title="<?php echo $view_helper->m62Lang('download'); ?>">
+    			<img src="{$module_dir|escape}views/images/download.png" alt="<?php echo $view_helper->m62Lang('download'); ?>" class="">
+    		</a> 
+		{else}
+			<img src="{$module_dir|escape}views/images/download.png" alt="<?php echo $view_helper->m62Lang('download'); ?>" class="desaturate">
+		{/if}
 		</div>
 	</td>
-	<?php endif; ?>	
+	{/if}
 </tr>
 {/foreach}
 
 </tbody>
 </table>
+</div>

@@ -88,7 +88,7 @@ class AdminBackupProDashboardController extends BaseAdminController
             'errors' => $this->errors,
             'enable_delete' => 'no',
             'enable_type' => 'yes',
-            'enable_actions' => 'no',
+            'enable_actions' => 'yes',
             'enable_editable_note' => 'yes'
             //'menu_data' => ee()->backup_pro->get_dashboard_view_menu(),
             //'method' => ee()->input->get_post('method')
