@@ -102,6 +102,7 @@ class AdminBackupProDashboardController extends BaseAdminController
      */
     protected function dbBackupView()
     {
+        $backup_complete = $this->getPost('backup_complete', 'no');
         $backup = $this->services['backups'];
         $backups = $backup->setBackupPath($this->settings['working_directory'])->getAllBackups($this->settings['storage_details']);
         $backup_meta = $backup->getBackupMeta($backups);
@@ -112,7 +113,8 @@ class AdminBackupProDashboardController extends BaseAdminController
             'backups' => $backups,
             'errors' => $this->errors,
             'section' => 'db_backups',
-            'active_tab' => 'db_backups'
+            'active_tab' => 'db_backups',
+            'backup_complete' => $backup_complete
         );
         
         $this->bp_template = 'database_backups.tpl';

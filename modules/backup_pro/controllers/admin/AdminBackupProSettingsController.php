@@ -250,6 +250,9 @@ class AdminBackupProSettingsController extends BaseAdminController
         $section = $this->getPost('section', 'storage');
         $invalid_storage_id = $this->getPost('invalid_storage_id', 'no');
         $fail_min_storage_location_needs = $this->getPost('fail_min_storage_location_needs', 'no');
+        $storage_removed = $this->getPost('storage_removed', 'no');
+        $updated = $this->getPost('updated', 'no');
+        $added = $this->getPost('added', 'no');
         $variables = array();
         $variables['can_remove'] = true;
         if( count($this->settings['storage_details']) <= 1 )
@@ -263,6 +266,10 @@ class AdminBackupProSettingsController extends BaseAdminController
         $variables['section'] = 'storage';
         $variables['active_tab'] = $section;
         $variables['invalid_storage_id'] = $invalid_storage_id;
+        $variables['fail_min_storage_location_needs'] = $fail_min_storage_location_needs;
+        $variables['storage_removed'] = $storage_removed;
+        $variables['updated'] = $updated;
+        $variables['added'] = $added;
         $variables['fail_min_storage_location_needs'] = $fail_min_storage_location_needs;
         
         $this->context->smarty->assign( $variables );
@@ -278,6 +285,7 @@ class AdminBackupProSettingsController extends BaseAdminController
     protected function settingsView()
     {
         $section = $this->getPost('section', 'general');
+        $update = $this->getPost('update', 'no');
         $variables = array('form_data' => $this->settings, 'form_errors' => $this->returnEmpty($this->settings));
         $variables['form_data']['cron_notify_emails'] = implode("\n", $this->settings['cron_notify_emails']);
         $variables['form_data']['exclude_paths'] = implode("\n", $this->settings['exclude_paths']);
@@ -314,7 +322,8 @@ class AdminBackupProSettingsController extends BaseAdminController
             }
         }
         
-        $variables['section']= $section;
+        $variables['section'] = $section;
+        $variables['update'] = $update;
         $variables['db_tables'] = $this->services['db']->getTables();
         $variables['backup_cron_commands'] = $this->platform->getBackupCronCommands($this->settings);
         $variables['ia_cron_commands'] = $this->platform->getIaCronCommands($this->settings);

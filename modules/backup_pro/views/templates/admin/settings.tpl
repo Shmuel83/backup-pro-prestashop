@@ -8,7 +8,11 @@
     	<div class="alert alert-danger">Woops! Looks like we have an issue...
 
     	</div>
-    {/if}    
+    {/if}     
+    
+    {if $update == 'yes'}
+    <div class="alert alert-success">{'settings_updated'|m62Lang}</div>
+    {/if} 
     
     {include file="./settings/_settings_nav.tpl"}
     

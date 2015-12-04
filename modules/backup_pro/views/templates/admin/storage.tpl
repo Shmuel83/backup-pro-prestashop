@@ -7,7 +7,21 @@
     
     {if $fail_min_storage_location_needs == 'yes'}
     <div class="alert alert-warning">{'min_storage_location_needs'|m62Lang}</div>
-    {/if}    
+    {/if} 
+    
+    {if $storage_removed == 'yes'}
+    <div class="alert alert-success">{'storage_location_removed'|m62Lang}</div>
+    {/if}  
+    
+    {if $updated == 'yes'}
+    <div class="alert alert-success">{'storage_location_updated'|m62Lang}</div>
+    {/if}  
+    
+    {if $added == 'yes'}
+    <div class="alert alert-success">{'storage_location_added'|m62Lang}</div>
+    {/if} 
+    
+          
     
     {include file="./settings/_settings_nav.tpl"}
     
