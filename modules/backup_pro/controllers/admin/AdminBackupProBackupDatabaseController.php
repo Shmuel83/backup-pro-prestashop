@@ -114,7 +114,7 @@ class AdminBackupProBackupDatabaseController extends BaseBackupController
                                     ->counts($this->settings['max_db_backups'])
                                     ->duplicates($this->settings['allow_duplicates']);
         
-                $this->redirect_after = self::$currentIndex.'&backup_complete=yes&token='.$this->token;;
+                $this->redirect_after = $this->context->link->getAdminLink('AdminBackupProDashboard').'&section=db_backups&backup_complete=yes';
                 $this->redirect();
             }
         }

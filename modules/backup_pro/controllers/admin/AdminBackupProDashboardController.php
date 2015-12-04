@@ -90,8 +90,6 @@ class AdminBackupProDashboardController extends BaseAdminController
             'enable_type' => 'yes',
             'enable_actions' => 'yes',
             'enable_editable_note' => 'yes'
-            //'menu_data' => ee()->backup_pro->get_dashboard_view_menu(),
-            //'method' => ee()->input->get_post('method')
         );
         
         $this->context->smarty->assign( $variables );
@@ -113,11 +111,7 @@ class AdminBackupProDashboardController extends BaseAdminController
             'backup_meta' => $backup_meta,
             'backups' => $backups,
             'errors' => $this->errors,
-            //'view_helper' => $this->view_helper,
-            //'url_base' => $this->url_base,
-            //'menu_data' => $this->backup_lib->getDashboardViewMenu(),
             'section' => 'db_backups',
-            //'theme_folder_url' => plugin_dir_url(self::name),
             'active_tab' => 'db_backups'
         );
         
@@ -138,11 +132,7 @@ class AdminBackupProDashboardController extends BaseAdminController
             'backup_meta' => $backup_meta,
             'backups' => $backups,
             'errors' => $this->errors,
-            //'view_helper' => $this->view_helper,
-            //'url_base' => $this->url_base,
-            //'menu_data' => $this->backup_lib->getDashboardViewMenu(),
             'section' => 'file_backups',
-            //'theme_folder_url' => plugin_dir_url(self::name)
             'active_tab' => 'file_backups'
         );
         
