@@ -36,7 +36,7 @@
 	<td style="white-space: nowrap">
     	<?php if(isset($backup['storage_locations']) && is_array($backup['storage_locations']) ): ?>
     		<?php foreach($backup['storage_locations'] AS $location_id => $storage): ?>
-    			<img src="<?php echo $theme_folder_url; ?>backup_pro/images/storage/<?php echo $storage['icon']; ?>.png" class="" title="<?php echo $storage['storage_location_name']; ?>">
+    			<img src="{$module_dir|escape}/images/storage/<?php echo $storage['icon']; ?>.png" class="" title="<?php echo $storage['storage_location_name']; ?>">
     		<?php endforeach; ?>
     	<?php endif; ?>
 	</td>

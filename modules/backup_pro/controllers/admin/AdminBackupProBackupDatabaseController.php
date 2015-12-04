@@ -66,9 +66,8 @@ class AdminBackupProBackupDatabaseController extends BaseBackupController
     
         if(!$proc_url)
         {
-            ee()->session->set_flashdata('message_failure', $this->services['lang']->__('can_not_backup'));
-            ee()->functions->redirect($this->url_base.'index');
-            exit;
+            $this->redirect_after = self::$currentIndex.'&section=storage&can_not_backup=yes&token='.$this->token;;
+            $this->redirect();
         }
     
         //ee()->cp->add_js_script('ui', 'progressbar');
@@ -115,8 +114,8 @@ class AdminBackupProBackupDatabaseController extends BaseBackupController
                                     ->counts($this->settings['max_db_backups'])
                                     ->duplicates($this->settings['allow_duplicates']);
         
-                ee()->session->set_flashdata('message_success', $this->services['lang']->__('backup_progress_bar_stop'));
-                ee()->functions->redirect(ee('CP/URL', 'addons/settings/backup_pro/db_backups'));
+                $this->redirect_after = self::$currentIndex.'&backup_complete=yes&token='.$this->token;;
+                $this->redirect();
             }
         }
         else

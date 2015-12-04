@@ -117,8 +117,8 @@ class AdminBackupProSettingsController extends BaseAdminController
         
             if( $this->services['backup']->getStorage()->getLocations()->setSetting($this->services['settings'])->remove($storage_id, $data, $backups) )
             {
-                ee()->session->set_flashdata('message_success', $this->services['lang']->__('storage_location_removed'));
-                ee()->functions->redirect(ee('CP/URL', 'addons/settings/backup_pro/view_storage'));
+                $this->redirect_after = self::$currentIndex.'&section=storage&storage_removed=yes&token='.$this->token;;
+                $this->redirect();
             }
             else
             {
@@ -126,7 +126,6 @@ class AdminBackupProSettingsController extends BaseAdminController
             }
         }
         
-        //$variables['menu_data'] = ee()->backup_pro->get_settings_view_menu();
         $variables['section'] = 'storage';
         $variables['storage_id'] = $storage_id;
         $variables['active_tab'] = $section;
@@ -178,11 +177,9 @@ class AdminBackupProSettingsController extends BaseAdminController
             }
         }
         
-        //$variables['menu_data'] = ee()->backup_pro->get_settings_view_menu();
         $variables['section'] = 'storage';
         $variables['storage_id'] = $storage_id;
-        $variables['active_tab'] = $section;
-        //ee()->view->cp_page_title = $this->services['lang']->__('storage_bp_settings_menu');     
+        $variables['active_tab'] = $section;  
         
         $this->context->smarty->assign( $variables );
         $content = $this->prepareContent('storage/edit.tpl');
@@ -234,7 +231,6 @@ class AdminBackupProSettingsController extends BaseAdminController
             $variables['_form_template'] = './drivers/_'.$engine;
         }
         
-        //$variables['menu_data'] = ee()->backup_pro->get_settings_view_menu();
         $variables['section'] = 'storage';
         $variables['engine'] = $engine;
         $variables['section'] = 'storage';
