@@ -45,6 +45,10 @@ class AdminBackupProDashboardController extends BaseAdminController
                 $this->restoreDbView();
             break;
             
+            case 'restore_db':
+                
+            break;
+            
             case 'remove':
                 
             break;
@@ -126,7 +130,8 @@ class AdminBackupProDashboardController extends BaseAdminController
             'enable_delete' => 'yes',
             'enable_type' => 'yes',
             'enable_actions' => 'yes',
-            'enable_editable_note' => 'yes'
+            'enable_editable_note' => 'yes',
+            'bad_restore_filename' => $this->getPost('bad_restore_filename', 'no')
         );
         
         $this->bp_template = 'database_backups.tpl';
@@ -159,8 +164,13 @@ class AdminBackupProDashboardController extends BaseAdminController
     protected function restoreDbView()
     {
         $encrypt = $this->services['encrypt'];
-        
         $file_name = $encrypt->decode($this->getPost('id'));
+        if( $file_name == '')
+        {
+            $this->redirect_after = self::$currentIndex.'&section=db_backups&bad_restore_filename=yes&token='.$this->token;;
+            $this->redirect();
+        }
+        
         $storage = $this->services['backup']->setStoragePath($this->settings['working_directory']);
         
         $file = $storage->getStorage()->getDbBackupNamePath($file_name);
@@ -169,8 +179,14 @@ class AdminBackupProDashboardController extends BaseAdminController
             'settings' => $this->settings,
             'backup' => $backup_info,
             'errors' => $this->errors,
-            'menu_data' => ee()->backup_pro->get_dashboard_view_menu(),
-            'method' => ee()->input->get_post('method'),
+            'active_tab' => 'db_backups',
+            //'menu_data' => ee()->backup_pro->get_dashboard_view_menu(),
+            'method' => $this->getPost('method'),
         );
+        
+        $this->bp_template = 'restore_confirm.tpl';
+        $this->context->smarty->assign( $variables );
+        $content = $this->prepareContent($this->bp_template);
+        $this->context->smarty->assign(array('content' => $content));
     }
 }
