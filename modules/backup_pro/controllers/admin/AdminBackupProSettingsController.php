@@ -180,7 +180,6 @@ class AdminBackupProSettingsController extends BaseAdminController
         $variables['section'] = 'storage';
         $variables['storage_id'] = $storage_id;
         $variables['active_tab'] = $section;  
-        
         $this->context->smarty->assign( $variables );
         $content = $this->prepareContent('storage/edit.tpl');
         $this->context->smarty->assign(array('content' => $content));       

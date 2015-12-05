@@ -6,7 +6,10 @@
   </button>
   <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
     {foreach from=$available_storage_engines key=k item=section}
-    <li><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=storage&amp;sub=new_storage&engine={$k}">{$section['name']|m62Lang}</a></li>
+    <li><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=storage&amp;sub=new_storage&engine={$k}">
+    	<img src="{$module_dir|escape}views/images/storage/{$section['icon']}.png" />
+    	{$section['name']|m62Lang}
+    </a></li>
     {/foreach} 
   </ul>
 </div>

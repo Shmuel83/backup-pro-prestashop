@@ -3,7 +3,7 @@
 {include file="../settings/_settings_nav.tpl"}
     <div class="panel">
 		<div class="panel-heading">
-			<i class="icon-folder-open"></i> {'edit_storage_location'|m62Lang} ({$storage_engine['name']|m62Lang})
+			<img src="{$module_dir|escape}views/images/storage/{$storage_engine['icon']}.png" /> {'edit_storage_location'|m62Lang}  ({$storage_engine['name']|m62Lang})
 		</div>
 	
 		{include file="../storage/_submenu.tpl"} <br clear="all" />
