@@ -142,6 +142,7 @@ class AdminBackupProDashboardController extends BaseAdminController
     
     protected function fileBackupView()
     {
+        $backup_complete = $this->getPost('backup_complete', 'no');
         $backup = $this->services['backups'];
         $backups = $backup->setBackupPath($this->settings['working_directory'])->getAllBackups($this->settings['storage_details']);
         $backup_meta = $backup->getBackupMeta($backups);
@@ -152,7 +153,13 @@ class AdminBackupProDashboardController extends BaseAdminController
             'backups' => $backups,
             'errors' => $this->errors,
             'section' => 'file_backups',
-            'active_tab' => 'file_backups'
+            'active_tab' => 'file_backups',
+            'backup_complete' => $backup_complete,
+            'enable_delete' => 'yes',
+            'enable_type' => 'yes',
+            'enable_actions' => 'yes',
+            'enable_editable_note' => 'yes',
+            'bad_restore_filename' => $this->getPost('bad_restore_filename', 'no')
         );
         
         $this->bp_template = 'file_backups.tpl';

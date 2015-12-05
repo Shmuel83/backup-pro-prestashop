@@ -13,12 +13,32 @@
 		</thead>
 		<tbody>
 		<tr>
-			<td width='120'> {$backup_meta['global']['total_backups']} </td>
-			<td width='150'>{$backup_meta['global']['total_space_used']}</td>
-			<td align='right' width='150'>{if $backup_meta['global']['newest_backup_taken'] != ''} {$backup_meta['global']['newest_backup_taken']|m62DateTime} {else} {'na'|m62Lang} {/if}</td>
-			<td align='right' width='150'>{if $backup_meta['global']['oldest_backup_taken'] != ''} {$backup_meta['global']['oldest_backup_taken']|m62DateTime} {else} {'na'|m62Lang} {/if}</td>
+			<td width='120'> {$backup_meta['files']['total_backups']} </td>
+			<td width='150'>{$backup_meta['files']['total_space_used']}</td>
+			<td align='right' width='150'>{if $backup_meta['files']['newest_backup_taken'] != ''} {$backup_meta['files']['newest_backup_taken']|m62DateTime} {else} {'na'|m62Lang} {/if}</td>
+			<td align='right' width='150'>{if $backup_meta['files']['oldest_backup_taken'] != ''} {$backup_meta['files']['oldest_backup_taken']|m62DateTime} {else} {'na'|m62Lang} {/if}</td>
 		</tr>
 		</tbody>
 		</table>
 	</div>    
+	
+	<div class="row panel">
+	
+		{if $backups['database']|count > 0}
+			<form name="remove_backups" action="confirm_remove_backup" method="post"  >
+			<h3>{'recent_backups'|m62Lang} ({$backups['files']|count})</h3>
+			{assign var="backups" value=$backups['files']} 
+			{include file="./includes/_backup_table.tpl"}
+			
+			
+			<div class="panel-footer"><button name="submit_button" class="btn btn-primary pull-right" value="1" id="submit_button" type="submit">
+								{'delete_selected'|m62Lang}
+							</button>
+			</div>
+			</form>			
+		{else}
+			{'no_backups_exist'|m62Lang}
+		{/if}
+	
+	</div>		
 </div>

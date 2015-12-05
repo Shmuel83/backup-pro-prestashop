@@ -22,10 +22,10 @@
 		</thead>
 		<tbody>
 		<tr>
-			<td width='120'> {$backup_meta['global']['total_backups']} </td>
-			<td width='150'>{$backup_meta['global']['total_space_used']}</td>
-			<td align='right' width='150'>{if $backup_meta['global']['newest_backup_taken'] != ''} {$backup_meta['global']['newest_backup_taken']|m62DateTime} {else} {'na'|m62Lang} {/if}</td>
-			<td align='right' width='150'>{if $backup_meta['global']['oldest_backup_taken'] != ''} {$backup_meta['global']['oldest_backup_taken']|m62DateTime} {else} {'na'|m62Lang} {/if}</td>
+			<td width='120'> {$backup_meta['database']['total_backups']} </td>
+			<td width='150'>{$backup_meta['database']['total_space_used']}</td>
+			<td align='right' width='150'>{if $backup_meta['database']['newest_backup_taken'] != ''} {$backup_meta['database']['newest_backup_taken']|m62DateTime} {else} {'na'|m62Lang} {/if}</td>
+			<td align='right' width='150'>{if $backup_meta['database']['oldest_backup_taken'] != ''} {$backup_meta['database']['oldest_backup_taken']|m62DateTime} {else} {'na'|m62Lang} {/if}</td>
 		</tr>
 		</tbody>
 		</table>
