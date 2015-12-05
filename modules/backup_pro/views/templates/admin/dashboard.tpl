@@ -81,6 +81,7 @@
 	<div class="row panel">
 	
 		{if $backups|count > 0}
+			<h3>{'recent_backups'|m62Lang} ({$backups|count})</h3>
 			{include file="./includes/_backup_table.tpl"}
 		{else}
 			{'no_backups_exist'|m62Lang}

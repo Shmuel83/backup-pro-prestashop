@@ -6,3 +6,6 @@
 /modules/backup_pro/views/css
 /modules/backup_pro/views/js
 /modules/backup_pro/views/images
+/modules/backup_pro/backups/progress.data
+/modules/backup_pro/backups/database
+/modules/backup_pro/backups/files

@@ -54,10 +54,10 @@ class Backup_pro extends Module
         $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
         $this->bootstrap = true;
     
-        parent::__construct();
-    
         $this->displayName = $this->l('Backup Pro');
         $this->description = $this->l('Description of my module.');
+    
+        parent::__construct();
     
         $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
 		$this->admin_tpl_path = _PS_MODULE_DIR_.$this->name.'/views/templates/admin/';

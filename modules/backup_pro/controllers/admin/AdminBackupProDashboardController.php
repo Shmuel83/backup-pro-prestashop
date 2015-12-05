@@ -41,6 +41,14 @@ class AdminBackupProDashboardController extends BaseAdminController
                 $this->fileBackupView();
             break;
             
+            case 'restore_confirm':
+                $this->restoreDbView();
+            break;
+            
+            case 'remove':
+                
+            break;
+            
             default:
                 $this->dashboardView();
             break;
@@ -114,7 +122,11 @@ class AdminBackupProDashboardController extends BaseAdminController
             'errors' => $this->errors,
             'section' => 'db_backups',
             'active_tab' => 'db_backups',
-            'backup_complete' => $backup_complete
+            'backup_complete' => $backup_complete,
+            'enable_delete' => 'yes',
+            'enable_type' => 'yes',
+            'enable_actions' => 'yes',
+            'enable_editable_note' => 'yes'
         );
         
         $this->bp_template = 'database_backups.tpl';
@@ -142,5 +154,23 @@ class AdminBackupProDashboardController extends BaseAdminController
         $this->context->smarty->assign( $variables );
         $content = $this->prepareContent($this->bp_template);
         $this->context->smarty->assign(array('content' => $content));
+    }
+    
+    protected function restoreDbView()
+    {
+        $encrypt = $this->services['encrypt'];
+        
+        $file_name = $encrypt->decode($this->getPost('id'));
+        $storage = $this->services['backup']->setStoragePath($this->settings['working_directory']);
+        
+        $file = $storage->getStorage()->getDbBackupNamePath($file_name);
+        $backup_info = $this->services['backups']->setLocations($this->settings['storage_details'])->getBackupData($file);
+        $variables = array(
+            'settings' => $this->settings,
+            'backup' => $backup_info,
+            'errors' => $this->errors,
+            'menu_data' => ee()->backup_pro->get_dashboard_view_menu(),
+            'method' => ee()->input->get_post('method'),
+        );
     }
 }

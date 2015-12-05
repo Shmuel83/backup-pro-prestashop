@@ -4,9 +4,9 @@
 {/foreach}
 {/if}
 
-<input type="hidden" value="<?php echo $note_url; ?>" name="__note_url" id="__note_url" />
+<input type="hidden" value="{$note_url}" name="__note_url" id="__note_url" />
 <div class="table-responsive-row clearfix">
-<table width="100%" class="data existing_backups table tableDnD " id="existing_backup_table" border="0" cellpadding="0" cellspacing="0">
+<table width="100%" class="data existing_backups table data_table" id="existing_backup_table" border="0" cellpadding="0" cellspacing="0">
 <thead>
 	<tr class="odd">
 		<th></th>
@@ -33,7 +33,7 @@
 <tr class="odd">
 	<td class=" backup_pro_backup_status {if $backup['verified'] == '0'}backup_pro_backup_warn{elseif $backup['verified'] == 'success'}backup_pro_backup_success{elseif $backup['verified'] == 'fail'}backup_pro_backup_fail{/if}"></td>
 	{if $enable_delete == 'yes'}
-	<td><?php echo form_checkbox('backups[]', urlencode($view_helper->m62Encode($backup['file_name'])), false, 'id="'.$backup['hash'].'"'); ?></td>
+	<td><input name="backups[]" id="backup_check_" value="{$backup['file_name']|m62Encode}" type="checkbox"></td>
 	{/if}
 	<td style="white-space: nowrap">
     	{if isset($backup['storage_locations']) && is_array($backup['storage_locations']) }
@@ -45,7 +45,7 @@
 	<td style="width:55%">
 		{if $enable_editable_note == 'yes'}
 		<div class="bp_editable" rel="{$backup['hash']}" id="note_div_{$backup['hash']}">{if $backup['note'] == ''}Click to add note...{else}{$backup['note']}{/if}</div>
-		<input name="note_{$backup['hash']}" value="{$backup['note']}" id="note_{$backup['hash']}" data-backup-type="{$backup['backup_type']}" class="note_container" rel="<?php echo urlencode($view_helper->m62Encode($backup['file_name'])); ?>" style="display:none; width:100%" type="text">
+		<input name="note_{$backup['hash']}" value="{$backup['note']}" id="note_{$backup['hash']}" data-backup-type="{$backup['backup_type']}" class="note_container" rel="{$backup['file_name']|m62Encode}" style="display:none; width:100%" type="text">
 		
 		{else}
             {if $backup['note'] == ''}{'na'|m62Lang}{else} {$backup['note']} {/if}
@@ -66,8 +66,8 @@
             {if $backup['backup_type'] == 'database'} 
             
             {if $backup['can_restore']}
-    			<a href="<?php echo $url_base;?>restore_confirm&id=<?php echo urlencode($view_helper->m62Encode($backup['details_file_name'])); ?>&type=<?php echo $backup['backup_type']; ?>" title="<?php echo $view_helper->m62Lang('restore'); ?>">
-    				<img src="{$module_dir|escape}views/images/restore.png" alt="<?php echo $view_helper->m62Lang('restore'); ?>" class="">
+    			<a class="btn btn-default" href="{$link->getAdminLink('AdminBackupProDashboard')|escape:'html':'UTF-8'}&amp;section=restore_confirm&amp;id={$backup['details_file_name']|m62Encode|escape:'url':'UTF-8'}&amp;type={$backup['backup_type']}" title="{'restore'|m62Lang}">
+    				<img src="{$module_dir|escape}views/images/restore.png" alt="{'restore'|m62Lang}" class="">
     			</a> 
             {else}
                 <img src="{$module_dir|escape}views/images/restore.png" alt="<?php echo $view_helper->m62Lang('restore'); ?>" class="desaturate">
@@ -75,11 +75,11 @@
 			
 		{/if}
         {if $backup['can_download']}
-    		<a href="<?php echo $url_base;?>download&id=<?php echo urlencode($view_helper->m62Encode($backup['details_file_name'])); ?>&type=<?php echo $backup['backup_type']; ?>" title="<?php echo $view_helper->m62Lang('download'); ?>">
-    			<img src="{$module_dir|escape}views/images/download.png" alt="<?php echo $view_helper->m62Lang('download'); ?>" class="">
+    		<a class="btn btn-default" href="{$link->getAdminLink('AdminBackupProManage')|escape:'html':'UTF-8'}download&id={$backup['details_file_name']|m62Encode|escape:'url':'UTF-8'}&amp;type={$backup['backup_type']}" title="{'download'|m62Lang}">
+    			<img src="{$module_dir|escape}views/images/download.png" alt="{'download'|m62Lang}" class="">
     		</a> 
 		{else}
-			<img src="{$module_dir|escape}views/images/download.png" alt="<?php echo $view_helper->m62Lang('download'); ?>" class="desaturate">
+			<img src="{$module_dir|escape}views/images/download.png" alt="{'download'|m62Lang}" class="desaturate">
 		{/if}
 		</div>
 	</td>

@@ -25,4 +25,25 @@
 		</tbody>
 		</table>
 	</div>    
+	
+	
+	<div class="row panel">
+	
+		{if $backups['database']|count > 0}
+			<form name="remove_backups" action="confirm_remove_backup" method="post"  >
+			<h3>{'recent_backups'|m62Lang} ({$backups['database']|count})</h3>
+			{assign var="backups" value=$backups['database']} 
+			{include file="./includes/_backup_table.tpl"}
+			
+			
+			<div class="panel-footer"><button name="submit_button" class="btn btn-primary pull-right" value="1" id="submit_button" type="submit">
+								{'delete_selected'|m62Lang}
+							</button>
+			</div>
+			</form>			
+		{else}
+			{'no_backups_exist'|m62Lang}
+		{/if}
+	
+	</div>	
 </div>

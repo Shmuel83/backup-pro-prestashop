@@ -16,7 +16,7 @@
     
     {include file="./settings/_settings_nav.tpl"}
     
-    <form name="fdsafdsafdsa" method="POST" action="" class="defaultForm form-horizontal " >
+    <form name="backup_pro_settings" method="POST" action="" class="defaultForm form-horizontal " >
 	{if $section == 'general'}
 		{include file="./settings/_general.tpl"}
 	{elseif $section == 'file_backups'}
