@@ -117,12 +117,7 @@ class AdminBackupProSettingsController extends BaseAdminController
         
             if( $this->services['backup']->getStorage()->getLocations()->setSetting($this->services['settings'])->remove($storage_id, $data, $backups) )
             {
-                $this->redirect_after = $this->context->link->getAdminLink('AdminBackupProSettings').'&section=storage&storage_removed=yes';
-                $this->redirect();
-            }
-            else
-            {
-                $variables['form_errors'] = array_merge($variables['form_errors'], $settings_errors);
+                Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProSettings').'&section='.$section.'&storage_removed=yes');
             }
         }
         
@@ -167,8 +162,7 @@ class AdminBackupProSettingsController extends BaseAdminController
             {
                 if( $this->services['backup']->getStorage()->getLocations()->setSetting($this->services['settings'])->update($storage_id, $variables['form_data']) )
                 {
-                    $this->redirect_after = $this->context->link->getAdminLink('AdminBackupProSettings').'&section=storage&updated=yes';
-                    $this->redirect();
+                    Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProSettings').'&section='.$section.'&updated=yes');
                 }
             }
             else
@@ -212,8 +206,7 @@ class AdminBackupProSettingsController extends BaseAdminController
             {
                 if( $this->services['backup']->getStorage()->getLocations()->setSetting($this->services['settings'])->create($engine, $variables['form_data']) )
                 {
-                    $this->redirect_after = $this->context->link->getAdminLink('AdminBackupProSettings').'&section=storage&added=yes';
-                    $this->redirect();
+                    Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProSettings').'&section='.$section.'&added=yes');
                 }
             }
             else
@@ -310,8 +303,7 @@ class AdminBackupProSettingsController extends BaseAdminController
             {
                 if( $this->services['settings']->update($data) )
                 {
-                    $this->redirect_after = self::$currentIndex.'&section='.$section.'&update=yes&token='.$this->token;;
-                    $this->redirect();
+                    Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProSettings').'&section='.$section.'&update=yes');
                 }
             }
             else

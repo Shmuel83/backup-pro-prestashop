@@ -67,21 +67,13 @@ class AdminBackupProBackupFilesController extends BaseBackupController
                                      ->counts($this->settings['max_file_backups'], 'files')
                                      ->duplicates($this->settings['allow_duplicates']);
                 
-                ee()->session->set_flashdata('message_success', $this->services['lang']->__('backup_progress_bar_stop'));
-                ee()->functions->redirect($this->url_base.'file_backups');
-                exit;
+                Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProDashboard').'&section=file_backups&backup_complete=yes');
             }
         }
         else
         {
-            $url = $this->url_base.'file_backups';
-            if( $error->getError() == 'no_backup_file_location' )
-            {
-                $url = $this->url_base.'settings&section=files';
-            }
             
-            ee()->session->set_flashdata('message_error', $this->services['lang']->__($error->getError()));
-            ee()->functions->redirect($url);
+            Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProDashboard').'&section=file_backups&backup_system_errors=yes');
         }       
     }
 }

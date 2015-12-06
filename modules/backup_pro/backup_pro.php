@@ -37,6 +37,7 @@ class Backup_pro extends Module
                 'AdminBackupProSettings' => 'Settings'
             ),
             'hidden' => array(
+                'AdminBackupProManage' => 'Manage',
             )
         ),
     );
@@ -56,15 +57,13 @@ class Backup_pro extends Module
     
         $this->displayName = $this->l('Backup Pro');
         $this->description = $this->l('Description of my module.');
-    
+
         parent::__construct();
+        $this->context->controller->addCSS('modules/backup_pro/views/css/backup_pro.css', true);
     
         $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
 		$this->admin_tpl_path = _PS_MODULE_DIR_.$this->name.'/views/templates/admin/';
 		$this->hooks_tpl_path = _PS_MODULE_DIR_.$this->name.'/views/templates/hooks/';
-        
-        if (!Configuration::get('BACKUP_PRO_NAME'))
-            $this->warning = $this->l('No name provided');
     }
     
     /**
