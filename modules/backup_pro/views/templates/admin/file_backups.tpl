@@ -42,7 +42,7 @@
 			</div>
 			</form>			
 		{else}
-			{'no_backups_exist'|m62Lang}
+			{'no_backups_exist'|m62Lang} <a href="{$link->getAdminLink('AdminBackupProBackupFiles')|escape:'html':'UTF-8'}">{'would_you_like_to_backup_files_now'|m62Lang}</a>
 		{/if}
 	
 	</div>		

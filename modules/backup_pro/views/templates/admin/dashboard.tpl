@@ -84,7 +84,7 @@
 			<h3>{'recent_backups'|m62Lang} ({$backups|count})</h3>
 			{include file="./includes/_backup_table.tpl"}
 		{else}
-			{'no_backups_exist'|m62Lang}
+			{'no_backups_exist'|m62Lang} <a href="{$link->getAdminLink('AdminBackupProBackupDatabase')|escape:'html':'UTF-8'}">{'would_you_like_to_backup_database_now'|m62Lang}</a>
 		{/if}
 	
 	</div>
