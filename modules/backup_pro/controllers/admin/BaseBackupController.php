@@ -43,7 +43,7 @@ abstract class BaseBackupController extends BaseAdminController
                                                  ->getErrors();
                 break;
         }
-    
+        
         $variables = array('proc_url' => $proc_url);
         $variables['errors'] = $this->errors;
         $variables['pre_backup_errors'] = $errors;
