@@ -118,4 +118,32 @@ abstract class BaseAdminController extends PrestashopController implements \mith
         
         return $default;
     }
+    
+    /**
+     * Validates the POST'd backup data and returns the clean array
+     * @param array $delete_backups
+     * @param string $type
+     * @return multitype:array
+     */
+    public function validateBackups($delete_backups, $type)
+    {
+        $encrypt = $this->services['encrypt'];
+        $backups = array();
+    
+        $locations = $this->settings['storage_details'];
+        $drivers = $this->services['backup']->getStorage()->getAvailableStorageDrivers();
+        foreach($delete_backups AS $file_name)
+        {
+            $file_name = $encrypt->decode(urldecode($file_name));
+            if( $file_name != '' )
+            {
+                $path = rtrim($this->settings['working_directory'], DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$type;
+                $file_data = $this->services['backup']->getDetails()->getDetails($file_name, $path);
+                $file_data = $this->services['backups']->getBackupStorageData($file_data, $locations, $drivers);
+                $backups[] = $file_data;
+            }
+        }
+    
+        return $backups;
+    }
 }

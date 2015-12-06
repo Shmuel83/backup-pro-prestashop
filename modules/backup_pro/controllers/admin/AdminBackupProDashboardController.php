@@ -49,8 +49,8 @@ class AdminBackupProDashboardController extends BaseAdminController
                 
             break;
             
-            case 'remove':
-                
+            case 'remove_confirm':
+                $this->removeBackupView();
             break;
             
             default:
@@ -140,6 +140,9 @@ class AdminBackupProDashboardController extends BaseAdminController
         $this->context->smarty->assign(array('content' => $content));
     }
     
+    /**
+     * The File Backup list view
+     */
     protected function fileBackupView()
     {
         $backup_complete = $this->getPost('backup_complete', 'no');
@@ -168,6 +171,9 @@ class AdminBackupProDashboardController extends BaseAdminController
         $this->context->smarty->assign(array('content' => $content));
     }
     
+    /**
+     * The Restore Database view
+     */
     protected function restoreDbView()
     {
         $encrypt = $this->services['encrypt'];
@@ -192,6 +198,30 @@ class AdminBackupProDashboardController extends BaseAdminController
         );
         
         $this->bp_template = 'restore_confirm.tpl';
+        $this->context->smarty->assign( $variables );
+        $content = $this->prepareContent($this->bp_template);
+        $this->context->smarty->assign(array('content' => $content));
+    }
+    
+    /**
+     * The Remove Backup view
+     */
+    protected function removeBackupView()
+    {
+        $delete_backups = $this->getPost('backups');
+        $type = $this->getPost('type');
+        $backups = $this->validateBackups($delete_backups, $type);
+        $variables = array(
+            'settings' => $this->settings,
+            'backups' => $backups,
+            'backup_type' => $type,
+            'method' => $this->getPost('method'),
+            'errors' => $this->errors,
+            'active_tab' => 'db_backups',
+            'enable_type' => 'yes', 'enable_editable_note' => 'no', 'enable_actions' => 'no', 'enable_delete' => 'no',
+        );
+        
+        $this->bp_template = 'delete_confirm.tpl';
         $this->context->smarty->assign( $variables );
         $content = $this->prepareContent($this->bp_template);
         $this->context->smarty->assign(array('content' => $content));

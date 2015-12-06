@@ -44,7 +44,7 @@ class AdminBackupProBackupFilesController extends BaseBackupController
     
     public function backupFiles()
     {
-            @session_write_close();
+        @session_write_close();
         $error = $this->services['errors'];
         $backup = $this->services['backup']->setStoragePath($this->settings['working_directory']);
         $error->clearErrors()->checkStorageLocations($this->settings['storage_details'])

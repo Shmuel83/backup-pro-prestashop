@@ -35,7 +35,8 @@
 	<div class="row panel">
 	
 		{if $backups['database']|count > 0}
-			<form name="remove_backups" action="confirm_remove_backup" method="post"  >
+			<form name="remove_backups" action="{$link->getAdminLink('AdminBackupProDashboard')|escape:'html':'UTF-8'}&amp;section=remove_confirm" method="POST"  >
+			<input type="hidden" name="type" id="hidden_backup_type" value="database" />
 			<h3>{'recent_backups'|m62Lang} ({$backups['database']|count})</h3>
 			{assign var="backups" value=$backups['database']} 
 			{include file="./includes/_backup_table.tpl"}
