@@ -75,7 +75,7 @@
 			
 		{/if}
         {if $backup['can_download']}
-    		<a class="btn btn-default" href="{$link->getAdminLink('AdminBackupProManage')|escape:'html':'UTF-8'}download&id={$backup['details_file_name']|m62Encode|escape:'url':'UTF-8'}&amp;type={$backup['backup_type']}" title="{'download'|m62Lang}">
+    		<a class="btn btn-default" href="{$link->getAdminLink('AdminBackupProManage')|escape:'html':'UTF-8'}&amp;section=download&id={$backup['details_file_name']|m62Encode|escape:'url':'UTF-8'}&amp;type={$backup['backup_type']}" title="{'download'|m62Lang}">
     			<img src="{$module_dir|escape}views/images/download.png" alt="{'download'|m62Lang}" class="">
     		</a> 
 		{else}

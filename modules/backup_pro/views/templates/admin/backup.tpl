@@ -11,8 +11,13 @@
 			<div id="backup_instructions">
 				{'backup_in_progress_instructions'|m62Lang}
 			</div>	
+			<div id="backup_running_details"  style="display:none" ><br /><br />
+			{'backup_in_progress'|m62Lang}
+			<img src="{$module_dir|escape}views/images/indicator.gif" id="animated_image" />
+			</div>
+						
 			<div class="panel-footer">
-				<button type="submit" value="1"	id="m62_settings_submit" name="submitAddprofile" class="btn btn-default pull-right">
+				<button type="submit" value="1"	id="_backup_direct" name="submitAddprofile" class="btn btn-primary">
 				{'start_backup'|m62Lang}
 				</button>
 			</div>
