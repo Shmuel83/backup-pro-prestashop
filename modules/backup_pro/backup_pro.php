@@ -59,7 +59,6 @@ class Backup_pro extends Module
         $this->description = $this->l('Description of my module.');
 
         parent::__construct();
-        $this->context->controller->addCSS('modules/backup_pro/views/css/backup_pro.css', true);
     
         $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
 		$this->admin_tpl_path = _PS_MODULE_DIR_.$this->name.'/views/templates/admin/';
@@ -75,7 +74,11 @@ class Backup_pro extends Module
         if (Shop::isFeatureActive())
             Shop::setContext(Shop::CONTEXT_ALL);
     
-        if( !parent::install() || !$this->installSettingsTable() || !$this->installModuleTabs() )
+        if( !parent::install() || 
+            !$this->installSettingsTable() || 
+            !$this->installModuleTabs() || 
+            !$this->registerHook('displayBackOfficeHeader') 
+        )
         {
             return false;
         }
@@ -89,11 +92,20 @@ class Backup_pro extends Module
      */
     public function uninstall()
     {
-        if (!parent::uninstall() || !$this->uninstallModuleTabs())
+        if ( !parent::uninstall() || !$this->uninstallSettingsTable() || !$this->uninstallModuleTabs())
         {
             return false;
         }
         return true;
+    }
+    
+    /**
+     * Adds the backup pro CSS for the tab nav to the admin header
+     * @return void
+     */
+    public function hookDisplayBackOfficeHeader()
+    {
+        $this->context->controller->addCSS('modules/backup_pro/views/css/backup_pro.css', true);
     }
     
     /**
@@ -202,6 +214,14 @@ class Backup_pro extends Module
               PRIMARY KEY (`id`)
 			) ENGINE = '._MYSQL_ENGINE_.' DEFAULT CHARSET=UTF8;')
         );
+    }
     
+    /**
+     * Drops the settings table
+     * @return bool
+     */
+    private function uninstallSettingsTable()
+    {
+        return Db::getInstance()->Execute('DROP TABLE IF EXISTS `'._DB_PREFIX_.'backup_pro_settings`');
     }
 }

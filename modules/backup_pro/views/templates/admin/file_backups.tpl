@@ -1,5 +1,10 @@
 <div id="container" class="row">
     {include file="./includes/_errors.tpl"}
+    
+    {if $backup_complete == 'yes'}
+    <div class="alert alert-success">{'backup_progress_bar_stop'|m62Lang}</div>
+    {/if} 
+        
     {include file="./includes/_dashboard_nav.tpl"}
     <div class="panel">
 		<table border="0" cellspacing="0" cellpadding="0" class="table"  width="100%" >
