@@ -34,7 +34,11 @@ class AdminBackupProManageController extends BaseAdminController
         switch( $this->getPost('section') )
         {
             case 'download':
-                $this->download();
+                $this->downloadAction();
+            break;
+            
+            case 'remove_backup':
+                $this->deleteBackupsAction();
             break;
         }
     }
@@ -42,7 +46,7 @@ class AdminBackupProManageController extends BaseAdminController
     /**
      * Download a backup action
      */
-    public function download()
+    public function downloadAction()
     {
         $encrypt = $this->services['encrypt'];
         $file_name = $encrypt->decode($this->getPost('id'));
@@ -89,7 +93,7 @@ class AdminBackupProManageController extends BaseAdminController
     /**
      * AJAX Action for updating a backup note
      */
-    public function update_backup_note()
+    public function updateBackupNoteAction()
     {
         $encrypt = $this->services['encrypt'];
         $file_name = $encrypt->decode(ee()->input->get_post('backup'));
@@ -107,20 +111,19 @@ class AdminBackupProManageController extends BaseAdminController
     /**
      * Delete Backup Action
      */
-    public function delete_backups()
+    public function deleteBackupsAction()
     {
-        $delete_backups = ee()->input->get_post('backups');
-        $type = ee()->input->get_post('type'); 
+        $delete_backups = $this->getPost('backups');
+        $type = $this->getPost('type'); 
         $backups = $this->validateBackups($delete_backups, $type);
         if( $this->services['backups']->setBackupPath($this->settings['working_directory'])->removeBackups($backups) )
         {
-            ee()->session->set_flashdata('message_success', $this->services['lang']->__('backups_deleted'));
-            ee()->functions->redirect($this->url_base.'index');
+
+            Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProDashboard').'&backups_removed=yes');
         }
         else
         {
-            ee()->session->set_flashdata('message_error', $this->services['lang']->__('backup_delete_failure'));
-            ee()->functions->redirect($this->url_base.'index');
+            Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProDashboard').'&backups_remove_fail=yes');
         }
     }
 }

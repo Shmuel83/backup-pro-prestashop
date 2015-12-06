@@ -134,7 +134,7 @@ abstract class BaseAdminController extends PrestashopController implements \mith
         $drivers = $this->services['backup']->getStorage()->getAvailableStorageDrivers();
         foreach($delete_backups AS $file_name)
         {
-            $file_name = $encrypt->decode(urldecode($file_name));
+            $file_name = $encrypt->decode($file_name);
             if( $file_name != '' )
             {
                 $path = rtrim($this->settings['working_directory'], DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$type;

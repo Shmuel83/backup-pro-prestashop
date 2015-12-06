@@ -1,7 +1,7 @@
 <div class="panel">
 												
 	<div class="panel-heading">
-		<i class="icon-heart-empty"></i> {'license_details'|m62Lang}
+		<i class="{if $settings['license_number'] == ''}icon-heart-empty{else}icon-heart{/if}"></i> {'license_details'|m62Lang}
 	</div>
 	
 	<div class="form-wrapper">

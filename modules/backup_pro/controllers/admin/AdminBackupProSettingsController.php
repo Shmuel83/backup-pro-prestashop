@@ -46,7 +46,7 @@ class AdminBackupProSettingsController extends BaseAdminController
         switch( $this->getPost('section') )
         {
             case 'storage':
-                $this->storage();
+                $this->storageView();
             break;
             
             case 'settings':
@@ -58,7 +58,7 @@ class AdminBackupProSettingsController extends BaseAdminController
         parent::display();
     }
     
-    protected function storage()
+    protected function storageView()
     {
         switch( $this->getPost('sub') )
         {
