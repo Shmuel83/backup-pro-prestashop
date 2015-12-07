@@ -65,6 +65,11 @@ class Backup_pro extends Module
 		$this->hooks_tpl_path = _PS_MODULE_DIR_.$this->name.'/views/templates/hooks/';
     }
     
+    public function hookDisphlayHeader()
+    {
+
+    }
+    
     /**
      * Installs Backup Pro
      * @return boolean
@@ -77,7 +82,8 @@ class Backup_pro extends Module
         if( !parent::install() || 
             !$this->installSettingsTable() || 
             !$this->installModuleTabs() || 
-            !$this->registerHook('displayBackOfficeHeader') 
+            !$this->registerHook('displayBackOfficeHeader') || 
+            !$this->registerHook('displayHeader') 
         )
         {
             return false;
