@@ -4,7 +4,30 @@
 		<i class="icon-time"></i> {'integrity_agent_cron'|m62Lang}
 	</div>
 
-			
+	<table class="table" border="0" cellspacing="0" cellpadding="0">
+	<thead>
+		<tr>
+			<th width='50%'></th>
+			<th width='30%'>{'cron_commands'|m62Lang}</th>
+			<th width='20%'>{'test'|m62Lang}</th>
+		</tr>
+	</thead>
+	<tbody>
+	{foreach from=$ia_cron_commands key=key item=cron}
+	<tr class="even">
+		<td width='50%' style="width:50%;">{$key|m62Lang}</td>
+		<td style="width:50%;">
+			<div class="select_all">{$cron['cmd']}</div>
+		</td>
+		<td style="width:50%;">
+			<a href="{$cron['url']}" class="test_cron" rel="{$key}">
+				<img src="{$module_dir|escape}views/images/test.png" />
+			</a> <img src="{$module_dir|escape}views/images/indicator.gif" id="animated_{$key}" style="display:none" />
+		</td>
+	</tr>
+	{/foreach}
+	</tbody>
+	</table>			
 </div>
 
 <div class="panel">

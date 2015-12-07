@@ -1,7 +1,24 @@
-<?php
+<?php  
+/**
+ * mithra62 - Backup Pro
+ *
+ * @author		Eric Lamb <eric@mithra62.com>
+ * @copyright	Copyright (c) 2015, mithra62, Eric Lamb.
+ * @link		http://mithra62.com/
+ * @version		3.0
+ * @filesource 	./modules/backup_pro/controllers/front/cron.php
+ */
 
 include_once 'BaseController.php';
 
+/**
+ * Backup Pro - Prestashop Cron Frontend Controller
+ *
+ * Contains thePrestashop Cron Frontend Controller
+ *
+ * @package 	mithra62\BackupPro
+ * @author		Eric Lamb <eric@mithra62.com>
+ */
 class Backup_ProCronModuleFrontController extends BaseController
 {
     public function display()
@@ -14,6 +31,10 @@ class Backup_ProCronModuleFrontController extends BaseController
         if( $this->getPost('backup') == 'files' )
         {
             $this->backup();
+        } 
+        elseif( $this->getPost('integrity') == 'check' )
+        {
+            $this->integrity();
         }
     }
     
@@ -76,11 +97,6 @@ class Backup_ProCronModuleFrontController extends BaseController
      */
     public function integrity()
     {
-        if( ee()->input->get_post('backup_pro') != $this->settings['cron_query_key'] )
-        {
-            exit;
-        }
-        
         ini_set('memory_limit', -1);
         set_time_limit(0); //limit the time to 1 hours
 
