@@ -54,7 +54,7 @@ abstract class BaseAdminController extends PrestashopController implements \mith
         $this->context->smarty->registerPlugin('modifier', 'm62Decode', array($this->view_helper, 'm62Decode'));
         $this->context->smarty->registerPlugin('modifier', 'm62FormErrors', array($this->view_helper, 'm62FormErrors'));
         $this->context->smarty->registerPlugin('modifier', 'm62TimeFormat', array($this->view_helper, 'm62TimeFormat'));
-        
+        $this->context->smarty->assign('help_link', 'https://www.mithra62.com/docs/table-of-contents/backup-pro');
         $this->bp_template_path = _MODULE_DIR_."backup_pro";
     }
     
