@@ -40,6 +40,11 @@ class AdminBackupProManageController extends BaseAdminController
             case 'remove_backup':
                 $this->deleteBackupsAction();
             break;
+            
+            case 'backup_note':
+                $this->updateBackupNoteAction();
+            break;
+                
         }
     }
     
@@ -96,9 +101,9 @@ class AdminBackupProManageController extends BaseAdminController
     public function updateBackupNoteAction()
     {
         $encrypt = $this->services['encrypt'];
-        $file_name = $encrypt->decode(ee()->input->get_post('backup'));
-        $backup_type = ee()->input->get_post('backup_type');
-        $note_text = ee()->input->get_post('note_text');
+        $file_name = $encrypt->decode($this->getPost('backup'));
+        $backup_type = $this->getPost('backup_type');
+        $note_text = $this->getPost('note_text');
         if($note_text && $file_name)
         {
             $path = rtrim($this->settings['working_directory'], DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$backup_type;

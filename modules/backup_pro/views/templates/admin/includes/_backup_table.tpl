@@ -45,7 +45,7 @@
 	<td style="width:55%">
 		{if $enable_editable_note == 'yes'}
 		<div class="bp_editable" rel="{$backup['hash']}" id="note_div_{$backup['hash']}">{if $backup['note'] == ''}Click to add note...{else}{$backup['note']}{/if}</div>
-		<input name="note_{$backup['hash']}" value="{$backup['note']}" id="note_{$backup['hash']}" data-backup-type="{$backup['backup_type']}" class="note_container" rel="{$backup['file_name']|m62Encode}" style="display:none; width:100%" type="text">
+		<input name="note_{$backup['hash']}" value="{$backup['note']}" id="note_{$backup['hash']}" data-backup-type="{$backup['backup_type']}" class="note_container" rel="{$backup['file_name']|m62Encode|escape:'url':'UTF-8'}" style="display:none; width:100%" type="text">
 		
 		{else}
             {if $backup['note'] == ''}{'na'|m62Lang}{else} {$backup['note']} {/if}
@@ -70,7 +70,7 @@
     				<img src="{$module_dir|escape}views/images/restore.png" alt="{'restore'|m62Lang}" class="">
     			</a> 
             {else}
-                <img src="{$module_dir|escape}views/images/restore.png" alt="<?php echo $view_helper->m62Lang('restore'); ?>" class="desaturate">
+                <img src="{$module_dir|escape}views/images/restore.png" alt="{'restore'|m62Lang}" class="desaturate">
             {/if}
 			
 		{/if}
