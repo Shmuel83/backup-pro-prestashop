@@ -83,14 +83,12 @@ class AdminBackupProManageController extends BaseAdminController
     
         if($download_file_path && file_exists($download_file_path))
         {
-            //$new_name = $backup->getStorage()->makePrettyFilename($file_name, $type, craft()->config->get('siteName'));
             $this->services['files']->fileDownload($download_file_path);
             exit;
         }
         else
         {
-            ee()->session->set_flashdata('message_error', $this->services['lang']->__('db_backup_not_found'));
-            ee()->functions->redirect($this->url_base.'index');
+            Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProDashboard').'&backup_download_fail=yes');
         }
     }   
     
