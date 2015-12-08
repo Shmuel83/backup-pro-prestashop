@@ -101,7 +101,8 @@ class AdminBackupProDashboardController extends BaseAdminController
             'enable_delete' => 'no',
             'enable_type' => 'yes',
             'enable_actions' => 'yes',
-            'enable_editable_note' => 'yes'
+            'enable_editable_note' => 'yes',
+            'database_restored' => $this->getPost('database_restored', 'no')
         );
         
         $this->context->smarty->assign( $variables );
@@ -193,7 +194,6 @@ class AdminBackupProDashboardController extends BaseAdminController
             'backup' => $backup_info,
             'errors' => $this->errors,
             'active_tab' => 'db_backups',
-            //'menu_data' => ee()->backup_pro->get_dashboard_view_menu(),
             'method' => $this->getPost('method'),
         );
         

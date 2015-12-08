@@ -44,7 +44,46 @@ class AdminBackupProManageController extends BaseAdminController
             case 'backup_note':
                 $this->updateBackupNoteAction();
             break;
+            
+            case 'restore_db':
+                $this->restoreDbAction();
+            break;
                 
+        }
+    }
+
+    /**
+     * Restore database action
+     */
+    public function restoreDbAction()
+    {
+        $encrypt = $this->services['encrypt'];
+        $file_name = $encrypt->decode($this->getPost('id'));
+        $storage = $this->services['backup']->setStoragePath($this->settings['working_directory']);
+    
+        $file = $storage->getStorage()->getDbBackupNamePath($file_name);
+        $backup_info = $this->services['backups']->setLocations($this->settings['storage_details'])->getBackupData($file);
+        $restore_file_path = false;
+        foreach($backup_info['storage_locations'] AS $storage_location)
+        {
+            if( $storage_location['obj']->canRestore() )
+            {
+                $restore_file_path = $storage_location['obj']->getFilePath($backup_info['file_name'], $backup_info['backup_type']); //next, get file path
+                break;
+            }
+        }
+    
+        if($restore_file_path && file_exists($restore_file_path))
+        {
+            $db_info = $this->platform->getDbCredentials();
+            if( $this->services['restore']->setDbInfo($db_info)->setBackupInfo($backup_info)->database($db_info['database'], $restore_file_path, $this->settings, $this->services['shell']) )
+            {
+                Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProDashboard').'&database_restored=yes');
+            }
+        }
+        else
+        {
+                Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProDashboard').'&database_restored=fail');
         }
     }
     

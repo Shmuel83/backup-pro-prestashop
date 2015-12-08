@@ -1,6 +1,9 @@
 <div id="container" class="row">
     {include file="./includes/_errors.tpl"}
     
+    {if $database_restored == 'yes'}
+    <div class="alert alert-success">{'database_restored'|m62Lang}</div>
+    {/if}     
     
     
     {include file="./includes/_dashboard_nav.tpl"}
