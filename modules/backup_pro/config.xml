@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <module>
 	<name>backup_pro</name>
-	<displayName><![CDATA[Backup Pro]]></displayName>
+	<displayName><![CDATA[Backup Pro 3]]></displayName>
 	<version><![CDATA[3.2]]></version>
-	<description><![CDATA[Description of my module.]]></description>
+	<description><![CDATA[Interface to create database and file backups of your site. ]]></description>
 	<author><![CDATA[mithra62]]></author>
 	<tab><![CDATA[administration]]></tab>
-	<confirmUninstall><![CDATA[Are you sure you want to uninstall?]]></confirmUninstall>
+	<confirmUninstall><![CDATA[Are you sure you want to uninstall Backup Pro 3?]]></confirmUninstall>
 	<is_configurable>1</is_configurable>
 	<need_instance>1</need_instance>
 	<limited_countries></limited_countries>

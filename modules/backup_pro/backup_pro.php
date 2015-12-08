@@ -11,6 +11,8 @@
 if (!defined('_PS_VERSION_'))
     exit;
 
+require_once 'libraries/mithra62/BackupPro/BackupPro.php';
+
 /**
  * Backup Pro - Prestashop
  *
@@ -20,7 +22,7 @@ if (!defined('_PS_VERSION_'))
  * @author		Eric Lamb
  * @filesource 	./modules/backup_pro/backup_pro.php
  */
-class Backup_pro extends Module
+class Backup_pro extends Module implements \mithra62\BackupPro\BackupPro
 {
     /**
      * The Admin menu details
@@ -49,25 +51,20 @@ class Backup_pro extends Module
     {
         $this->name = 'backup_pro';
         $this->tab = 'administration';
-        $this->version = '3.2';
+        $this->version = self::version;
         $this->author = 'mithra62';
         $this->need_instance = 1;
         $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
         $this->bootstrap = true;
     
-        $this->displayName = $this->l('Backup Pro');
-        $this->description = $this->l('Description of my module.');
+        $this->displayName = $this->l('Backup Pro 3');
+        $this->description = $this->l('Interface to create database and file backups of your site. ');
 
         parent::__construct();
     
-        $this->confirmUninstall = $this->l('Are you sure you want to uninstall?');
+        $this->confirmUninstall = $this->l('Are you sure you want to uninstall Backup Pro 3?');
 		$this->admin_tpl_path = _PS_MODULE_DIR_.$this->name.'/views/templates/admin/';
 		$this->hooks_tpl_path = _PS_MODULE_DIR_.$this->name.'/views/templates/hooks/';
-    }
-    
-    public function hookDisphlayHeader()
-    {
-
     }
     
     /**
@@ -81,9 +78,7 @@ class Backup_pro extends Module
     
         if( !parent::install() || 
             !$this->installSettingsTable() || 
-            !$this->installModuleTabs() || 
-            !$this->registerHook('displayBackOfficeHeader') || 
-            !$this->registerHook('displayHeader') 
+            !$this->installModuleTabs()
         )
         {
             return false;
@@ -103,15 +98,6 @@ class Backup_pro extends Module
             return false;
         }
         return true;
-    }
-    
-    /**
-     * Adds the backup pro CSS for the tab nav to the admin header
-     * @return void
-     */
-    public function hookDisplayBackOfficeHeader()
-    {
-        $this->context->controller->addCSS('modules/backup_pro/views/css/backup_pro.css', true);
     }
     
     /**
