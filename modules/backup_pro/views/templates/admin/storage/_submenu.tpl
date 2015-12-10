@@ -7,7 +7,7 @@
   <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
     {foreach from=$available_storage_engines key=k item=section}
     <li><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=storage&amp;sub=new_storage&engine={$k|escape:'htmlall':'UTF-8'}">
-    	<img src="{$module_dir|escape}views/images/storage/{$section['icon']|escape:'htmlall':'UTF-8'}.png" />
+    	<img src="{$module_dir|escape}views/img/storage/{$section['icon']|escape:'htmlall':'UTF-8'}.png" />
     	{$section['name']|m62Lang}
     </a></li>
     {/foreach} 

@@ -12,7 +12,7 @@
     
     <div class="panel">
 		<div class="panel-heading">
-			<img src="{$module_dir|escape}views/images/storage/{$storage_engine['icon']|escape:'htmlall':'UTF-8'}.png" /> {'add_storage_location'|m62Lang} ({$storage_engine['name']|m62Lang})
+			<img src="{$module_dir|escape}views/img/storage/{$storage_engine['icon']|escape:'htmlall':'UTF-8'}.png" /> {'add_storage_location'|m62Lang} ({$storage_engine['name']|m62Lang})
 		</div>
 	
 		{include file="../storage/_submenu.tpl"} <br clear="all" />

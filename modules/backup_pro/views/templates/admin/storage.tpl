@@ -47,7 +47,7 @@
 		{foreach from=$storage_details key=k item=storage}
 		<tr>
 			<td><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=storage&amp;sub=edit_storage&amp;id={$k}">{$storage['storage_location_name']}</a></td>
-			<td><img src="{$module_dir|escape}views/images/storage/{$storage['storage_location_driver']}.png" /></td>
+			<td><img src="{$module_dir|escape}views/img/storage/{$storage['storage_location_driver']}.png" /></td>
 			<td>{if $storage['storage_location_status'] == '1'} {'active'|m62Lang} {else} {'inactive'|m62Lang} {/if}</td>
 			<td>{$storage['storage_location_create_date']|m62DateTime}</td>
 			{if $can_remove}<td><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=storage&amp;sub=remove_storage&amp;id={$k}">Remove</a></td>{/if}

@@ -38,7 +38,7 @@
 	<td style="white-space: nowrap">
     	{if isset($backup['storage_locations']) && is_array($backup['storage_locations']) }
     		{foreach from=$backup['storage_locations'] key=location_id item=storage}
-    			<img src="{$module_dir|escape:'htmlall':'UTF-8'}views/images/storage/{$storage['icon']|escape:'htmlall':'UTF-8'}.png" class="" title="{$storage['storage_location_name']|escape:'htmlall':'UTF-8'}">
+    			<img src="{$module_dir|escape:'htmlall':'UTF-8'}views/img/storage/{$storage['icon']|escape:'htmlall':'UTF-8'}.png" class="" title="{$storage['storage_location_name']|escape:'htmlall':'UTF-8'}">
     		{/foreach}
     	{/if}
 	</td>
@@ -67,19 +67,19 @@
             
             {if $backup['can_restore']}
     			<a class="btn btn-default" href="{$link->getAdminLink('AdminBackupProDashboard')|escape:'html':'UTF-8'}&amp;section=restore_confirm&amp;id={$backup['details_file_name']|m62Encode|escape:'url':'UTF-8'}&amp;type={$backup['backup_type']}" title="{'restore'|m62Lang}">
-    				<img src="{$module_dir|escape}views/images/restore.png" alt="{'restore'|m62Lang}" class="">
+    				<img src="{$module_dir|escape}views/img/restore.png" alt="{'restore'|m62Lang}" class="">
     			</a> 
             {else}
-                <img src="{$module_dir|escape}views/images/restore.png" alt="{'restore'|m62Lang}" class="desaturate">
+                <img src="{$module_dir|escape}views/img/restore.png" alt="{'restore'|m62Lang}" class="desaturate">
             {/if}
 			
 		{/if}
         {if $backup['can_download']}
     		<a class="btn btn-default" href="{$link->getAdminLink('AdminBackupProManage')|escape:'html':'UTF-8'}&amp;section=download&id={$backup['details_file_name']|m62Encode|escape:'url':'UTF-8'}&amp;type={$backup['backup_type']}" title="{'download'|m62Lang}">
-    			<img src="{$module_dir|escape}views/images/download.png" alt="{'download'|m62Lang}" class="">
+    			<img src="{$module_dir|escape}views/img/download.png" alt="{'download'|m62Lang}" class="">
     		</a> 
 		{else}
-			<img src="{$module_dir|escape}views/images/download.png" alt="{'download'|m62Lang}" class="desaturate">
+			<img src="{$module_dir|escape}views/img/download.png" alt="{'download'|m62Lang}" class="desaturate">
 		{/if}
 		</div>
 	</td>

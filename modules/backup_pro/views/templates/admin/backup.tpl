@@ -13,7 +13,7 @@
 			</div>	
 			<div id="backup_running_details"  style="display:none" ><br /><br />
 			{'backup_in_progress'|m62Lang}
-			<img src="{$module_dir|escape}views/images/indicator.gif" id="animated_image" />
+			<img src="{$module_dir|escape}views/img/indicator.gif" id="animated_image" />
 			</div>
 						
 			<div class="panel-footer">
