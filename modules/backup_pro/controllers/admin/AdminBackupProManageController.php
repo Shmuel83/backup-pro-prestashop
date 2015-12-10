@@ -31,7 +31,7 @@ class AdminBackupProManageController extends BaseAdminController
      */
     public function display()
     {
-        switch( $this->getPost('section') )
+        switch( $this->platform->getPost('section') )
         {
             case 'download':
                 $this->downloadAction();
@@ -58,7 +58,7 @@ class AdminBackupProManageController extends BaseAdminController
     public function restoreDbAction()
     {
         $encrypt = $this->services['encrypt'];
-        $file_name = $encrypt->decode($this->getPost('id'));
+        $file_name = $encrypt->decode($this->platform->getPost('id'));
         $storage = $this->services['backup']->setStoragePath($this->settings['working_directory']);
     
         $file = $storage->getStorage()->getDbBackupNamePath($file_name);
@@ -93,8 +93,8 @@ class AdminBackupProManageController extends BaseAdminController
     public function downloadAction()
     {
         $encrypt = $this->services['encrypt'];
-        $file_name = $encrypt->decode($this->getPost('id'));
-        $type = $this->getPost('type');
+        $file_name = $encrypt->decode($this->platform->getPost('id'));
+        $type = $this->platform->getPost('type');
         $storage = $this->services['backup']->setStoragePath($this->settings['working_directory']);
         if($type == 'files')
         {
@@ -138,9 +138,9 @@ class AdminBackupProManageController extends BaseAdminController
     public function updateBackupNoteAction()
     {
         $encrypt = $this->services['encrypt'];
-        $file_name = $encrypt->decode($this->getPost('backup'));
-        $backup_type = $this->getPost('backup_type');
-        $note_text = $this->getPost('note_text');
+        $file_name = $encrypt->decode($this->platform->getPost('backup'));
+        $backup_type = $this->platform->getPost('backup_type');
+        $note_text = $this->platform->getPost('note_text');
         if($note_text && $file_name)
         {
             $path = rtrim($this->settings['working_directory'], DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$backup_type;
@@ -155,8 +155,8 @@ class AdminBackupProManageController extends BaseAdminController
      */
     public function deleteBackupsAction()
     {
-        $delete_backups = $this->getPost('backups');
-        $type = $this->getPost('type'); 
+        $delete_backups = $this->platform->getPost('backups');
+        $type = $this->platform->getPost('type'); 
         $backups = $this->validateBackups($delete_backups, $type);
         if( $this->services['backups']->setBackupPath($this->settings['working_directory'])->removeBackups($backups) )
         {

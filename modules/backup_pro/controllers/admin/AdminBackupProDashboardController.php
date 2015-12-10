@@ -31,7 +31,7 @@ class AdminBackupProDashboardController extends BaseAdminController
      */
     public function display()
     {
-        switch( $this->getPost('section') )
+        switch( $this->platform->getPost('section') )
         {
             case 'db_backups':
                 $this->dbBackupView();
@@ -102,7 +102,7 @@ class AdminBackupProDashboardController extends BaseAdminController
             'enable_type' => 'yes',
             'enable_actions' => 'yes',
             'enable_editable_note' => 'yes',
-            'database_restored' => $this->getPost('database_restored', 'no')
+            'database_restored' => $this->platform->getPost('database_restored', 'no')
         );
         
         $this->context->smarty->assign( $variables );
@@ -115,7 +115,7 @@ class AdminBackupProDashboardController extends BaseAdminController
      */
     protected function dbBackupView()
     {
-        $backup_complete = $this->getPost('backup_complete', 'no');
+        $backup_complete = $this->platform->getPost('backup_complete', 'no');
         $backup = $this->services['backups'];
         $backups = $backup->setBackupPath($this->settings['working_directory'])->getAllBackups($this->settings['storage_details']);
         $backup_meta = $backup->getBackupMeta($backups);
@@ -132,7 +132,7 @@ class AdminBackupProDashboardController extends BaseAdminController
             'enable_type' => 'yes',
             'enable_actions' => 'yes',
             'enable_editable_note' => 'yes',
-            'bad_restore_filename' => $this->getPost('bad_restore_filename', 'no')
+            'bad_restore_filename' => $this->platform->getPost('bad_restore_filename', 'no')
         );
         
         $this->bp_template = 'database_backups.tpl';
@@ -146,7 +146,7 @@ class AdminBackupProDashboardController extends BaseAdminController
      */
     protected function fileBackupView()
     {
-        $backup_complete = $this->getPost('backup_complete', 'no');
+        $backup_complete = $this->platform->getPost('backup_complete', 'no');
         $backup = $this->services['backups'];
         $backups = $backup->setBackupPath($this->settings['working_directory'])->getAllBackups($this->settings['storage_details']);
         $backup_meta = $backup->getBackupMeta($backups);
@@ -163,7 +163,7 @@ class AdminBackupProDashboardController extends BaseAdminController
             'enable_type' => 'yes',
             'enable_actions' => 'yes',
             'enable_editable_note' => 'yes',
-            'bad_restore_filename' => $this->getPost('bad_restore_filename', 'no')
+            'bad_restore_filename' => $this->platform->getPost('bad_restore_filename', 'no')
         );
         
         $this->bp_template = 'file_backups.tpl';
@@ -178,7 +178,7 @@ class AdminBackupProDashboardController extends BaseAdminController
     protected function restoreDbView()
     {
         $encrypt = $this->services['encrypt'];
-        $file_name = $encrypt->decode($this->getPost('id'));
+        $file_name = $encrypt->decode($this->platform->getPost('id'));
         if( $file_name == '')
         {
             $this->redirect_after = self::$currentIndex.'&section=db_backups&bad_restore_filename=yes&token='.$this->token;;
@@ -194,7 +194,7 @@ class AdminBackupProDashboardController extends BaseAdminController
             'backup' => $backup_info,
             'errors' => $this->errors,
             'active_tab' => 'db_backups',
-            'method' => $this->getPost('method'),
+            'method' => $this->platform->getPost('method'),
         );
         
         $this->bp_template = 'restore_confirm.tpl';
@@ -208,14 +208,14 @@ class AdminBackupProDashboardController extends BaseAdminController
      */
     protected function removeBackupView()
     {
-        $delete_backups = $this->getPost('backups');
-        $type = $this->getPost('type');
+        $delete_backups = $this->platform->getPost('backups');
+        $type = $this->platform->getPost('type');
         $backups = $this->validateBackups($delete_backups, $type);
         $variables = array(
             'settings' => $this->settings,
             'backups' => $backups,
             'backup_type' => $type,
-            'method' => $this->getPost('method'),
+            'method' => $this->platform->getPost('method'),
             'errors' => $this->errors,
             'active_tab' => 'db_backups',
             'enable_type' => 'yes', 'enable_editable_note' => 'no', 'enable_actions' => 'no', 'enable_delete' => 'no',

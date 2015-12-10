@@ -43,7 +43,7 @@ class AdminBackupProSettingsController extends BaseAdminController
      */
     public function display()
     {
-        switch( $this->getPost('section') )
+        switch( $this->platform->getPost('section') )
         {
             case 'storage':
                 $this->storageView();
@@ -60,7 +60,7 @@ class AdminBackupProSettingsController extends BaseAdminController
     
     protected function storageView()
     {
-        switch( $this->getPost('sub') )
+        switch( $this->platform->getPost('sub') )
         {
             
             case 'new_storage':
@@ -84,8 +84,8 @@ class AdminBackupProSettingsController extends BaseAdminController
     
     protected function removeStorageView()
     {
-        $storage_id = $this->getPost('id');
-        $section = $this->getPost('section', 'storage');
+        $storage_id = $this->platform->getPost('id');
+        $section = $this->platform->getPost('section', 'storage');
         if( count($this->settings['storage_details']) <= 1 )
         {
             $this->redirect_after = self::$currentIndex.'&section=storage&fail_min_storage_location_needs=yes&token='.$this->token;;
@@ -131,8 +131,8 @@ class AdminBackupProSettingsController extends BaseAdminController
     
     protected function editStorageView()
     {
-        $storage_id = $this->getPost('id');
-        $section = $this->getPost('section', 'storage');
+        $storage_id = $this->platform->getPost('id');
+        $section = $this->platform->getPost('section', 'storage');
         if( empty($this->settings['storage_details'][$storage_id]) )
         {
             $this->redirect_after = self::$currentIndex.'&section=storage&invalid_storage_id=yes&token='.$this->token;;
@@ -179,8 +179,8 @@ class AdminBackupProSettingsController extends BaseAdminController
     
     protected function newStorageView()
     {
-        $engine = $this->getPost('engine', 'local');
-        $section = $this->getPost('section', 'storage');
+        $engine = $this->platform->getPost('engine', 'local');
+        $section = $this->platform->getPost('section', 'storage');
         $variables = array();
         $variables['available_storage_engines'] = $this->services['backup']->getStorage()->getAvailableStorageDrivers();
         
@@ -235,12 +235,12 @@ class AdminBackupProSettingsController extends BaseAdminController
      */
     protected function viewStorageView()
     {
-        $section = $this->getPost('section', 'storage');
-        $invalid_storage_id = $this->getPost('invalid_storage_id', 'no');
-        $fail_min_storage_location_needs = $this->getPost('fail_min_storage_location_needs', 'no');
-        $storage_removed = $this->getPost('storage_removed', 'no');
-        $updated = $this->getPost('updated', 'no');
-        $added = $this->getPost('added', 'no');
+        $section = $this->platform->getPost('section', 'storage');
+        $invalid_storage_id = $this->platform->getPost('invalid_storage_id', 'no');
+        $fail_min_storage_location_needs = $this->platform->getPost('fail_min_storage_location_needs', 'no');
+        $storage_removed = $this->platform->getPost('storage_removed', 'no');
+        $updated = $this->platform->getPost('updated', 'no');
+        $added = $this->platform->getPost('added', 'no');
         $variables = array();
         $variables['can_remove'] = true;
         if( count($this->settings['storage_details']) <= 1 )
@@ -272,8 +272,8 @@ class AdminBackupProSettingsController extends BaseAdminController
      */
     protected function settingsView()
     {
-        $section = $this->getPost('section', 'general');
-        $update = $this->getPost('update', 'no');
+        $section = $this->platform->getPost('section', 'general');
+        $update = $this->platform->getPost('update', 'no');
         $variables = array('form_data' => $this->settings, 'form_errors' => $this->returnEmpty($this->settings));
         $variables['form_data']['cron_notify_emails'] = implode("\n", $this->settings['cron_notify_emails']);
         $variables['form_data']['exclude_paths'] = implode("\n", $this->settings['exclude_paths']);
