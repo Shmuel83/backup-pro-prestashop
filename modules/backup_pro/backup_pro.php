@@ -116,7 +116,7 @@ class Backup_pro extends Module implements \mithra62\BackupPro\BackupPro
      */
     private function installModuleTabs() 
     {
-        foreach($this->admin_tabs As $key => $value)
+        foreach($this->admin_tabs As $value)
         {
             @copy(_PS_MODULE_DIR_ . $this->name . '/logo.png', _PS_IMG_DIR_ . 't/' . $value['class'] . '.png');
             $parent_tab = new Tab();

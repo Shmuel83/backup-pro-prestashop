@@ -28,7 +28,7 @@ abstract class BaseBackupController extends BaseAdminController
     public function backupView($type)
     {
         $proc_url = FALSE;
-        $backup = $this->services['backup']->setStoragePath($this->settings['working_directory']);
+        $this->services['backup']->setStoragePath($this->settings['working_directory']);
         switch($type)
         {
             case 'database':

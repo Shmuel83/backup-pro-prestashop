@@ -85,7 +85,6 @@ class AdminBackupProSettingsController extends BaseAdminController
     protected function removeStorageView()
     {
         $storage_id = $this->getPost('id');
-        $sub = $this->getPost('sub', 'view_storage');
         $section = $this->getPost('section', 'storage');
         if( count($this->settings['storage_details']) <= 1 )
         {
@@ -133,7 +132,6 @@ class AdminBackupProSettingsController extends BaseAdminController
     protected function editStorageView()
     {
         $storage_id = $this->getPost('id');
-        $sub = $this->getPost('sub', 'view_storage');
         $section = $this->getPost('section', 'storage');
         if( empty($this->settings['storage_details'][$storage_id]) )
         {
@@ -181,7 +179,6 @@ class AdminBackupProSettingsController extends BaseAdminController
     
     protected function newStorageView()
     {
-        $sub = $this->getPost('sub', 'view_storage');
         $engine = $this->getPost('engine', 'local');
         $section = $this->getPost('section', 'storage');
         $variables = array();
@@ -238,7 +235,6 @@ class AdminBackupProSettingsController extends BaseAdminController
      */
     protected function viewStorageView()
     {
-        $sub = $this->getPost('sub', 'view_storage');
         $section = $this->getPost('section', 'storage');
         $invalid_storage_id = $this->getPost('invalid_storage_id', 'no');
         $fail_min_storage_location_needs = $this->getPost('fail_min_storage_location_needs', 'no');

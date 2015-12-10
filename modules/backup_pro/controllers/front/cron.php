@@ -43,7 +43,7 @@ class Backup_ProCronModuleFrontController extends BaseController
         @session_write_close();
         $error = $this->services['errors'];
         $backup = $this->services['backup']->setStoragePath($this->settings['working_directory']);
-        $errors = $error->clearErrors()->checkStorageLocations($this->settings['storage_details'])->checkBackupDirs($backup->getStorage())->getErrors();
+        $error->clearErrors()->checkStorageLocations($this->settings['storage_details'])->checkBackupDirs($backup->getStorage())->getErrors();
         
         if( $error->totalErrors() == '0' )
         {

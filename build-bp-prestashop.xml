@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Backup Pro Prestashop" default="move_zip">
+
+	<property name="platform_name" value="Prestashop" />
+	<property name="build_path" value="../builds/prestashop" />
+	<property name="build_container_dir" value="${build_path}/backup_pro" />
+	<property name="main_files" value="modules" />
+	<property name="cms_root_path" value="${build_container_dir}/modules" /> 
+	<property name="vendor_path" value="${cms_root_path}/backup_pro/libraries/vendor" />
+	<property name="backup_pro_logic_base" value="${cms_root_path}/backup_pro/libraries/mithra62/BackupPro" />
+	<property name="jaeger_base" value="${cms_root_path}/backup_pro/libraries/mithra62" />
+		
+	<property name="platform_theme_base" value="${build_container_dir}/modules/backup_pro/views" />		
+	<property name="backup_pro_theme_base" value="${platform_theme_base}" />
+	<property name="build_archive_path" value="${build_path}/backup_pro.prestashop.${version}.zip" />
+	<property name="export_archive_path" value="../../product-export/prestashop/backup_pro.prestashop.${version}.zip" />
+	<property name="export_archive_directory_root" value="${cms_root_path}" />
+		
+	<property name="clean_install_bp_core_file_path" value="../../clean_cms/prestashop/html/modules/backup_pro" />
+	<property name="clean_install_bp_theme_path" value="${clean_install_bp_core_file_path}/views" />
+		
+	<property name="clean_install_cms_add_on_path" value="../../clean_cms/prestashop/html/modules" />
+	<property name="clean_install_cms_theme" value="${clean_install_cms_add_on_path}/backup_pro/views" />
+	
+	<property name="mink_test_dir" value="Prestashop" />
+	
+	<import file="../backup-pro-lib/phing.prepare.xml" />
+	<import file="../backup-pro-lib/phing.cms-files.xml" />
+	<import file="../backup-pro-lib/phing.vendor-no-dev.xml" /> 
+	<import file="../backup-pro-lib/phing.bp-files.xml" /> 
+	<import file="../backup-pro-lib/phing.clean-install.xml" />  
+	<import file="../backup-pro-lib/phing.unit-test.xml" /> 
+	<import file="../backup-pro-lib/phing.archive.xml" /> 
+	
+	<target name="cms-files" depends="prepare">
+        <echo msg="(${platform_name}) Copying files to build directory..." />
+
+    	<echo msg="" />
+		<echo msg="(${platform_name}) Copying to ${cms_root_path}" />
+		<copy todir="${cms_root_path}">
+			<fileset dir="${main_files}">
+				<include name="**"></include>
+				<exclude name="**/mithra62/**"></exclude>
+				<exclude name="**/vendor/**"></exclude>
+				<exclude name="**composer.**"></exclude>
+				<exclude name="**/resources/**"></exclude>
+				<exclude name="**/images**"></exclude>
+				<exclude name="**/css/**"></exclude>
+				<exclude name="**/js/**"></exclude>
+			</fileset>
+		</copy>
+    </target>	
+	
+</project>
