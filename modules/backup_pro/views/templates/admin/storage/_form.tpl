@@ -7,7 +7,7 @@
 <div class="form-wrapper">
 	<div class="form-group">
 		<label class="control-label col-lg-3 required" for="storage_location_name">{'storage_location_name'|m62Lang}</label>
-		<div class="col-lg-6"><input type="text" id="storage_location_name" name="storage_location_name" value="{$form_data['storage_location_name']}" class="" required="required" /></div>
+		<div class="col-lg-6"><input type="text" id="storage_location_name" name="storage_location_name" value="{$form_data['storage_location_name']|escape:'htmlall':'UTF-8'}" class="" required="required" /></div>
 		<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'storage_location_name_instructions'|m62Lang}</div></div>
 		<div class="col-lg-6 col-lg-offset-3">{$form_errors['storage_location_name']|m62FormErrors}</div>
 	</div>

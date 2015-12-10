@@ -8,7 +8,7 @@
 		<p>{'license_details_instructions'|m62Lang}</p>
 		<div class="form-group">
 			<label class="control-label col-lg-3 required">{'license_number'|m62Lang}</label>
-			<div class="col-lg-6"><input type="text" id="license_number" name="license_number" value="{$form_data['license_number']}" class="" required="required" /></div>
+			<div class="col-lg-6"><input type="text" id="license_number" name="license_number" value="{$form_data['license_number']|escape:'htmlall':'UTF-8'}" class="" required="required" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'license_number_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['license_number']|m62FormErrors}</div>
 		</div>

@@ -68,11 +68,11 @@
 					<tbody>
 						<tr class="even">
 						<td><strong>{'total_backups'|m62Lang}</strong></td>
-							<td>{$backup_meta['files']['total_backups']}</td>
+							<td>{$backup_meta['files']['total_backups']|escape:'htmlall':'UTF-8'}</td>
 						</tr>
 					<tr class="odd">
 						<td><strong>{'total_space_used'|m62Lang}</strong></td>
-						<td>{$backup_meta['files']['total_space_used']}</td>
+						<td>{$backup_meta['files']['total_space_used']|escape:'htmlall':'UTF-8'}</td>
 					<tr class="even">
 						<td><strong>{'last_backup_taken'|m62Lang}</strong></td>
 						<td>{if $backup_meta['files']['newest_backup_taken'] != ''} {$backup_meta['files']['newest_backup_taken']|m62DateTime} {else} {'na'|m62Lang} {/if}</td>

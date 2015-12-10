@@ -8,7 +8,7 @@
 	<div class="form-wrapper">
 		<div class="form-group">
 			<label class="control-label col-lg-3 required" for="working_directory">{'working_directory'|m62Lang}</label>
-			<div class="col-lg-6"><input type="text" id="working_directory" name="working_directory" value="{$form_data['working_directory']}" class="" required="required" /></div>
+			<div class="col-lg-6"><input type="text" id="working_directory" name="working_directory" value="{$form_data['working_directory']|escape:'htmlall':'UTF-8'}" class="" required="required" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'working_directory_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['working_directory']|m62FormErrors}</div>
 		</div>
@@ -17,7 +17,7 @@
 	<div class="form-wrapper">
 		<div class="form-group">
 			<label class="control-label col-lg-3 required" for="cron_query_key">{'cron_query_key'|m62Lang}</label>
-			<div class="col-lg-6"><input type="text" id="cron_query_key" name="cron_query_key" value="{$form_data['cron_query_key']}" class="" required="required" /></div>
+			<div class="col-lg-6"><input type="text" id="cron_query_key" name="cron_query_key" value="{$form_data['cron_query_key']|escape:'htmlall':'UTF-8'}" class="" required="required" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'cron_query_key_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['cron_query_key']|m62FormErrors}</div>
 		</div>
@@ -26,7 +26,7 @@
 	<div class="form-wrapper">
 		<div class="form-group">
 			<label class="control-label col-lg-3 required" for="dashboard_recent_total">{'dashboard_recent_total'|m62Lang}</label>
-			<div class="col-lg-6"><input type="text" id="dashboard_recent_total" name="dashboard_recent_total" value="{$form_data['dashboard_recent_total']}" class="" required="required" /></div>
+			<div class="col-lg-6"><input type="text" id="dashboard_recent_total" name="dashboard_recent_total" value="{$form_data['dashboard_recent_total']|escape:'htmlall':'UTF-8'}" class="" required="required" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'dashboard_recent_total_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['dashboard_recent_total']|m62FormErrors}</div>
 		</div>
@@ -49,7 +49,7 @@
 	<div class="form-wrapper" id="auto_threshold_custom_wrap" style="display:none;">
 		<div class="form-group">
 			<label class="control-label col-lg-3 " for="auto_threshold_custom">{'auto_threshold_custom'|m62Lang}</label>
-			<div class="col-lg-6"><input type="text" id="auto_threshold_custom" name="auto_threshold_custom" value="{$form_data['auto_threshold_custom']}" class="" /></div>
+			<div class="col-lg-6"><input type="text" id="auto_threshold_custom" name="auto_threshold_custom" value="{$form_data['auto_threshold_custom']|escape:'htmlall':'UTF-8'}" class="" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'auto_threshold_custom_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['auto_threshold_custom']|m62FormErrors}</div>
 		</div>
@@ -71,7 +71,7 @@
 	<div class="form-wrapper">
 		<div class="form-group">
 			<label class="control-label col-lg-3 required" for="date_format">{'date_format'|m62Lang}</label>
-			<div class="col-lg-6"><input type="text" id="date_format" name="date_format" value="{$form_data['date_format']}" class="" required="required" /></div>
+			<div class="col-lg-6"><input type="text" id="date_format" name="date_format" value="{$form_data['date_format']|escape:'htmlall':'UTF-8'}" class="" required="required" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'date_format_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['date_format']|m62FormErrors}</div>
 		</div>

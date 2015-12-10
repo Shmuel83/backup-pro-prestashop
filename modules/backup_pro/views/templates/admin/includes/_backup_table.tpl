@@ -4,7 +4,7 @@
 {/foreach}
 {/if}
 
-<input type="hidden" value="{$note_url}" name="__note_url" id="__note_url" />
+<input type="hidden" value="{$note_url|escape:'htmlall':'UTF-8'}" name="__note_url" id="__note_url" />
 <div class="table-responsive-row clearfix">
 <table width="100%" class="data existing_backups table data_table" id="existing_backup_table" border="0" cellpadding="0" cellspacing="0">
 <thead>
@@ -38,17 +38,17 @@
 	<td style="white-space: nowrap">
     	{if isset($backup['storage_locations']) && is_array($backup['storage_locations']) }
     		{foreach from=$backup['storage_locations'] key=location_id item=storage}
-    			<img src="{$module_dir|escape}views/images/storage/{$storage['icon']}.png" class="" title="{$storage['storage_location_name']}">
+    			<img src="{$module_dir|escape:'htmlall':'UTF-8'}views/images/storage/{$storage['icon']|escape:'htmlall':'UTF-8'}.png" class="" title="{$storage['storage_location_name']|escape:'htmlall':'UTF-8'}">
     		{/foreach}
     	{/if}
 	</td>
 	<td style="width:55%">
 		{if $enable_editable_note == 'yes'}
-		<div class="bp_editable" rel="{$backup['hash']}" id="note_div_{$backup['hash']}">{if $backup['note'] == ''}Click to add note...{else}{$backup['note']}{/if}</div>
-		<input name="note_{$backup['hash']}" value="{$backup['note']}" id="note_{$backup['hash']}" data-backup-type="{$backup['backup_type']}" class="note_container" rel="{$backup['file_name']|m62Encode|escape:'url':'UTF-8'}" style="display:none; width:100%" type="text">
+		<div class="bp_editable" rel="{$backup['hash']|escape:'htmlall':'UTF-8'}" id="note_div_{$backup['hash']|escape:'htmlall':'UTF-8'}">{if $backup['note'] == ''}Click to add note...{else}{$backup['note']|escape:'htmlall':'UTF-8'}{/if}</div>
+		<input name="note_{$backup['hash']|escape:'htmlall':'UTF-8'}" value="{$backup['note']|escape:'htmlall':'UTF-8'}" id="note_{$backup['hash']|escape:'htmlall':'UTF-8'}" data-backup-type="{$backup['backup_type']|escape:'htmlall':'UTF-8'}" class="note_container" rel="{$backup['file_name']|m62Encode|escape:'url':'UTF-8'}" style="display:none; width:100%" type="text">
 		
 		{else}
-            {if $backup['note'] == ''}{'na'|m62Lang}{else} {$backup['note']} {/if}
+            {if $backup['note'] == ''}{'na'|m62Lang}{else} {$backup['note']|escape:'htmlall':'UTF-8'} {/if}
 		{/if}
 	</td>
 	<td style="white-space: nowrap">

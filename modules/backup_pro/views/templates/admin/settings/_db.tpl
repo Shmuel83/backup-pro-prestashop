@@ -7,7 +7,7 @@
 	<div class="form-wrapper">
 		<div class="form-group">
 			<label class="control-label col-lg-3 required" for="max_db_backups">{'max_db_backups'|m62Lang}</label>
-			<div class="col-lg-6"><input type="text" id="max_db_backups" name="max_db_backups" value="{$form_data['max_db_backups']}" class="" required="required" /></div>
+			<div class="col-lg-6"><input type="text" id="max_db_backups" name="max_db_backups" value="{$form_data['max_db_backups']|escape:'htmlall':'UTF-8'}" class="" required="required" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'max_db_backups_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['max_db_backups']|m62FormErrors}</div>
 		</div>
@@ -16,7 +16,7 @@
 	<div class="form-wrapper">
 		<div class="form-group">
 			<label class="control-label col-lg-3 required" for="db_backup_alert_threshold">{'db_backup_alert_threshold'|m62Lang}</label>
-			<div class="col-lg-6"><input type="text" id="db_backup_alert_threshold" name="db_backup_alert_threshold" value="{$form_data['db_backup_alert_threshold']}" class="" required="required" /></div>
+			<div class="col-lg-6"><input type="text" id="db_backup_alert_threshold" name="db_backup_alert_threshold" value="{$form_data['db_backup_alert_threshold']|escape:'htmlall':'UTF-8'}" class="" required="required" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'db_backup_alert_threshold_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['db_backup_alert_threshold']|m62FormErrors}</div>
 		</div>
@@ -38,7 +38,7 @@
 	<div class="form-wrapper" id="mysqldump_command_wrap" style="display:none;">
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="mysqldump_command">{'mysqldump_command'|m62Lang}</label>
-			<div class="col-lg-6"><input type="text" id="mysqldump_command" name="mysqldump_command" value="{$form_data['mysqldump_command']}" class="" /></div>
+			<div class="col-lg-6"><input type="text" id="mysqldump_command" name="mysqldump_command" value="{$form_data['mysqldump_command']|escape:'htmlall':'UTF-8'}" class="" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'mysqldump_command_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['mysqldump_command']|m62FormErrors}</div>
 		</div>
@@ -69,7 +69,7 @@
 	<div class="form-wrapper" id="mysqlcli_command_wrap" style="display:none;">
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="mysqlcli_command">{'mysqlcli_command'|m62Lang}</label>
-			<div class="col-lg-6"><input type="text" id="mysqlcli_command" name="mysqlcli_command" value="{$form_data['mysqlcli_command']}" class="" /></div>
+			<div class="col-lg-6"><input type="text" id="mysqlcli_command" name="mysqlcli_command" value="{$form_data['mysqlcli_command']|escape:'htmlall':'UTF-8'}" class="" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'mysqlcli_command_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['mysqlcli_command']|m62FormErrors}</div>
 		</div>
@@ -134,7 +134,7 @@
 	<div class="form-wrapper">
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="db_backup_archive_pre_sql">{'db_backup_archive_pre_sql'|m62Lang}</label>
-			<div class="col-lg-6"><textarea id="db_backup_archive_pre_sql" name="db_backup_archive_pre_sql" style="height:150px;">{$form_data['db_backup_archive_pre_sql']}</textarea></div>
+			<div class="col-lg-6"><textarea id="db_backup_archive_pre_sql" name="db_backup_archive_pre_sql" style="height:150px;">{$form_data['db_backup_archive_pre_sql']|escape:'htmlall':'UTF-8'}</textarea></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'db_backup_archive_pre_sql_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['db_backup_archive_pre_sql']|m62FormErrors}</div>
 		</div>
@@ -143,7 +143,7 @@
 	<div class="form-wrapper">
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="db_backup_archive_post_sql">{'db_backup_archive_post_sql'|m62Lang}</label>
-			<div class="col-lg-6"><textarea id="db_backup_archive_post_sql" name="db_backup_archive_post_sql" style="height:150px;">{$form_data['db_backup_archive_post_sql']}</textarea></div>
+			<div class="col-lg-6"><textarea id="db_backup_archive_post_sql" name="db_backup_archive_post_sql" style="height:150px;">{$form_data['db_backup_archive_post_sql']|escape:'htmlall':'UTF-8'}</textarea></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'db_backup_archive_post_sql_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['db_backup_archive_post_sql']|m62FormErrors}</div>
 		</div>
@@ -165,7 +165,7 @@
 	<div class="form-wrapper">
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="db_backup_execute_pre_sql">{'db_backup_execute_pre_sql'|m62Lang}</label>
-			<div class="col-lg-6"><textarea id="db_backup_execute_pre_sql" name="db_backup_execute_pre_sql" style="height:150px;">{$form_data['db_backup_execute_pre_sql']}</textarea></div>
+			<div class="col-lg-6"><textarea id="db_backup_execute_pre_sql" name="db_backup_execute_pre_sql" style="height:150px;">{$form_data['db_backup_execute_pre_sql']|escape:'htmlall':'UTF-8'}</textarea></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'db_backup_execute_pre_sql_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['db_backup_execute_pre_sql']|m62FormErrors}</div>
 		</div>
@@ -174,7 +174,7 @@
 	<div class="form-wrapper">
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="db_backup_archive_pre_sql">{'db_backup_archive_pre_sql'|m62Lang}</label>
-			<div class="col-lg-6"><textarea id="db_backup_archive_pre_sql" name="db_backup_archive_pre_sql" style="height:150px;">{$form_data['db_backup_archive_pre_sql']}</textarea></div>
+			<div class="col-lg-6"><textarea id="db_backup_archive_pre_sql" name="db_backup_archive_pre_sql" style="height:150px;">{$form_data['db_backup_archive_pre_sql']|escape:'htmlall':'UTF-8'}</textarea></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'db_backup_archive_pre_sql_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['db_backup_archive_pre_sql']|m62FormErrors}</div>
 		</div>

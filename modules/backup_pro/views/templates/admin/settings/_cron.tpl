@@ -18,12 +18,12 @@
 		<tr class="even">
 			<td width='50%' style="width:50%;">{$key|m62Lang}</td>
 			<td style="width:50%;">
-				<div class="select_all">{$cron['cmd']}</div>
+				<div class="select_all">{$cron['cmd']|escape:'htmlall':'UTF-8'}</div>
 			</td>
 			<td style="width:50%;">
-				<a href="{$cron['url']}" class="test_cron" rel="{$key}">
+				<a href="{$cron['url']|escape:'htmlall':'UTF-8'}" class="test_cron" rel="{$key|escape:'htmlall':'UTF-8'}">
 					<img src="{$module_dir|escape}views/images/test.png" />
-				</a> <img src="{$module_dir|escape}views/images/indicator.gif" id="animated_{$key}" style="display:none" />
+				</a> <img src="{$module_dir|escape}views/images/indicator.gif" id="animated_{$key|escape:'htmlall':'UTF-8'}" style="display:none" />
 			</td>
 		</tr>
 		{/foreach}
@@ -42,7 +42,7 @@
 	<div class="form-wrapper">
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="cron_notify_emails">{'cron_notify_emails'|m62Lang}</label>
-			<div class="col-lg-6"><textarea id="cron_notify_emails" name="cron_notify_emails" style="height:150px;">{$form_data['cron_notify_emails']}</textarea></div>
+			<div class="col-lg-6"><textarea id="cron_notify_emails" name="cron_notify_emails" style="height:150px;">{$form_data['cron_notify_emails']|escape:'htmlall':'UTF-8'}</textarea></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'cron_notify_emails_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['cron_notify_emails']|m62FormErrors}</div>
 		</div>
@@ -64,7 +64,7 @@
 	<div class="form-wrapper">
 		<div class="form-group">
 			<label class="control-label col-lg-3 required" for="cron_notify_email_subject">{'cron_notify_email_subject'|m62Lang}</label>
-			<div class="col-lg-6"><input type="text" id="cron_notify_email_subject" name="cron_notify_email_subject" value="{$form_data['cron_notify_email_subject']}" class="" required="required" /></div>
+			<div class="col-lg-6"><input type="text" id="cron_notify_email_subject" name="cron_notify_email_subject" value="{$form_data['cron_notify_email_subject']|escape:'htmlall':'UTF-8'}" class="" required="required" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'cron_notify_email_subject_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['cron_notify_email_subject']|m62FormErrors}</div>
 		</div>
@@ -73,7 +73,7 @@
 	<div class="form-wrapper">
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="cron_notify_email_message">{'cron_notify_email_message'|m62Lang}</label>
-			<div class="col-lg-6"><textarea id="cron_notify_email_message" name="cron_notify_email_message" style="height:150px;">{$form_data['cron_notify_email_message']}</textarea></div>
+			<div class="col-lg-6"><textarea id="cron_notify_email_message" name="cron_notify_email_message" style="height:150px;">{$form_data['cron_notify_email_message']|escape:'htmlall':'UTF-8'}</textarea></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'cron_notify_email_message_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['cron_notify_email_message']|m62FormErrors}</div>
 		</div>
