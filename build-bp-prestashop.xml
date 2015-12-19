@@ -45,6 +45,7 @@
 				<exclude name="**composer.**"></exclude>
 				<exclude name="**/resources/**"></exclude>
 				<exclude name="**/images**"></exclude>
+				<exclude name="**/img**"></exclude>
 				<exclude name="**/css/**"></exclude>
 				<exclude name="**/js/**"></exclude>
 			</fileset>

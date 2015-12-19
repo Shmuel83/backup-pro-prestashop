@@ -73,11 +73,9 @@ class Backup_pro extends Module implements \mithra62\BackupPro\BackupPro
      */
     public function install()
     {
-        if (Shop::isFeatureActive())
-            Shop::setContext(Shop::CONTEXT_ALL);
-    
         if( !parent::install() || 
             !$this->installSettingsTable() || 
+            !$this->registerHook('displayBackOfficeHeader') ||
             !$this->installModuleTabs()
         )
         {
@@ -98,6 +96,15 @@ class Backup_pro extends Module implements \mithra62\BackupPro\BackupPro
             return false;
         }
         return true;
+    }
+    
+    /**
+     * Adds the backup pro CSS for the tab nav to the admin header
+     * @return void
+     */
+    public function hookDisplayBackOfficeHeader()
+    {
+        $this->context->controller->addCSS('modules/backup_pro/views/css/backup_pro.css', true);
     }
     
     /**
