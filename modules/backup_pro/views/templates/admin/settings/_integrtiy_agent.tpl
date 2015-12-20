@@ -21,8 +21,8 @@
 		</td>
 		<td style="width:50%;">
 			<a href="{$cron['url']|escape:'htmlall':'UTF-8'}" class="test_cron" rel="{$key|escape:'htmlall':'UTF-8'}">
-				<img src="{$module_dir|escape}views/img/test.png" />
-			</a> <img src="{$module_dir|escape}views/img/indicator.gif" id="animated_{$key|escape:'htmlall':'UTF-8'}" style="display:none" />
+				<img src="{$module_dir|escape:'htmlall':'UTF-8'}views/img/test.png" />
+			</a> <img src="{$module_dir|escape:'htmlall':'UTF-8'}views/img/indicator.gif" id="animated_{$key|escape:'htmlall':'UTF-8'}" style="display:none" />
 		</td>
 	</tr>
 	{/foreach}
@@ -48,7 +48,7 @@
 	<div class="form-wrapper">
 		<div class="form-group">
 			<label class="control-label col-lg-3 required" for="total_verifications_per_execution">{'total_verifications_per_execution'|m62Lang}</label>
-			<div class="col-lg-6"><input type="text" id="total_verifications_per_execution" name="total_verifications_per_execution" value="{$form_data['total_verifications_per_execution']}" class="" required="required" /></div>
+			<div class="col-lg-6"><input type="text" id="total_verifications_per_execution" name="total_verifications_per_execution" value="{$form_data['total_verifications_per_execution']|escape:'htmlall':'UTF-8'}" class="" required="required" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'total_verifications_per_execution_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['total_verifications_per_execution']|m62FormErrors}</div>
 		</div>
