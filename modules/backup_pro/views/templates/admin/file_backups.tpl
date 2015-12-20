@@ -18,8 +18,8 @@
 		</thead>
 		<tbody>
 		<tr>
-			<td width='120'> {$backup_meta['files']['total_backups']} </td>
-			<td width='150'>{$backup_meta['files']['total_space_used']}</td>
+			<td width='120'> {$backup_meta['files']['total_backups']|escape:'htmlall':'UTF-8'} </td>
+			<td width='150'>{$backup_meta['files']['total_space_used']|escape:'htmlall':'UTF-8'}</td>
 			<td align='right' width='150'>{if $backup_meta['files']['newest_backup_taken'] != ''} {$backup_meta['files']['newest_backup_taken']|m62DateTime} {else} {'na'|m62Lang} {/if}</td>
 			<td align='right' width='150'>{if $backup_meta['files']['oldest_backup_taken'] != ''} {$backup_meta['files']['oldest_backup_taken']|m62DateTime} {else} {'na'|m62Lang} {/if}</td>
 		</tr>

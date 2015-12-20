@@ -22,8 +22,8 @@
 			</td>
 			<td style="width:50%;">
 				<a href="{$cron['url']|escape:'htmlall':'UTF-8'}" class="test_cron" rel="{$key|escape:'htmlall':'UTF-8'}">
-					<img src="{$module_dir|escape}views/img/test.png" />
-				</a> <img src="{$module_dir|escape}views/img/indicator.gif" id="animated_{$key|escape:'htmlall':'UTF-8'}" style="display:none" />
+					<img src="{$module_dir|escape:'htmlall':'UTF-8'}views/img/test.png" />
+				</a> <img src="{$module_dir|escape:'htmlall':'UTF-8'}views/img/indicator.gif" id="animated_{$key|escape:'htmlall':'UTF-8'}" style="display:none" />
 			</td>
 		</tr>
 		{/foreach}

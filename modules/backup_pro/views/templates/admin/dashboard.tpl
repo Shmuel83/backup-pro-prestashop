@@ -20,8 +20,8 @@
 		</thead>
 		<tbody>
 		<tr>
-			<td width='120'> {$backup_meta['global']['total_backups']} </td>
-			<td width='150'>{$backup_meta['global']['total_space_used']}</td>
+			<td width='120'> {$backup_meta['global']['total_backups']|escape:'htmlall':'UTF-8'} </td>
+			<td width='150'>{$backup_meta['global']['total_space_used']|escape:'htmlall':'UTF-8'}</td>
 			<td>{if $settings['auto_threshold'] == '0'} {'unlimited'|m62Lang} {else} {$available_space['available_space']} / {$available_space['max_space']} {/if}</td>
 			<td align='right' width='150'>{if $backup_meta['global']['newest_backup_taken'] != ''} {$backup_meta['global']['newest_backup_taken']|m62DateTime} {else} {'na'|m62Lang} {/if}</td>
 			<td align='right' width='150'>{if $backup_meta['global']['oldest_backup_taken'] != ''} {$backup_meta['global']['oldest_backup_taken']|m62DateTime} {else} {'na'|m62Lang} {/if}</td>
@@ -43,11 +43,11 @@
 					<tbody>
 					<tr class="even">
 						<td><strong>{'total_backups'|m62Lang}</strong></td>
-						<td>{$backup_meta['database']['total_backups']}</td>
+						<td>{$backup_meta['database']['total_backups']|escape:'htmlall':'UTF-8'}</td>
 					</tr>
 					<tr class="odd">
 						<td><strong>{'total_space_used'|m62Lang}</strong></td>
-						<td>{$backup_meta['database']['total_space_used']}</td>
+						<td>{$backup_meta['database']['total_space_used']|escape:'htmlall':'UTF-8'}</td>
 					</tr>
 					<tr class="even">
 						<td><strong>{'last_backup_taken'|m62Lang}</strong></td>

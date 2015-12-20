@@ -47,7 +47,7 @@
 	<div class="form-wrapper" id="php_backup_method_select_chunk_limit_wrap" style="display:none;">
 		<div class="form-group">
 			<label class="control-label col-lg-3" for="php_backup_method_select_chunk_limit">{'php_backup_method_select_chunk_limit'|m62Lang}</label>
-			<div class="col-lg-6"><input type="text" id="php_backup_method_select_chunk_limit" name="php_backup_method_select_chunk_limit" value="{$form_data['php_backup_method_select_chunk_limit']}" class="" /></div>
+			<div class="col-lg-6"><input type="text" id="php_backup_method_select_chunk_limit" name="php_backup_method_select_chunk_limit" value="{$form_data['php_backup_method_select_chunk_limit']|escape:'htmlall':'UTF-8'}" class="" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'php_backup_method_select_chunk_limit_instructions'|m62Lang}</div></div>
 			<div class="col-lg-6 col-lg-offset-3">{$form_errors['php_backup_method_select_chunk_limit']|m62FormErrors}</div>
 		</div>
@@ -96,7 +96,7 @@
 			<div class="col-lg-6">
 			<select name="db_backup_ignore_tables[]" multiple="multiple" data-placeholder="{'db_backup_ignore_tables'|m62Lang}" id="db_backup_ignore_tables">
 			{foreach from=$db_tables key=k item=v}
-			<option value="{$k}" {if $form_data['db_backup_ignore_tables'] == $k}selected="selected"{/if}>{$v}</option>
+			<option value="{$k|escape:'htmlall':'UTF-8'}" {if $form_data['db_backup_ignore_tables'] == $k}selected="selected"{/if}>{$v|escape:'htmlall':'UTF-8'}</option>
 			{/foreach}
 			</select>
 			</div>
@@ -110,7 +110,7 @@
 			<div class="col-lg-6">
 			<select name="db_backup_ignore_table_data[]" multiple="multiple" data-placeholder="{'db_backup_ignore_table_data'|m62Lang}" id="db_backup_ignore_table_data">
 			{foreach from=$db_tables key=k item=v}
-			<option value="{$k}" {if $form_data['db_backup_ignore_table_data'] == $k}selected="selected"{/if}>{$v}</option>
+			<option value="{$k|escape:'htmlall':'UTF-8'}" {if $form_data['db_backup_ignore_table_data'] == $k}selected="selected"{/if}>{$v|escape:'htmlall':'UTF-8'}</option>
 			{/foreach}
 			</select>
 			</div>

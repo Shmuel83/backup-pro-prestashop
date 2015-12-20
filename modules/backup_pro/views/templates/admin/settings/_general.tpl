@@ -38,7 +38,7 @@
 			<div class="col-lg-6">
 			<select name="auto_threshold" id="auto_threshold" class="form-control fixed-width-xxl">
 			{foreach from=$threshold_options key=k item=v}
-			<option value="{$k}" {if $form_data['auto_threshold'] == $k}selected="selected"{/if}>{$v}</option>
+			<option value="{$k|escape:'htmlall':'UTF-8'}" {if $form_data['auto_threshold'] == $k}selected="selected"{/if}>{$v|escape:'htmlall':'UTF-8'}</option>
 			{/foreach}
 			</select>
 			</div>

@@ -10,7 +10,7 @@
 		<p class="notice">{'action_can_not_be_undone'|m62Lang}</p>
 			<br /><br />
 			<form name="remove_backups" action="{$link->getAdminLink('AdminBackupProManage')|escape:'html':'UTF-8'}&amp;section=remove_backup" method="POST"  >
-			<input type="hidden" value="{$backup_type}" name="type" />
+			<input type="hidden" value="{$backup_type|escape:'htmlall':'UTF-8'}" name="type" />
 			{include file="./includes/_backup_table.tpl"}
 			
 			

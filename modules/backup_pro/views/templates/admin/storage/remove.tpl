@@ -12,7 +12,7 @@
 			
 			<p>{'delete_storage_confirm'|m62Lang}</p>
 			<p class="notice">{'action_can_not_be_undone'|m62Lang}</p>   
-			<p>{$storage_details['storage_location_name']}</p> 
+			<p>{$storage_details['storage_location_name']|escape:'htmlall':'UTF-8'}</p> 
                     
 			<div class="panel-footer">
 				<button type="submit" value="1"	id="m62_settings_submit" name="submitAddprofile" class="btn btn-default pull-right">
