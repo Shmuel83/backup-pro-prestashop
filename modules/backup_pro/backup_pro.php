@@ -56,6 +56,7 @@ class Backup_pro extends Module implements \mithra62\BackupPro\BackupPro
         $this->need_instance = 1;
         $this->ps_versions_compliancy = array('min' => '1.6', 'max' => _PS_VERSION_);
         $this->bootstrap = true;
+        $this->module_key = '59fa346df72e2a7dfa0bc796beaa8015';
     
         $this->displayName = $this->l('Backup Pro 3');
         $this->description = $this->l('Interface to create database and file backups of your site. ');
