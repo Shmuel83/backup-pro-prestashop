@@ -54,6 +54,7 @@ abstract class BaseAdminController extends PrestashopController implements \mith
         $this->context->smarty->registerPlugin('modifier', 'm62Decode', array($this->view_helper, 'm62Decode'));
         $this->context->smarty->registerPlugin('modifier', 'm62FormErrors', array($this->view_helper, 'm62FormErrors'));
         $this->context->smarty->registerPlugin('modifier', 'm62TimeFormat', array($this->view_helper, 'm62TimeFormat'));
+        $this->context->smarty->registerPlugin('modifier', 'm62RelativeDateTime', array($this->view_helper, 'm62RelativeDateTime'));
         $this->bp_template_path = _MODULE_DIR_."backup_pro";
     }
     
@@ -63,6 +64,12 @@ abstract class BaseAdminController extends PrestashopController implements \mith
         if (!$this->loadObject(true)) {
             return;
         }
+        
+
+        //grab the backup details
+        $backup = $this->services['backups'];
+        $backups = $backup->setBackupPath($this->settings['working_directory'])->getAllBackups($this->settings['storage_details']);
+        $backup_meta = $backup->getBackupMeta($backups);
         
         $this->initToolbar();
         $this->initPageHeaderToolbar();
@@ -75,6 +82,11 @@ abstract class BaseAdminController extends PrestashopController implements \mith
             'page_header_toolbar_btn' => $this->page_header_toolbar_btn,
             'note_url' => $this->context->link->getAdminLink('AdminBackupProManage').'&section=backup_note',
             'help_link' => 'https://www.mithra62.com/docs/table-of-contents/backup-pro',
+            'backup_meta' => $backup_meta,
+            'last_database_backup_rel_time' => $this->view_helper->m62RelativeDateTime($backup_meta['database']['newest_backup_taken_raw']),
+            'database_backup_url' => $this->context->link->getAdminLink('AdminBackupProBackupDatabase'),
+            'last_file_backup_rel_time' => $this->view_helper->m62RelativeDateTime($backup_meta['files']['newest_backup_taken_raw']),
+            'file_backup_url' => $this->context->link->getAdminLink('AdminBackupProBackupFiles')
         ));
     }
     
