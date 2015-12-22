@@ -6,7 +6,7 @@
 	<div class="panel">
 		<h3>{'restore_db'|m62Lang}</h3>
 		
-		<div id="_backup_details_table">
+		<div id="_restore_details_table">
 		
 			<p>{'restore_db_question'|m62Lang}</p>
 			
