@@ -62,7 +62,7 @@
 		<form name="remove_backups" action="{$link->getAdminLink('AdminBackupProManage')|escape:'html':'UTF-8'}&amp;section=restore_db" method="POST"  >
 			<input type="hidden" name="id" value="{$backup['details_file_name']|m62Encode}" />
 			<div class="panel-footer"><button name="submit_button" class="btn btn-primary" value="1" id="submit_button" type="submit">
-				{'restore'|m62Lang}
+				{'restore_db'|m62Lang}
 			</button>
 			</div>
 		</form>	
