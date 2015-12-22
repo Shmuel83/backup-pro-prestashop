@@ -10,21 +10,54 @@
 		
 		<p class="notice">{'action_can_not_be_undone'|m62Lang} {'restore_double_speak'|m62Lang} </p>
 		
-		<p>
-			<strong>{'taken'|m62Lang}:</strong> {$backup['created_date']|m62DateTime} <br />
-			<strong>{'backup_type'|m62Lang}:</strong> {$backup['database_backup_type']|m62Lang}<br />
-			<strong>{'verified'|m62Lang}:</strong> 
+		<table border="0" cellspacing="0" cellpadding="0" class="table"  width="100%" >
+		<thead>
+		<tr>
+			<th></th>
+			<th></th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>{'taken'|m62Lang}</td>
+			<td>{$backup['created_date']|m62DateTime}</td>
+		</tr>
+		<tr>
+			<td>{'backup_type'|m62Lang}</td>
+			<td>{$backup['database_backup_type']|m62Lang}</td>
+		</tr>
+		<tr>
+			<td>{'verified'|m62Lang}</td>
+			<td>
 				{if $backup['verified'] == '0' }
 					<span class="notice">{'no'|m62Lang}</span>
 				{else}
 					<span class="success">{'yes'|m62Lang}</span>
-				{/if} <br />
-			<strong>{'time_taken'|m62Lang}:</strong> {$backup['time_taken']|m62TimeFormat} <br />
-			<strong>{'max_memory'|m62Lang}:</strong> {$backup['max_memory']|m62FileSize} <br />
-			<strong>{'uncompressed_sql_size'|m62Lang}:</strong> {$backup['uncompressed_size']|m62FileSize} <br />
-			<strong>{'total_tables'|m62Lang}:</strong> <?php echo $backup['item_count']; ?><br />
-			<strong>{'md5_hash'|m62Lang}:</strong> {$backup['hash']}
-		</p>
+				{/if}			
+			</td>
+		</tr>
+		<tr>
+			<td>{'time_taken'|m62Lang}</td>
+			<td>{$backup['time_taken']|m62TimeFormat}</td>
+		</tr>
+		<tr>
+			<td>{'max_memory'|m62Lang}</td>
+			<td>{$backup['uncompressed_size']|m62FileSize}</td>
+		</tr>
+		<tr>
+			<td>{'uncompressed_sql_size'|m62Lang}</td>
+			<td>{$backup['max_memory']|m62FileSize}</td>
+		</tr>
+		<tr>
+			<td>{'total_tables'|m62Lang}</td>
+			<td>{$backup['item_count']}</td>
+		</tr>
+		<tr>
+			<td>{'md5_hash'|m62Lang}</td>
+			<td>{$backup['hash']}</td>
+		</tr>
+		</tbody>
+		</table>
 		
 		<form name="remove_backups" action="{$link->getAdminLink('AdminBackupProManage')|escape:'html':'UTF-8'}&amp;section=restore_db" method="POST"  >
 			<input type="hidden" name="id" value="{$backup['details_file_name']|m62Encode}" />
