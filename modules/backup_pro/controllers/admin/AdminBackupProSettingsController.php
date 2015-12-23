@@ -116,7 +116,7 @@ class AdminBackupProSettingsController extends BaseAdminController
         
             if( $this->services['backup']->getStorage()->getLocations()->setSetting($this->services['settings'])->remove($storage_id, $data, $backups) )
             {
-                Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProSettings').'&section='.$section.'&storage_removed=yes');
+                $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProSettings').'&section='.$section.'&storage_removed=yes');
             }
         }
         
@@ -160,7 +160,8 @@ class AdminBackupProSettingsController extends BaseAdminController
             {
                 if( $this->services['backup']->getStorage()->getLocations()->setSetting($this->services['settings'])->update($storage_id, $variables['form_data']) )
                 {
-                    Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProSettings').'&section='.$section.'&updated=yes');
+                    $url = $this->context->link->getAdminLink('AdminBackupProSettings').'&section='.$section.'&updated=yes';
+                    $this->platform->redirect($url);
                 }
             }
             else
@@ -203,7 +204,7 @@ class AdminBackupProSettingsController extends BaseAdminController
             {
                 if( $this->services['backup']->getStorage()->getLocations()->setSetting($this->services['settings'])->create($engine, $variables['form_data']) )
                 {
-                    Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProSettings').'&section='.$section.'&added=yes');
+                    $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProSettings').'&section='.$section.'&added=yes');
                 }
             }
             else
@@ -299,7 +300,7 @@ class AdminBackupProSettingsController extends BaseAdminController
             {
                 if( $this->services['settings']->update($data) )
                 {
-                    Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProSettings').'&section='.$section.'&update=yes');
+                    $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProSettings').'&section='.$section.'&update=yes');
                 }
             }
             else

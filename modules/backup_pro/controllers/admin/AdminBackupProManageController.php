@@ -78,12 +78,12 @@ class AdminBackupProManageController extends BaseAdminController
             $db_info = $this->platform->getDbCredentials();
             if( $this->services['restore']->setDbInfo($db_info)->setBackupInfo($backup_info)->database($db_info['database'], $restore_file_path, $this->settings, $this->services['shell']) )
             {
-                Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProDashboard').'&database_restored=yes');
+                $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard').'&database_restored=yes');
             }
         }
         else
         {
-                Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProDashboard').'&database_restored=fail');
+                $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard').'&database_restored=fail');
         }
     }
     
@@ -127,7 +127,7 @@ class AdminBackupProManageController extends BaseAdminController
         }
         else
         {
-            Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProDashboard').'&backup_download_fail=yes');
+            $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard').'&backup_download_fail=yes');
         }
     }   
     
@@ -161,11 +161,11 @@ class AdminBackupProManageController extends BaseAdminController
         if( $this->services['backups']->setBackupPath($this->settings['working_directory'])->removeBackups($backups) )
         {
 
-            Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProDashboard').'&backups_removed=yes');
+            $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard').'&backups_removed=yes');
         }
         else
         {
-            Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProDashboard').'&backups_remove_fail=yes');
+            $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard').'&backups_remove_fail=yes');
         }
     }
 }

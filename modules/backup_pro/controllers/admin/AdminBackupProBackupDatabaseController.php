@@ -68,12 +68,12 @@ class AdminBackupProBackupDatabaseController extends BaseBackupController
                                     ->counts($this->settings['max_db_backups'])
                                     ->duplicates($this->settings['allow_duplicates']);
                 
-                Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProDashboard').'&section=db_backups&backup_complete=yes');
+                $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard').'&section=db_backups&backup_complete=yes');
             }
         }
         else
         {
-            Tools::redirectAdmin($this->context->link->getAdminLink('AdminBackupProDashboard').'&section=db_backups&backup_system_errors=yes');
+            $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard').'&section=db_backups&backup_system_errors=yes');
         }        
     }
 }
