@@ -1,4 +1,4 @@
-<?php  
+<?php
 /**
  * mithra62 - Backup Pro
  *
@@ -7,7 +7,6 @@
  * @version		3.0
  * @filesource 	./modules/BackupPro/controllers/admin/AdminBackupProSettingsController.php
  */
-
 require_once 'BaseAdminController.php';
 
 /**
@@ -15,13 +14,15 @@ require_once 'BaseAdminController.php';
  *
  * Contains the methods for updating Backup Pro settings
  *
- * @package 	mithra62\BackupPro
- * @author		Eric Lamb <eric@mithra62.com>
+ * @package mithra62\BackupPro
+ * @author Eric Lamb <eric@mithra62.com>
  */
 class AdminBackupProSettingsController extends BaseAdminController
 {
+
     /**
      * The default Storage form field values
+     * 
      * @var unknown
      */
     public $storage_form_data_defaults = array(
@@ -29,11 +30,12 @@ class AdminBackupProSettingsController extends BaseAdminController
         'storage_location_file_use' => '1',
         'storage_location_status' => '1',
         'storage_location_db_use' => '1',
-        'storage_location_include_prune' => '1',
+        'storage_location_include_prune' => '1'
     );
-    
+
     /**
      * The main base template we're using
+     * 
      * @var string
      */
     protected $bp_template = 'settings.tpl';
@@ -43,80 +45,83 @@ class AdminBackupProSettingsController extends BaseAdminController
      */
     public function display()
     {
-        switch( $this->platform->getPost('section') )
-        {
+        switch ($this->platform->getPost('section')) {
             case 'storage':
                 $this->storageView();
-            break;
+                break;
             
             case 'settings':
             default:
                 $this->settingsView();
-            break;
+                break;
         }
-    
+        
         parent::display();
     }
-    
+
     protected function storageView()
     {
-        switch( $this->platform->getPost('sub') )
-        {
+        switch ($this->platform->getPost('sub')) {
             
             case 'new_storage':
                 $this->newStorageView();
-            break; 
+                break;
             
             case 'edit_storage':
                 $this->editStorageView();
-            break;
+                break;
             
             case 'remove_storage':
                 $this->removeStorageView();
-            break;
+                break;
             
             case 'view_storage':
             default:
                 $this->viewStorageView();
-            break;                
+                break;
         }
     }
-    
+
     protected function removeStorageView()
     {
         $storage_id = $this->platform->getPost('id');
         $section = $this->platform->getPost('section', 'storage');
-        if( count($this->settings['storage_details']) <= 1 )
-        {
-            $this->redirect_after = self::$currentIndex.'&section=storage&fail_min_storage_location_needs=yes&token='.$this->token;;
-            $this->redirect();            
+        if (count($this->settings['storage_details']) <= 1) {
+            $this->redirect_after = self::$currentIndex . '&section=storage&fail_min_storage_location_needs=yes&token=' . $this->token;
+            ;
+            $this->redirect();
         }
         
-        if( empty($this->settings['storage_details'][$storage_id]) )
-        {
-            $this->redirect_after = self::$currentIndex.'&section=storage&invalid_storage_id=yes&token='.$this->token;;
-            $this->redirect();            
+        if (empty($this->settings['storage_details'][$storage_id])) {
+            $this->redirect_after = self::$currentIndex . '&section=storage&invalid_storage_id=yes&token=' . $this->token;
+            ;
+            $this->redirect();
         }
         
         $storage_details = $this->settings['storage_details'][$storage_id];
         
         $variables = array();
-        $variables['form_data'] = array('remove_remote_files' => '0');
-        $variables['form_errors'] = array('remove_remote_files' => false);
+        $variables['form_data'] = array(
+            'remove_remote_files' => '0'
+        );
+        $variables['form_errors'] = array(
+            'remove_remote_files' => false
+        );
         $variables['errors'] = $this->errors;
         $variables['available_storage_engines'] = $this->services['backup']->getStorage()->getAvailableStorageDrivers();
         $variables['storage_engine'] = $variables['available_storage_engines'][$storage_details['storage_location_driver']];
         $variables['storage_details'] = $storage_details;
         
-        if( $_SERVER['REQUEST_METHOD'] == 'POST' )
-        {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = $_POST;
-            $backups = $this->services['backups']->setBackupPath($this->settings['working_directory'])
-                                                 ->getAllBackups($this->settings['storage_details'], $this->services['backup']->getStorage()->getAvailableStorageDrivers());
-        
-            if( $this->services['backup']->getStorage()->getLocations()->setSetting($this->services['settings'])->remove($storage_id, $data, $backups) )
-            {
-                $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProSettings').'&section='.$section.'&storage_removed=yes');
+            $backups = $this->services['backups']->setBackupPath($this->settings['working_directory'])->getAllBackups($this->settings['storage_details'], $this->services['backup']->getStorage()
+                ->getAvailableStorageDrivers());
+            
+            if ($this->services['backup']->getStorage()
+                ->getLocations()
+                ->setSetting($this->services['settings'])
+                ->remove($storage_id, $data, $backups)) {
+                $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProSettings') . '&section=' . $section . '&storage_removed=yes');
             }
         }
         
@@ -124,18 +129,20 @@ class AdminBackupProSettingsController extends BaseAdminController
         $variables['storage_id'] = $storage_id;
         $variables['active_tab'] = $section;
         
-        $this->context->smarty->assign( $variables );
+        $this->context->smarty->assign($variables);
         $content = $this->prepareContent('storage/remove.tpl');
-        $this->context->smarty->assign(array('content' => $content));
+        $this->context->smarty->assign(array(
+            'content' => $content
+        ));
     }
-    
+
     protected function editStorageView()
     {
         $storage_id = $this->platform->getPost('id');
         $section = $this->platform->getPost('section', 'storage');
-        if( empty($this->settings['storage_details'][$storage_id]) )
-        {
-            $this->redirect_after = self::$currentIndex.'&section=storage&invalid_storage_id=yes&token='.$this->token;;
+        if (empty($this->settings['storage_details'][$storage_id])) {
+            $this->redirect_after = self::$currentIndex . '&section=storage&invalid_storage_id=yes&token=' . $this->token;
+            ;
             $this->redirect();
         }
         
@@ -144,40 +151,40 @@ class AdminBackupProSettingsController extends BaseAdminController
         $variables = array();
         $variables['storage_details'] = $storage_details;
         $variables['form_data'] = array_merge($this->storage_form_data_defaults, $storage_details);
-        $variables['form_errors'] = $this->returnEmpty($storage_details); //array_merge($storage_details, $this->form_data_defaults);
+        $variables['form_errors'] = $this->returnEmpty($storage_details); // array_merge($storage_details, $this->form_data_defaults);
         $variables['errors'] = $this->errors;
         $variables['available_storage_engines'] = $this->services['backup']->getStorage()->getAvailableStorageOptions();
         $variables['storage_engine'] = $variables['available_storage_engines'][$storage_details['storage_location_driver']];
-        $variables['_form_template'] = './drivers/_'.$storage_details['storage_location_driver'];
+        $variables['_form_template'] = './drivers/_' . $storage_details['storage_location_driver'];
         
-        if(  $_SERVER['REQUEST_METHOD'] == 'POST' )
-        {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = $_POST;
             $variables['form_data'] = $data;
             $data['location_id'] = $storage_id;
             $settings_errors = $this->services['backup']->getStorage()->validateDriver($this->services['validate'], $storage_details['storage_location_driver'], $data, $this->settings['storage_details']);
-            if( !$settings_errors )
-            {
-                if( $this->services['backup']->getStorage()->getLocations()->setSetting($this->services['settings'])->update($storage_id, $variables['form_data']) )
-                {
-                    $url = $this->context->link->getAdminLink('AdminBackupProSettings').'&section='.$section.'&updated=yes';
+            if (! $settings_errors) {
+                if ($this->services['backup']->getStorage()
+                    ->getLocations()
+                    ->setSetting($this->services['settings'])
+                    ->update($storage_id, $variables['form_data'])) {
+                    $url = $this->context->link->getAdminLink('AdminBackupProSettings') . '&section=' . $section . '&updated=yes';
                     $this->platform->redirect($url);
                 }
-            }
-            else
-            {
+            } else {
                 $variables['form_errors'] = array_merge($variables['form_errors'], $settings_errors);
             }
         }
         
         $variables['section'] = 'storage';
         $variables['storage_id'] = $storage_id;
-        $variables['active_tab'] = $section;  
-        $this->context->smarty->assign( $variables );
+        $variables['active_tab'] = $section;
+        $this->context->smarty->assign($variables);
         $content = $this->prepareContent('storage/edit.tpl');
-        $this->context->smarty->assign(array('content' => $content));       
+        $this->context->smarty->assign(array(
+            'content' => $content
+        ));
     }
-    
+
     protected function newStorageView()
     {
         $engine = $this->platform->getPost('engine', 'local');
@@ -185,8 +192,7 @@ class AdminBackupProSettingsController extends BaseAdminController
         $variables = array();
         $variables['available_storage_engines'] = $this->services['backup']->getStorage()->getAvailableStorageDrivers();
         
-        if( !isset($variables['available_storage_engines'][$engine]) )
-        {
+        if (! isset($variables['available_storage_engines'][$engine])) {
             $engine = 'local';
         }
         
@@ -195,20 +201,18 @@ class AdminBackupProSettingsController extends BaseAdminController
         $variables['form_data'] = array_merge($this->settings, $variables['storage_engine']['settings'], $this->storage_form_data_defaults);
         $variables['form_errors'] = array_merge($this->returnEmpty($this->settings), $this->returnEmpty($variables['storage_engine']['settings']), $this->storage_form_data_defaults);
         $variables['form_has_errors'] = false;
-        if(  $_SERVER['REQUEST_METHOD'] == 'POST' )
-        {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = $_POST;
             $variables['form_data'] = $data;
             $settings_errors = $this->services['backup']->getStorage()->validateDriver($this->services['validate'], $engine, $data, $this->settings['storage_details']);
-            if( !$settings_errors )
-            {
-                if( $this->services['backup']->getStorage()->getLocations()->setSetting($this->services['settings'])->create($engine, $variables['form_data']) )
-                {
-                    $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProSettings').'&section='.$section.'&added=yes');
+            if (! $settings_errors) {
+                if ($this->services['backup']->getStorage()
+                    ->getLocations()
+                    ->setSetting($this->services['settings'])
+                    ->create($engine, $variables['form_data'])) {
+                    $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProSettings') . '&section=' . $section . '&added=yes');
                 }
-            }
-            else
-            {
+            } else {
                 $variables['form_has_errors'] = true;
                 $variables['form_errors'] = array_merge($variables['form_errors'], $settings_errors);
             }
@@ -216,9 +220,8 @@ class AdminBackupProSettingsController extends BaseAdminController
         
         $variables['errors'] = $this->errors;
         $variables['_form_template'] = false;
-        if( $variables['storage_engine']['obj']->hasSettingsView() )
-        {
-            $variables['_form_template'] = './drivers/_'.$engine;
+        if ($variables['storage_engine']['obj']->hasSettingsView()) {
+            $variables['_form_template'] = './drivers/_' . $engine;
         }
         
         $variables['section'] = 'storage';
@@ -226,11 +229,13 @@ class AdminBackupProSettingsController extends BaseAdminController
         $variables['section'] = 'storage';
         $variables['active_tab'] = $section;
         
-        $this->context->smarty->assign( $variables );
+        $this->context->smarty->assign($variables);
         $content = $this->prepareContent('storage/new.tpl');
-        $this->context->smarty->assign(array('content' => $content));    
+        $this->context->smarty->assign(array(
+            'content' => $content
+        ));
     }
-    
+
     /**
      * The default Storage Locations view
      */
@@ -244,8 +249,7 @@ class AdminBackupProSettingsController extends BaseAdminController
         $added = $this->platform->getPost('added', 'no');
         $variables = array();
         $variables['can_remove'] = true;
-        if( count($this->settings['storage_details']) <= 1 )
-        {
+        if (count($this->settings['storage_details']) <= 1) {
             $variables['can_remove'] = false;
         }
         
@@ -261,21 +265,26 @@ class AdminBackupProSettingsController extends BaseAdminController
         $variables['added'] = $added;
         $variables['fail_min_storage_location_needs'] = $fail_min_storage_location_needs;
         
-        $this->context->smarty->assign( $variables );
+        $this->context->smarty->assign($variables);
         $content = $this->prepareContent('storage.tpl');
-        $this->context->smarty->assign(array('content' => $content));
+        $this->context->smarty->assign(array(
+            'content' => $content
+        ));
     }
-    
+
     /**
      * The Backup Pro Settings view
-     * 
-     * Handles displaying and processing settings 
+     *
+     * Handles displaying and processing settings
      */
     protected function settingsView()
     {
         $section = $this->platform->getPost('section', 'general');
         $update = $this->platform->getPost('update', 'no');
-        $variables = array('form_data' => $this->settings, 'form_errors' => $this->returnEmpty($this->settings));
+        $variables = array(
+            'form_data' => $this->settings,
+            'form_errors' => $this->returnEmpty($this->settings)
+        );
         $variables['form_data']['cron_notify_emails'] = implode("\n", $this->settings['cron_notify_emails']);
         $variables['form_data']['exclude_paths'] = implode("\n", $this->settings['exclude_paths']);
         $variables['form_data']['backup_file_location'] = implode("\n", $this->settings['backup_file_location']);
@@ -286,25 +295,25 @@ class AdminBackupProSettingsController extends BaseAdminController
         $variables['form_data']['backup_missed_schedule_notify_emails'] = implode("\n", $this->settings['backup_missed_schedule_notify_emails']);
         $variables['form_has_errors'] = false;
         
-        if( $_SERVER['REQUEST_METHOD'] == 'POST' )
-        {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = $_POST;
-        
-            $variables['form_data'] = array_merge(array('db_backup_ignore_tables' => '', 'db_backup_ignore_table_data' => ''), $data);
+            
+            $variables['form_data'] = array_merge(array(
+                'db_backup_ignore_tables' => '',
+                'db_backup_ignore_table_data' => ''
+            ), $data);
             $backup = $this->services['backups'];
             $backups = $backup->setBackupPath($this->settings['working_directory'])->getAllBackups($this->settings['storage_details']);
             $data['meta'] = $backup->getBackupMeta($backups);
-            $extra = array('db_creds' => $this->platform->getDbCredentials());
+            $extra = array(
+                'db_creds' => $this->platform->getDbCredentials()
+            );
             $settings_errors = $this->services['settings']->validate($data, $extra);
-            if( !$settings_errors )
-            {
-                if( $this->services['settings']->update($data) )
-                {
-                    $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProSettings').'&section='.$section.'&update=yes');
+            if (! $settings_errors) {
+                if ($this->services['settings']->update($data)) {
+                    $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProSettings') . '&section=' . $section . '&update=yes');
                 }
-            }
-            else
-            {
+            } else {
                 $variables['form_has_errors'] = true;
                 $variables['form_errors'] = array_merge($variables['form_errors'], $settings_errors);
             }
@@ -321,8 +330,10 @@ class AdminBackupProSettingsController extends BaseAdminController
         
         $variables['view_helper'] = $this->view_helper;
         $variables['active_tab'] = $section;
-        $this->context->smarty->assign( $variables );
+        $this->context->smarty->assign($variables);
         $content = $this->prepareContent($this->bp_template);
-        $this->context->smarty->assign(array('content' => $content));
+        $this->context->smarty->assign(array(
+            'content' => $content
+        ));
     }
 }

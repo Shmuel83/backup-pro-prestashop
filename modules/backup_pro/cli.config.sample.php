@@ -7,7 +7,6 @@
  * @version		3.0
  * @filesource 	./cli.config.sample.php
  */
-
 return array(
     'site_url' => '',
     'site_name' => '',
@@ -18,19 +17,19 @@ return array(
         'password' => '',
         'database' => '',
         'host' => '',
-        'prefix' => '',
+        'prefix' => ''
     ),
     'email' => array(
         'from_email' => '',
         'sender_name' => '',
-        'type' => 'php', //choose between `php` and `smtp`
-        'smtp_options' => array( //if `smtp` chosen above, this must be completed and accurate
+        'type' => 'php', // choose between `php` and `smtp`
+        'smtp_options' => array( // if `smtp` chosen above, this must be completed and accurate
             'host' => '',
             'connection_config' => array(
                 'username' => '',
-                'password' => '',
+                'password' => ''
             ),
-            'port' => '',
+            'port' => ''
         )
     )
 );

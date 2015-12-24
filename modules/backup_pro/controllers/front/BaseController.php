@@ -1,4 +1,4 @@
-<?php  
+<?php
 /**
  * mithra62 - Backup Pro
  *
@@ -7,12 +7,11 @@
  * @version		3.0
  * @filesource 	./modules/BackupPro/controllers/front/BaseController.php
  */
-
-require_once realpath(dirname(__FILE__).'/../../libraries/vendor/autoload.php');
+require_once realpath(dirname(__FILE__) . '/../../libraries/vendor/autoload.php');
 
 use mithra62\BackupPro\Traits\Controller;
 use mithra62\Traits\Log;
-use mithra62\BackupPro\Platforms\Prestashop AS Platform;
+use mithra62\BackupPro\Platforms\Prestashop as Platform;
 use mithra62\BackupPro\Exceptions\BackupException;
 
 /**
@@ -20,67 +19,72 @@ use mithra62\BackupPro\Exceptions\BackupException;
  *
  * Contains all the actions for viewing Backups
  *
- * @package 	mithra62\BackupPro
- * @author		Eric Lamb <eric@mithra62.com>
+ * @package mithra62\BackupPro
+ * @author Eric Lamb <eric@mithra62.com>
  */
 abstract class BaseController extends ModuleFrontController implements \mithra62\BackupPro\BackupPro
 {
     use Controller;
     use Log;
-    
+
     /**
      * The abstracted platform object
+     * 
      * @var \mithra62\Platforms\Craft
      */
     protected $platform = null;
-    
+
     /**
      * The Backup Pro Settings
+     * 
      * @var array
      */
     protected $settings = array();
-    
+
     /**
      * A container of system messages and errors
+     * 
      * @var array
-    */
+     */
     protected $bp_errors = array();
-    
+
     /**
      * Set it up
-     * @param unknown $id
-     * @param string $module
-    */
+     * 
+     * @param unknown $id            
+     * @param string $module            
+     */
     public function __construct()
     {
         parent::__construct();
         $this->initController();
         $this->platform = new Platform();
-        $this->m62->setService('platform', function($c) {
+        $this->m62->setService('platform', function ($c) {
             return $this->platform;
         });
-    
+        
         $this->m62->setDbConfig($this->platform->getDbCredentials());
         $this->settings = $this->services['settings']->get();
         $errors = $this->services['errors']->checkWorkingDirectory($this->settings['working_directory'])
-                                           ->checkStorageLocations($this->settings['storage_details'])
-                                           ->licenseCheck($this->settings['license_number'], $this->services['license']);
-
-        if( $errors->totalErrors() == '0' )
-        {
+            ->checkStorageLocations($this->settings['storage_details'])
+            ->licenseCheck($this->settings['license_number'], $this->services['license']);
+        
+        if ($errors->totalErrors() == '0') {
             $errors = $errors->checkBackupState($this->services['backups'], $this->settings);
         }
-
+        
         $this->bp_errors = $errors->getErrors();
-    
     }
-    
+
     /**
-     * Handy little helper method to figure out the passed variables 
+     * Handy little helper method to figure out the passed variables
+     *
+     * We check the _POST then _GET in that order.
      * 
-     * We check the _POST then _GET in that order. 
-     * @param string $index The GET or POST variable we want
-     * @param string $default The value to use if the expected isn't set
+     * @param string $index
+     *            The GET or POST variable we want
+     * @param string $default
+     *            The value to use if the expected isn't set
      * @return unknown|string
      */
     public function getPost($index, $default = false)

@@ -7,7 +7,6 @@
  * @version		3.0
  * @filesource 	./modules/BackupPro/controllers/admin/AdminBackupProManageController.php
  */
- 
 require_once 'BaseBackupController.php';
 
 /**
@@ -15,40 +14,40 @@ require_once 'BaseBackupController.php';
  *
  * Displays the Backup Pro Backup Manage Actions
  *
- * @package 	mithra62\BackupPro
- * @author		Eric Lamb <eric@mithra62.com>
+ * @package mithra62\BackupPro
+ * @author Eric Lamb <eric@mithra62.com>
  */
 class AdminBackupProManageController extends BaseAdminController
 {
+
     /**
      * The main base template we're using
+     * 
      * @var string
      */
     protected $bp_template = 'backup.tpl';
-    
+
     /**
      * Our actual "Action" method
      */
     public function display()
     {
-        switch( $this->platform->getPost('section') )
-        {
+        switch ($this->platform->getPost('section')) {
             case 'download':
                 $this->downloadAction();
-            break;
+                break;
             
             case 'remove_backup':
                 $this->deleteBackupsAction();
-            break;
+                break;
             
             case 'backup_note':
                 $this->updateBackupNoteAction();
-            break;
+                break;
             
             case 'restore_db':
                 $this->restoreDbAction();
-            break;
-                
+                break;
         }
     }
 
@@ -60,33 +59,29 @@ class AdminBackupProManageController extends BaseAdminController
         $encrypt = $this->services['encrypt'];
         $file_name = $encrypt->decode($this->platform->getPost('id'));
         $storage = $this->services['backup']->setStoragePath($this->settings['working_directory']);
-    
+        
         $file = $storage->getStorage()->getDbBackupNamePath($file_name);
         $backup_info = $this->services['backups']->setLocations($this->settings['storage_details'])->getBackupData($file);
         $restore_file_path = false;
-        foreach($backup_info['storage_locations'] AS $storage_location)
-        {
-            if( $storage_location['obj']->canRestore() )
-            {
-                $restore_file_path = $storage_location['obj']->getFilePath($backup_info['file_name'], $backup_info['backup_type']); //next, get file path
+        foreach ($backup_info['storage_locations'] as $storage_location) {
+            if ($storage_location['obj']->canRestore()) {
+                $restore_file_path = $storage_location['obj']->getFilePath($backup_info['file_name'], $backup_info['backup_type']); // next, get file path
                 break;
             }
         }
-    
-        if($restore_file_path && file_exists($restore_file_path))
-        {
+        
+        if ($restore_file_path && file_exists($restore_file_path)) {
             $db_info = $this->platform->getDbCredentials();
-            if( $this->services['restore']->setDbInfo($db_info)->setBackupInfo($backup_info)->database($db_info['database'], $restore_file_path, $this->settings, $this->services['shell']) )
-            {
-                $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard').'&database_restored=yes');
+            if ($this->services['restore']->setDbInfo($db_info)
+                ->setBackupInfo($backup_info)
+                ->database($db_info['database'], $restore_file_path, $this->settings, $this->services['shell'])) {
+                $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard') . '&database_restored=yes');
             }
-        }
-        else
-        {
-                $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard').'&database_restored=fail');
+        } else {
+            $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard') . '&database_restored=fail');
         }
     }
-    
+
     /**
      * Download a backup action
      */
@@ -96,41 +91,30 @@ class AdminBackupProManageController extends BaseAdminController
         $file_name = $encrypt->decode($this->platform->getPost('id'));
         $type = $this->platform->getPost('type');
         $storage = $this->services['backup']->setStoragePath($this->settings['working_directory']);
-        if($type == 'files')
-        {
+        if ($type == 'files') {
             $file = $storage->getStorage()->getFileBackupNamePath($file_name);
-        }
-        else
-        {
+        } else {
             $file = $storage->getStorage()->getDbBackupNamePath($file_name);
         }
-    
-    
+        
         $backup_info = $this->services['backups']->setLocations($this->settings['storage_details'])->getBackupData($file);
         $download_file_path = false;
-        if( !empty($backup_info['storage_locations']) && is_array($backup_info['storage_locations']) )
-        {
-            foreach($backup_info['storage_locations'] AS $storage_location)
-            {
-                if( $storage_location['obj']->canDownload() )
-                {
-                    $download_file_path = $storage_location['obj']->getFilePath($backup_info['file_name'], $backup_info['backup_type']); //next, get file path
+        if (! empty($backup_info['storage_locations']) && is_array($backup_info['storage_locations'])) {
+            foreach ($backup_info['storage_locations'] as $storage_location) {
+                if ($storage_location['obj']->canDownload()) {
+                    $download_file_path = $storage_location['obj']->getFilePath($backup_info['file_name'], $backup_info['backup_type']); // next, get file path
                     break;
                 }
             }
         }
-    
-        if($download_file_path && file_exists($download_file_path))
-        {
+        
+        if ($download_file_path && file_exists($download_file_path)) {
             $this->services['files']->fileDownload($download_file_path);
-            exit;
+            exit();
+        } else {
+            $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard') . '&backup_download_fail=yes');
         }
-        else
-        {
-            $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard').'&backup_download_fail=yes');
-        }
-    }   
-    
+    }
 
     /**
      * AJAX Action for updating a backup note
@@ -141,31 +125,31 @@ class AdminBackupProManageController extends BaseAdminController
         $file_name = $encrypt->decode($this->platform->getPost('backup'));
         $backup_type = $this->platform->getPost('backup_type');
         $note_text = $this->platform->getPost('note_text');
-        if($note_text && $file_name)
-        {
-            $path = rtrim($this->settings['working_directory'], DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$backup_type;
-            $this->services['backup']->getDetails()->addDetails($file_name, $path, array('note' => $note_text));
-            echo json_encode(array('success'));
+        if ($note_text && $file_name) {
+            $path = rtrim($this->settings['working_directory'], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $backup_type;
+            $this->services['backup']->getDetails()->addDetails($file_name, $path, array(
+                'note' => $note_text
+            ));
+            echo Tools::jsonEncode(array(
+                'success'
+            ));
         }
-        exit;
+        exit();
     }
-    
+
     /**
      * Delete Backup Action
      */
     public function deleteBackupsAction()
     {
         $delete_backups = $this->platform->getPost('backups');
-        $type = $this->platform->getPost('type'); 
+        $type = $this->platform->getPost('type');
         $backups = $this->validateBackups($delete_backups, $type);
-        if( $this->services['backups']->setBackupPath($this->settings['working_directory'])->removeBackups($backups) )
-        {
-
-            $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard').'&backups_removed=yes');
-        }
-        else
-        {
-            $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard').'&backups_remove_fail=yes');
+        if ($this->services['backups']->setBackupPath($this->settings['working_directory'])->removeBackups($backups)) {
+            
+            $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard') . '&backups_removed=yes');
+        } else {
+            $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard') . '&backups_remove_fail=yes');
         }
     }
 }
