@@ -177,7 +177,7 @@ class Backup_pro extends Module implements \mithra62\BackupPro\BackupPro
             }
             
             if (isset($value['children'])) {
-                foreach ($value['children'] as $v) {
+                foreach ($value['children'] as $k => $v) {
                     $idTab = Tab::getIdFromClassName($k);
                     if ($idTab != 0) {
                         $tab = new Tab($idTab);

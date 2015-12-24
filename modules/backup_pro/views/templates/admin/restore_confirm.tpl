@@ -22,7 +22,7 @@
 			{if $backup['note'] != ''}
 			<tr>
 				<td>{'note'|m62Lang}</td>
-				<td>{$backup['note']}</td>
+				<td>{$backup['note']|escape:'htmlall':'UTF-8'}</td>
 			</tr>
 			{/if}
 			<tr>
@@ -57,11 +57,11 @@
 			</tr>
 			<tr>
 				<td>{'total_tables'|m62Lang}</td>
-				<td>{$backup['item_count']}</td>
+				<td>{$backup['item_count']|escape:'htmlall':'UTF-8'}</td>
 			</tr>
 			<tr>
 				<td>{'md5_hash'|m62Lang}</td>
-				<td>{$backup['hash']}</td>
+				<td>{$backup['hash']|escape:'htmlall':'UTF-8'}</td>
 			</tr>
 			</tbody>
 			</table>
