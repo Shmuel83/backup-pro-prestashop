@@ -168,7 +168,7 @@ class Backup_pro extends Module implements \mithra62\BackupPro\BackupPro
      */
     private function uninstallModuleTabs()
     {
-        foreach ($this->admin_tabs as $key => $value) {
+        foreach ($this->admin_tabs as $value) {
             $idTab = Tab::getIdFromClassName($value['class']);
             if ($idTab != 0) {
                 $tab = new Tab($idTab);
@@ -177,7 +177,7 @@ class Backup_pro extends Module implements \mithra62\BackupPro\BackupPro
             }
             
             if (isset($value['children'])) {
-                foreach ($value['children'] as $k => $v) {
+                foreach ($value['children'] as $v) {
                     $idTab = Tab::getIdFromClassName($k);
                     if ($idTab != 0) {
                         $tab = new Tab($idTab);
