@@ -93,7 +93,8 @@ abstract class BaseAdminController extends PrestashopController implements \mith
         
         // grab the backup details
         $backup = $this->services['backups'];
-        $backups = $backup->setBackupPath($this->settings['working_directory'])->getAllBackups($this->settings['storage_details']);
+        $backups = $backup->setBackupPath($this->settings['working_directory'])
+                            ->getAllBackups($this->settings['storage_details']);
         $backup_meta = $backup->getBackupMeta($backups);
         
         $this->initToolbar();
@@ -108,9 +109,11 @@ abstract class BaseAdminController extends PrestashopController implements \mith
             'note_url' => $this->context->link->getAdminLink('AdminBackupProManage') . '&section=backup_note',
             'help_link' => 'https://www.mithra62.com/docs/table-of-contents/backup-pro',
             'backup_meta' => $backup_meta,
-            'last_database_backup_rel_time' => $this->view_helper->m62RelativeDateTime($backup_meta['database']['newest_backup_taken_raw']),
+            'last_database_backup_rel_time' => 
+                $this->view_helper->m62RelativeDateTime($backup_meta['database']['newest_backup_taken_raw']),
             'database_backup_url' => $this->context->link->getAdminLink('AdminBackupProBackupDatabase'),
-            'last_file_backup_rel_time' => $this->view_helper->m62RelativeDateTime($backup_meta['files']['newest_backup_taken_raw']),
+            'last_file_backup_rel_time' => 
+                $this->view_helper->m62RelativeDateTime($backup_meta['files']['newest_backup_taken_raw']),
             'file_backup_url' => $this->context->link->getAdminLink('AdminBackupProBackupFiles')
         ));
     }

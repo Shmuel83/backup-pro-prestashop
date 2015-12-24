@@ -54,8 +54,11 @@ class AdminBackupProBackupDatabaseController extends BaseBackupController
             set_time_limit(0);
             
             $db_info = $this->platform->getDbCredentials();
-            if ($backup->setDbInfo($db_info)->database($db_info['database'], $this->settings, $this->services['shell'])) {
-                $backups = $this->services['backups']->setBackupPath($this->settings['working_directory'])->getAllBackups($this->settings['storage_details']);
+            $run_backup = $backup->setDbInfo($db_info)
+                                 ->database($db_info['database'], $this->settings, $this->services['shell']);
+            if ($run_backup) {
+                $backups = $this->services['backups']->setBackupPath($this->settings['working_directory'])
+                                                     ->getAllBackups($this->settings['storage_details']);
                 
                 $backup->getStorage()
                     ->getCleanup()
@@ -66,7 +69,8 @@ class AdminBackupProBackupDatabaseController extends BaseBackupController
                     ->counts($this->settings['max_db_backups'])
                     ->duplicates($this->settings['allow_duplicates']);
                 
-                $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard') . '&section=db_backups&backup_complete=yes');
+                $url = $this->context->link->getAdminLink('AdminBackupProDashboard').'&section=db_backups&backup_complete=yes';
+                $this->platform->redirect($url);
             }
         } else {
             $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard') . '&section=db_backups&backup_system_errors=yes');
