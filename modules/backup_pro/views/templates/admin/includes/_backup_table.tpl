@@ -70,7 +70,9 @@
     				<img src="{$module_dir|escape}views/img/restore.png" alt="{'restore'|m62Lang}" class="">
     			</a> 
             {else}
-                <img src="{$module_dir|escape}views/img/restore.png" alt="{'restore'|m62Lang}" class="desaturate">
+            	<a class="btn btn-default" href="javascript:;" title="{'restore'|m62Lang}">
+                	<img src="{$module_dir|escape}views/img/restore.png" alt="{'restore'|m62Lang}" class="desaturate">
+                </a>
             {/if}
 			
 		{/if}
@@ -79,7 +81,9 @@
     			<img src="{$module_dir|escape}views/img/download.png" alt="{'download'|m62Lang}" class="">
     		</a> 
 		{else}
-			<img src="{$module_dir|escape}views/img/download.png" alt="{'download'|m62Lang}" class="desaturate">
+			<a class="btn btn-default" href="javascript:;" title="{'download'|m62Lang}">
+				<img src="{$module_dir|escape}views/img/download.png" alt="{'download'|m62Lang}" class="desaturate">
+			</a>
 		{/if}
 		</div>
 	</td>
