@@ -2,7 +2,7 @@
 
 	<div class="panel">
 	{if $pre_backup_errors|count >= 1}
-		<h3>{'pre_backup_setting_issue_blurb'|m62Lang}</h3>
+		<h3>{'pre_backup_setting_issue_blurb'|m62Lang}:</h3>
 		{assign var="bp_errors" value=$pre_backup_errors} 
 		{include file="./includes/_errors.tpl"}
 	{else}

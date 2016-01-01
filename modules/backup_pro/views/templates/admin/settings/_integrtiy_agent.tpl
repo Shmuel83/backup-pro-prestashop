@@ -104,8 +104,8 @@
 			<label class="control-label col-lg-3 required" for="backup_missed_schedule_notify_email_mailtype">{'backup_missed_schedule_notify_email_mailtype'|m62Lang}</label>
 			<div class="col-lg-6">
 			<select name="backup_missed_schedule_notify_email_mailtype" id="backup_missed_schedule_notify_email_mailtype" class="form-control fixed-width-xl">
-				<option value="html" {if $form_data['cron_notify_email_mailtype'] == 'html'}selected="selected"{/if}>HTML</option>
-				<option value="text"  {if $form_data['cron_notify_email_mailtype'] == 'text'}selected="selected"{/if}>Text</option>
+				<option value="html" {if $form_data['backup_missed_schedule_notify_email_mailtype'] == 'html'}selected="selected"{/if}>HTML</option>
+				<option value="text"  {if $form_data['backup_missed_schedule_notify_email_mailtype'] == 'text'}selected="selected"{/if}>Text</option>
 			</select>
 			</div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'backup_missed_schedule_notify_email_mailtype_instructions'|m62Lang}</div></div>
