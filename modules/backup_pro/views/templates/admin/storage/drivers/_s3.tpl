@@ -1,3 +1,4 @@
+<input type="hidden" value="0" name="s3_reduced_redundancy" />
 <div class="form-wrapper">
 	<div class="form-group">
 		<label class="control-label col-lg-3 required" for="s3_access_key">{'s3_access_key'|m62Lang}</label>
