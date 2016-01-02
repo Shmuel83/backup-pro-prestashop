@@ -29,11 +29,11 @@
 	</tr>
 </thead>
 <tbody>
-{foreach from=$backups key=k item=backup}
+{foreach from=$backups key=k item=backup name=backup_each}
 <tr class="odd">
 	<td class=" backup_pro_backup_status {if $backup['verified'] == '0'}backup_pro_backup_warn{elseif $backup['verified'] == 'success'}backup_pro_backup_success{elseif $backup['verified'] == 'fail'}backup_pro_backup_fail{/if}"></td>
 	{if $enable_delete == 'yes'}
-	<td><input name="backups[]" id="backup_check_" value="{$backup['file_name']|m62Encode}" type="checkbox"></td>
+	<td><input name="backups[]" id="backup_check_{$smarty.foreach.backup_each.index}" value="{$backup['file_name']|m62Encode}" type="checkbox"></td>
 	{/if}
 	<td style="white-space: nowrap">
     	{if isset($backup['storage_locations']) && is_array($backup['storage_locations']) }

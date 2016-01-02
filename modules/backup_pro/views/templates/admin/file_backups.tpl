@@ -37,7 +37,7 @@
 			{include file="./includes/_backup_table.tpl"}
 			
 			
-			<div class="panel-footer"><button name="submit_button" class="btn btn-primary pull-right" value="1" id="submit_button" type="submit">
+			<div class="panel-footer"><button name="_remove_backup_button" class="btn btn-primary pull-right" value="1" id="_remove_backup_button" type="submit">
 								{'delete_selected'|m62Lang}
 							</button>
 			</div>
