@@ -66,7 +66,7 @@
             {if $backup['backup_type'] == 'database'} 
             
             {if $backup['can_restore']}
-    			<a class="btn btn-default" href="{$link->getAdminLink('AdminBackupProDashboard')|escape:'html':'UTF-8'}&amp;section=restore_confirm&amp;id={$backup['details_file_name']|m62Encode|escape:'url':'UTF-8'}&amp;type={$backup['backup_type']}" title="{'restore'|m62Lang}">
+    			<a class="btn btn-default" href="{$link->getAdminLink('AdminBackupProDashboard')|escape:'html':'UTF-8'}&amp;section=restore_confirm&amp;id={$backup['details_file_name']|m62Encode|escape:'url':'UTF-8'}&amp;type={$backup['backup_type']}" title="{'restore'|m62Lang}" id="restore_link_{$smarty.foreach.backup_each.index}">
     				<img src="{$module_dir|escape}views/img/restore.png" alt="{'restore'|m62Lang}" class="">
     			</a> 
             {else}
@@ -77,7 +77,7 @@
 			
 		{/if}
         {if $backup['can_download']}
-    		<a class="btn btn-default" href="{$link->getAdminLink('AdminBackupProManage')|escape:'html':'UTF-8'}&amp;section=download&id={$backup['details_file_name']|m62Encode|escape:'url':'UTF-8'}&amp;type={$backup['backup_type']}" title="{'download'|m62Lang}">
+    		<a class="btn btn-default" href="{$link->getAdminLink('AdminBackupProManage')|escape:'html':'UTF-8'}&amp;section=download&id={$backup['details_file_name']|m62Encode|escape:'url':'UTF-8'}&amp;type={$backup['backup_type']}" title="{'download'|m62Lang}" id="download_link_{$smarty.foreach.backup_each.index}">
     			<img src="{$module_dir|escape}views/img/download.png" alt="{'download'|m62Lang}" class="">
     		</a> 
 		{else}
