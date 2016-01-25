@@ -72,9 +72,11 @@ class AdminBackupProManageController extends BaseAdminController
         
         if ($restore_file_path && file_exists($restore_file_path)) {
             $db_info = $this->platform->getDbCredentials();
+            $options = $this->settings;
+            $options['file_name'] = $restore_file_path;
             if ($this->services['restore']->setDbInfo($db_info)
                 ->setBackupInfo($backup_info)
-                ->database($db_info['database'], $restore_file_path, $this->settings, $this->services['shell'])) {
+                ->database($db_info['database'], $options, $this->services['shell'])) {
                 $this->platform->redirect($this->context->link->getAdminLink('AdminBackupProDashboard') . '&database_restored=yes');
             }
         } else {
