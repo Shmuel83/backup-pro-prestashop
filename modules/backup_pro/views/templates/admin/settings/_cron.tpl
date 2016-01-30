@@ -53,8 +53,9 @@
 			<label class="control-label col-lg-3 required" for="cron_notify_email_mailtype">{'cron_notify_email_mailtype'|m62Lang}</label>
 			<div class="col-lg-6">
 			<select name="cron_notify_email_mailtype" id="cron_notify_email_mailtype" class="form-control fixed-width-xl">
-				<option value="html" {if $form_data['cron_notify_email_mailtype'] == 'html'}selected="selected"{/if}>HTML</option>
-				<option value="text"  {if $form_data['cron_notify_email_mailtype'] == 'text'}selected="selected"{/if}>Text</option>
+			{foreach from='email_type'|m62Options key=key item=mail_type}
+				<option value="{$key}" {if $form_data['cron_notify_email_mailtype'] == $key}selected="selected"{/if}>{$mail_type}</option>
+			{/foreach}
 			</select>
 			</div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'cron_notify_email_mailtype_instructions'|m62Lang}</div></div>

@@ -81,6 +81,10 @@ abstract class BaseAdminController extends PrestashopController implements \mith
             $this->view_helper,
             'm62RelativeDateTime'
         ));
+        $this->context->smarty->registerPlugin('modifier', 'm62Options', array(
+            $this->view_helper,
+            'm62Options'
+        ));
         $this->bp_template_path = _MODULE_DIR_ . "backup_pro";
     }
 
