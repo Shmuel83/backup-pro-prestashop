@@ -105,7 +105,7 @@
 			<div class="col-lg-6">
 			<select name="backup_missed_schedule_notify_email_mailtype" id="backup_missed_schedule_notify_email_mailtype" class="form-control fixed-width-xl">
 			{foreach from='email_type'|m62Options key=key item=mail_type}
-				<option value="{$key}" {if $form_data['cron_notify_email_mailtype'] == $key}selected="selected"{/if}>{$mail_type}</option>
+				<option value="{$key|escape:'htmlall':'UTF-8'}" {if $form_data['backup_missed_schedule_notify_email_mailtype'] == $key}selected="selected"{/if}>{$mail_type|escape:'htmlall':'UTF-8'}</option>
 			{/foreach}
 			</select>
 			</div>
