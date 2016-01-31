@@ -5,5 +5,5 @@
         <li role="presentation" {if $active_tab == 'cron'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=cron">{'cron_bp_settings_menu'|m62Lang}</a></li>
         <li role="presentation" {if $active_tab == 'storage'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=storage">{'storage_location_bp_settings_menu'|m62Lang}</a></li>
         <li role="presentation" {if $active_tab == 'integrity_agent'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=integrity_agent">{'integrity_agent_bp_settings_menu'|m62Lang}</a></li>
-        <li role="presentation" {if $active_tab == 'license'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=license">{'license_bp_settings_menu'|m62Lang}</a></li>
+        <!-- <li role="presentation" {if $active_tab == 'license'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=license">{'license_bp_settings_menu'|m62Lang}</a></li> -->
     </ul>
