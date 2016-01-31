@@ -111,7 +111,7 @@ abstract class BaseAdminController extends PrestashopController implements \mith
             'page_header_toolbar_title' => $this->page_header_toolbar_title,
             'page_header_toolbar_btn' => $this->page_header_toolbar_btn,
             'note_url' => $this->context->link->getAdminLink('AdminBackupProManage') . '&section=backup_note',
-            'help_link' => 'https://www.mithra62.com/docs/table-of-contents/backup-pro',
+           // 'help_link' => 'https://www.mithra62.com/docs/table-of-contents/backup-pro',
             'backup_meta' => $backup_meta,
             'last_database_backup_rel_time' => 
                 $this->view_helper->m62RelativeDateTime($backup_meta['database']['newest_backup_taken_raw']),
