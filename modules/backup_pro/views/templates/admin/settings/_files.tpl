@@ -5,7 +5,7 @@
 	</div>
 	
 	<div class="form-wrapper">
-		<div class="form-group">
+		<div class="form-group {if $form_errors['max_file_backups']|m62FormErrors}has-error{/if}">
 			<label class="control-label col-lg-3 required" for="max_file_backups">{'max_file_backups'|m62Lang}</label>
 			<div class="col-lg-6"><input type="text" id="max_file_backups" name="max_file_backups" value="{$form_data['max_file_backups']|escape:'htmlall':'UTF-8'}" class="" required="required" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'max_file_backups_instructions'|m62Lang}</div></div>
@@ -14,7 +14,7 @@
 	</div><!-- /.form-wrapper -->
 	
 	<div class="form-wrapper">
-		<div class="form-group">
+		<div class="form-group {if $form_errors['file_backup_alert_threshold']|m62FormErrors}has-error{/if}">
 			<label class="control-label col-lg-3 required" for="file_backup_alert_threshold">{'file_backup_alert_threshold'|m62Lang}</label>
 			<div class="col-lg-6"><input type="text" id="file_backup_alert_threshold" name="file_backup_alert_threshold" value="{$form_data['file_backup_alert_threshold']|escape:'htmlall':'UTF-8'}" class="" required="required" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'file_backup_alert_threshold_instructions'|m62Lang}</div></div>
@@ -23,7 +23,7 @@
 	</div><!-- /.form-wrapper -->
 	
 	<div class="form-wrapper">
-		<div class="form-group">
+		<div class="form-group {if $form_errors['backup_file_location']|m62FormErrors}has-error{/if}">
 			<label class="control-label col-lg-3 required" for="backup_file_location">{'backup_file_location'|m62Lang}</label>
 			<div class="col-lg-6"><textarea id="backup_file_location" name="backup_file_location" style="height:150px;" required="required">{$form_data['backup_file_location']|escape:'htmlall':'UTF-8'}</textarea></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'backup_file_location_instructions'|m62Lang}</div></div>
@@ -32,7 +32,7 @@
 	</div><!-- /.form-wrapper -->	
 	
 	<div class="form-wrapper">
-		<div class="form-group">
+		<div class="form-group {if $form_errors['exclude_paths']|m62FormErrors}has-error{/if}">
 			<label class="control-label col-lg-3" for="exclude_paths">{'exclude_paths'|m62Lang}</label>
 			<div class="col-lg-6"><textarea id="exclude_paths" name="exclude_paths" style="height:150px;">{$form_data['exclude_paths']|escape:'htmlall':'UTF-8'}</textarea></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'exclude_paths_instructions'|m62Lang}</div></div>
@@ -41,7 +41,7 @@
 	</div><!-- /.form-wrapper -->	
 	
 	<div class="form-wrapper" >
-		<div class="form-group">
+		<div class="form-group ">
 			<label class="control-label col-lg-3 " for="regex_file_exclude">{'regex_file_exclude'|m62Lang}</label>
 			<div class="col-lg-9">
 				<div class="help-block"><label for="regex_file_exclude">

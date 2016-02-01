@@ -5,7 +5,7 @@
 	</div>
 	
 	<div class="form-wrapper">
-		<div class="form-group">
+		<div class="form-group {if $form_errors['max_db_backups']|m62FormErrors}has-error{/if}">
 			<label class="control-label col-lg-3 required" for="max_db_backups">{'max_db_backups'|m62Lang}</label>
 			<div class="col-lg-6"><input type="text" id="max_db_backups" name="max_db_backups" value="{$form_data['max_db_backups']|escape:'htmlall':'UTF-8'}" class="" required="required" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'max_db_backups_instructions'|m62Lang}</div></div>
@@ -14,7 +14,7 @@
 	</div><!-- /.form-wrapper -->
 	
 	<div class="form-wrapper">
-		<div class="form-group">
+		<div class="form-group {if $form_errors['db_backup_alert_threshold']|m62FormErrors}has-error{/if}">
 			<label class="control-label col-lg-3 required" for="db_backup_alert_threshold">{'db_backup_alert_threshold'|m62Lang}</label>
 			<div class="col-lg-6"><input type="text" id="db_backup_alert_threshold" name="db_backup_alert_threshold" value="{$form_data['db_backup_alert_threshold']|escape:'htmlall':'UTF-8'}" class="" required="required" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'db_backup_alert_threshold_instructions'|m62Lang}</div></div>
@@ -23,7 +23,7 @@
 	</div><!-- /.form-wrapper -->
 	
 	<div class="form-wrapper">
-		<div class="form-group">
+		<div class="form-group {if $form_errors['db_backup_method']|m62FormErrors}has-error{/if}">
 			<label class="control-label col-lg-3 required" for="db_backup_method">{'db_backup_method'|m62Lang}</label>
 			<div class="col-lg-6">
 			<select name="db_backup_method" id="db_backup_method" class="form-control fixed-width-xl">
@@ -36,7 +36,7 @@
 	</div><!-- /.form-wrapper -->
 	
 	<div class="form-wrapper" id="mysqldump_command_wrap" style="display:none;">
-		<div class="form-group">
+		<div class="form-group {if $form_errors['mysqldump_command']|m62FormErrors}has-error{/if}">
 			<label class="control-label col-lg-3" for="mysqldump_command">{'mysqldump_command'|m62Lang}</label>
 			<div class="col-lg-6"><input type="text" id="mysqldump_command" name="mysqldump_command" value="{$form_data['mysqldump_command']|escape:'htmlall':'UTF-8'}" class="" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'mysqldump_command_instructions'|m62Lang}</div></div>
@@ -45,7 +45,7 @@
 	</div><!-- /.form-wrapper -->	
 	
 	<div class="form-wrapper" id="php_backup_method_select_chunk_limit_wrap" style="display:none;">
-		<div class="form-group">
+		<div class="form-group {if $form_errors['php_backup_method_select_chunk_limit']|m62FormErrors}has-error{/if}">
 			<label class="control-label col-lg-3" for="php_backup_method_select_chunk_limit">{'php_backup_method_select_chunk_limit'|m62Lang}</label>
 			<div class="col-lg-6"><input type="text" id="php_backup_method_select_chunk_limit" name="php_backup_method_select_chunk_limit" value="{$form_data['php_backup_method_select_chunk_limit']|escape:'htmlall':'UTF-8'}" class="" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'php_backup_method_select_chunk_limit_instructions'|m62Lang}</div></div>
@@ -67,7 +67,7 @@
 	</div><!-- /.form-wrapper -->
 	
 	<div class="form-wrapper" id="mysqlcli_command_wrap" style="display:none;">
-		<div class="form-group">
+		<div class="form-group {if $form_errors['mysqlcli_command']|m62FormErrors}has-error{/if}">
 			<label class="control-label col-lg-3" for="mysqlcli_command">{'mysqlcli_command'|m62Lang}</label>
 			<div class="col-lg-6"><input type="text" id="mysqlcli_command" name="mysqlcli_command" value="{$form_data['mysqlcli_command']|escape:'htmlall':'UTF-8'}" class="" /></div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'mysqlcli_command_instructions'|m62Lang}</div></div>
