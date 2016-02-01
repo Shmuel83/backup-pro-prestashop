@@ -42,7 +42,7 @@
 
 <div class="form-wrapper">
 	<div class="form-group {if $form_errors['s3_optional_prefix']|m62FormErrors}has-error{/if}">
-		<label class="control-label col-lg-3" for="rcf_container">{'s3_optional_prefix'|m62Lang}</label>
+		<label class="control-label col-lg-3" for="s3_optional_prefix">{'s3_optional_prefix'|m62Lang}</label>
 		<div class="col-lg-6"><input type="text" id="s3_optional_prefix" name="s3_optional_prefix" value="{$form_data['s3_optional_prefix']|escape:'htmlall':'UTF-8'}" class="" /></div>
 		<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'s3_optional_prefix_instructions'|m62Lang}</div></div>
 		<div class="col-lg-6 col-lg-offset-3">{$form_errors['s3_optional_prefix']|m62FormErrors}</div>

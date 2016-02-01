@@ -24,6 +24,15 @@
 		<div class="col-lg-6 col-lg-offset-3">{$form_errors['rcf_container']|m62FormErrors}</div>
 	</div>
 </div><!-- /.form-wrapper -->
+
+<div class="form-wrapper">
+	<div class="form-group {if $form_errors['rcf_optional_prefix']|m62FormErrors}has-error{/if}">
+		<label class="control-label col-lg-3" for="rcf_container">{'rcf_optional_prefix'|m62Lang}</label>
+		<div class="col-lg-6"><input type="text" id="rcf_optional_prefix" name="rcf_optional_prefix" value="{$form_data['rcf_optional_prefix']|escape:'htmlall':'UTF-8'}" class="" /></div>
+		<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'rcf_optional_prefix_instructions'|m62Lang}</div></div>
+		<div class="col-lg-6 col-lg-offset-3">{$form_errors['rcf_optional_prefix']|m62FormErrors}</div>
+	</div>
+</div><!-- /.form-wrapper -->	
 	
 <div class="form-wrapper">
 	<div class="form-group">

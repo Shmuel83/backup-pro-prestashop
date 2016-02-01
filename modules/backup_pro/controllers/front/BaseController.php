@@ -13,6 +13,7 @@ use mithra62\BackupPro\Traits\Controller;
 use mithra62\Traits\Log;
 use mithra62\BackupPro\Platforms\Prestashop as Platform;
 use mithra62\BackupPro\Exceptions\BackupException;
+use mithra62\BackupPro\Platforms\View\Smarty;
 
 /**
  * Prestashop - Backup Pro Base Controller
@@ -25,7 +26,7 @@ use mithra62\BackupPro\Exceptions\BackupException;
 abstract class BaseController extends ModuleFrontController implements \mithra62\BackupPro\BackupPro
 {
     use Controller;
-    use Log;
+    //use Log;
 
     /**
      * The abstracted platform object
@@ -74,6 +75,10 @@ abstract class BaseController extends ModuleFrontController implements \mithra62
         }
         
         $this->bp_errors = $errors->getErrors();
+        $this->view_helper = new Smarty($this->services['lang'], $this->services['files'], $this->services['settings'], $this->services['encrypt'], $this->platform);
+        $this->m62->setService('view_helpers', function ($c) {
+            return $this->view_helper;
+        });
     }
 
     /**

@@ -13,7 +13,7 @@ if( php_sapi_name() !== 'cli' ){
 }
 
 $old_wd = getcwd();
-chdir(__DIR__);
+chdir(dirname(__FILE__));
 
 if( !file_exists( './cli.config.php') ){
     echo "Config file not set...";
