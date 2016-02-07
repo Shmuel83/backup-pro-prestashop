@@ -173,10 +173,10 @@
 	
 	<div class="form-wrapper">
 		<div class="form-group">
-			<label class="control-label col-lg-3" for="db_backup_archive_pre_sql">{'db_backup_archive_pre_sql'|m62Lang}</label>
-			<div class="col-lg-6"><textarea id="db_backup_archive_pre_sql" name="db_backup_archive_pre_sql" style="height:150px;">{$form_data['db_backup_archive_pre_sql']|escape:'htmlall':'UTF-8'}</textarea></div>
-			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'db_backup_archive_pre_sql_instructions'|m62Lang}</div></div>
-			<div class="col-lg-6 col-lg-offset-3">{$form_errors['db_backup_archive_pre_sql']|m62FormErrors}</div>
+			<label class="control-label col-lg-3" for="db_backup_execute_post_sql">{'db_backup_execute_post_sql'|m62Lang}</label>
+			<div class="col-lg-6"><textarea id="db_backup_execute_post_sql" name="db_backup_execute_post_sql" style="height:150px;">{$form_data['db_backup_execute_post_sql']|escape:'htmlall':'UTF-8'}</textarea></div>
+			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'db_backup_execute_post_sql_instructions'|m62Lang}</div></div>
+			<div class="col-lg-6 col-lg-offset-3">{$form_errors['db_backup_execute_post_sql']|m62FormErrors}</div>
 		</div>
 	</div><!-- /.form-wrapper -->	
 	
