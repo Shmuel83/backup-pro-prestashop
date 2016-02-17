@@ -12,7 +12,7 @@
 		<th></th>
 	
 		{if $enable_delete == 'yes'}
-		<th></th>
+		<th><input name="bp_toggle_all" value="1" type="checkbox" class="bp_toggle_all" /></th>
 		{/if}
 		<th></th>
 		<th></th>
