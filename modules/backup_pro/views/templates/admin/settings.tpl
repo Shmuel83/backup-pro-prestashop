@@ -27,6 +27,8 @@
 		{include file="./settings/_cron.tpl"}
 	{elseif $section == 'license'}
 		{include file="./settings/_license.tpl"}
+	{elseif $section == 'api'}
+		{include file="./settings/_api.tpl"}
 	{else}
 		{include file="./settings/_integrtiy_agent.tpl"}
 	{/if}	

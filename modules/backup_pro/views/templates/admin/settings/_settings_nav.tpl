@@ -1,9 +1,10 @@
-    <ul class="nav nav-tabs">
-        <li role="presentation" {if $active_tab == 'general'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=general">{'general_bp_settings_menu'|m62Lang}</a></li>
-        <li role="presentation" {if $active_tab == 'db_backups'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=db_backups">{'db_bp_settings_menu'|m62Lang}</a></li>
-        <li role="presentation" {if $active_tab == 'file_backups'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=file_backups">{'files_bp_settings_menu'|m62Lang}</a></li>
-        <li role="presentation" {if $active_tab == 'cron'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=cron">{'cron_bp_settings_menu'|m62Lang}</a></li>
-        <li role="presentation" {if $active_tab == 'storage'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=storage">{'storage_location_bp_settings_menu'|m62Lang}</a></li>
-        <li role="presentation" {if $active_tab == 'integrity_agent'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=integrity_agent">{'integrity_agent_bp_settings_menu'|m62Lang}</a></li>
-        <!-- <li role="presentation" {if $active_tab == 'license'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=license">{'license_bp_settings_menu'|m62Lang}</a></li> -->
-    </ul>
+<ul class="nav nav-tabs">
+    <li role="presentation" {if $active_tab == 'general'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=general">{'general_bp_settings_menu'|m62Lang}</a></li>
+    <li role="presentation" {if $active_tab == 'db_backups'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=db_backups">{'db_bp_settings_menu'|m62Lang}</a></li>
+    <li role="presentation" {if $active_tab == 'file_backups'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=file_backups">{'files_bp_settings_menu'|m62Lang}</a></li>
+    <li role="presentation" {if $active_tab == 'cron'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=cron">{'cron_bp_settings_menu'|m62Lang}</a></li>
+    <li role="presentation" {if $active_tab == 'storage'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=storage">{'storage_location_bp_settings_menu'|m62Lang}</a></li>
+    <li role="presentation" {if $active_tab == 'integrity_agent'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=integrity_agent">{'integrity_agent_bp_settings_menu'|m62Lang}</a></li>
+    <li role="presentation" {if $active_tab == 'api'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=api">{'rest_api_bp_settings_menu'|m62Lang}</a></li>
+    <!-- <li role="presentation" {if $active_tab == 'license'}class="active"{/if}><a href="{$link->getAdminLink('AdminBackupProSettings')|escape:'html':'UTF-8'}&amp;section=license">{'license_bp_settings_menu'|m62Lang}</a></li> -->
+</ul>
