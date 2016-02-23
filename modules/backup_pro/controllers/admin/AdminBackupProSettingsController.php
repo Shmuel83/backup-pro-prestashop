@@ -324,6 +324,7 @@ class AdminBackupProSettingsController extends BaseAdminController
         $variables['db_tables'] = $this->services['db']->getTables();
         $variables['backup_cron_commands'] = $this->platform->setPrestaContext($this->context)->getBackupCronCommands($this->settings);
         $variables['ia_cron_commands'] = $this->platform->setPrestaContext($this->context)->getIaCronCommands($this->settings);
+        $variables['rest_api_route_entry'] = $this->platform->setPrestaContext($this->context)->getRestApiRouteEntry($this->settings);
         $variables['errors'] = $this->errors;
         $variables['threshold_options'] = $this->services['settings']->getAutoPruneThresholdOptions();
         $variables['available_db_backup_engines'] = $this->services['backup']->getDataBase()->getAvailableEnginesOptions();
