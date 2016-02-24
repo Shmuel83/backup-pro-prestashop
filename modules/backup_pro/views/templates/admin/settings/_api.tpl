@@ -45,7 +45,7 @@
 
 	
 	
-	<div class="form-wrapper"><p>{'rest_api_credentials_instructions'|m62Lang}
+	<div class="form-wrapper"><p>{'rest_api_credentials_instructions'|m62Lang}</p>
 		<div class="form-group {if $form_errors['api_key']|m62FormErrors}has-error{/if}">
 			<label class="control-label col-lg-3 required" for="api_key">{'api_key'|m62Lang}</label>
 			<div class="col-lg-6"><input type="text" id="api_key" name="api_key" value="{$form_data['api_key']|escape:'htmlall':'UTF-8'}" class="" required="required" /></div>
