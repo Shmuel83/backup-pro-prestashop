@@ -2,7 +2,7 @@
 <module>
 	<name>backup_pro</name>
 	<displayName><![CDATA[Backup Pro 3]]></displayName>
-	<version><![CDATA[3.2.4]]></version>
+	<version><![CDATA[3.3]]></version>
 	<description><![CDATA[Interface to create database and file backups of your site. ]]></description>
 	<author><![CDATA[mithra62]]></author>
 	<tab><![CDATA[administration]]></tab>
