@@ -155,7 +155,9 @@ class Backup_pro extends Module implements \mithra62\BackupPro\BackupPro
                 foreach ($value['children'] as $k => $v) {
                     $tab = new Tab();
                     // Need a foreach for the language
-                    $tab->name[$this->context->language->id] = $this->l($v);
+                    foreach (Language::getLanguages(true) as $lang)
+                        $tab->name[$lang['id_lang']] = $this->l($v);
+                    
                     $tab->class_name = $k;
                     $tab->id_parent = $parent_tab->id;
                     $tab->module = $this->name;
@@ -165,7 +167,9 @@ class Backup_pro extends Module implements \mithra62\BackupPro\BackupPro
                 foreach ($value['hidden'] as $k => $v) {
                     $tab = new Tab();
                     // Need a foreach for the language
-                    $tab->name[$this->context->language->id] = $this->l($v);
+                    foreach (Language::getLanguages(true) as $lang)
+                        $tab->name[$lang['id_lang']] = $this->l($v);
+                    
                     $tab->class_name = $k;
                     $tab->id_parent = - 1;
                     $tab->module = $this->name;
