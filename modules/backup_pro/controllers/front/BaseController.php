@@ -10,7 +10,7 @@
 require_once realpath(dirname(__FILE__) . '/../../libraries/vendor/autoload.php');
 
 use mithra62\BackupPro\Traits\Controller;
-use mithra62\Traits\Log;
+use JaegerApp\Traits\Log;
 use mithra62\BackupPro\Platforms\Prestashop as Platform;
 use mithra62\BackupPro\Exceptions\BackupException;
 use mithra62\BackupPro\Platforms\View\Smarty;
