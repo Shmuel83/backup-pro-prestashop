@@ -18,10 +18,10 @@
 		<tr class="even">
 			<td width='50%' style="width:50%;">{$key|m62Lang}</td>
 			<td style="width:50%;">
-				<div class="select_all">{$cron['cmd']|escape:'htmlall':'UTF-8'}</div>
+				<div class="select_all" id="cron_cmd_{$key|escape:'htmlall':'UTF-8'}">{$cron['cmd']|escape:'htmlall':'UTF-8'}</div>
 			</td>
 			<td style="width:50%;">
-				<a href="{$cron['url']|escape:'htmlall':'UTF-8'}" class="test_cron" rel="{$key|escape:'htmlall':'UTF-8'}">
+				<a href="{$cron['url']|escape:'htmlall':'UTF-8'}" class="test_cron" rel="{$key|escape:'htmlall':'UTF-8'}" id="cron_url_{$key|escape:'htmlall':'UTF-8'}">
 					<img src="{$module_dir|escape:'htmlall':'UTF-8'}views/img/test.png" />
 				</a> <img src="{$module_dir|escape:'htmlall':'UTF-8'}views/img/indicator.gif" id="animated_{$key|escape:'htmlall':'UTF-8'}" style="display:none" />
 			</td>
