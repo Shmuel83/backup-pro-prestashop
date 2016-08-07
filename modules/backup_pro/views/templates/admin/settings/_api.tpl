@@ -9,7 +9,7 @@
 		<div class="form-group {if $form_errors['enable_rest_api']|m62FormErrors}has-error{/if}">
 			<label class="control-label col-lg-3 " for="enable_rest_api">{'rest_api_route_entry'|m62Lang}</label>
 			<div class="col-lg-9">
-				<div class="help-block"><a href="{$rest_api_route_entry|escape:'htmlall':'UTF-8'}" target="_blank">{$rest_api_route_entry|escape:'htmlall':'UTF-8'}</a>
+				<div class="help-block"><a href="{$rest_api_route_entry|escape:'htmlall':'UTF-8'}" target="_blank" id="rest_api_url_wrap">{$rest_api_route_entry|escape:'htmlall':'UTF-8'}</a>
 				</div>
 			</div>
 			<div class="col-lg-6 col-lg-offset-3"><div class="help-block">{'rest_api_route_entry_instructions'|m62Lang}</div></div>
