@@ -94,9 +94,10 @@
 		<div class="form-group">
 			<label class="control-label col-lg-3 required" for="db_backup_ignore_tables">{'db_backup_ignore_tables'|m62Lang}</label>
 			<div class="col-lg-6">
+			<input type="hidden" name="db_backup_ignore_tables[]" value="" />
 			<select name="db_backup_ignore_tables[]" multiple="multiple" data-placeholder="{'db_backup_ignore_tables'|m62Lang}" id="db_backup_ignore_tables">
 			{foreach from=$db_tables key=k item=v}
-			<option value="{$k|escape:'htmlall':'UTF-8'}" {if $form_data['db_backup_ignore_tables'] == $k}selected="selected"{/if}>{$v|escape:'htmlall':'UTF-8'}</option>
+			<option value="{$k|escape:'htmlall':'UTF-8'}" {if $k|in_array:$form_data['db_backup_ignore_tables']}selected="selected"{/if}>{$v|escape:'htmlall':'UTF-8'}</option>
 			{/foreach}
 			</select>
 			</div>
@@ -108,9 +109,10 @@
 		<div class="form-group">
 			<label class="control-label col-lg-3 required" for="db_backup_ignore_table_data">{'db_backup_ignore_table_data'|m62Lang}</label>
 			<div class="col-lg-6">
+			<input type="hidden" name="db_backup_ignore_table_data[]" value="" />
 			<select name="db_backup_ignore_table_data[]" multiple="multiple" data-placeholder="{'db_backup_ignore_table_data'|m62Lang}" id="db_backup_ignore_table_data">
 			{foreach from=$db_tables key=k item=v}
-			<option value="{$k|escape:'htmlall':'UTF-8'}" {if $form_data['db_backup_ignore_table_data'] == $k}selected="selected"{/if}>{$v|escape:'htmlall':'UTF-8'}</option>
+			<option value="{$k|escape:'htmlall':'UTF-8'}" {if $k|in_array:$form_data['db_backup_ignore_table_data']}selected="selected"{/if}>{$v|escape:'htmlall':'UTF-8'}</option>
 			{/foreach}
 			</select>
 			</div>
